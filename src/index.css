@@ -537,4 +537,5 @@ hr.hr {
 
 .post button {
   border: none !important;
+  border: 2px solid black;
 }
