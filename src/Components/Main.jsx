@@ -8,7 +8,7 @@ export default function Main() {
   return (
     <div className="main mt-2 d-flex justify-content-center gap-3">
 
-      <div className="posts  ">
+      <div className="posts bg bg-transparent">
         <Poster />
       </div>
 

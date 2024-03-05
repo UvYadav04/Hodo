@@ -66,5 +66,32 @@ router.put('/comment/add', async (req, res) => {
         res.json({ success: false })
     }
 })
+router.put('/comment/delete', async (req, res) => {
+    try {
+        const id = req.body.id
+        const index = req.body.index
+        const comment = req.body.item
+        const username = req.body.user
+        console.log(req.body)
+        const p = await post.findOne({ _id: id });
+        const cmnt = p.comment
+        let u = cmnt.users
+        u.splice(index, 1)
+        let c = cmnt.comment
+        c.splice(index, 1)
+        console.log(u)
+        let Comments = {
+            users: u,
+            comment: c
+        }
+        const r = await post.findByIdAndUpdate(id, { comment: Comments })
+        const q = await post.findOne({ _id: id })
+        res.json({ success: true, data: q })
+    }
+    catch (e) {
+        console.log(`error : `, e)
+        res.json({ success: false })
+    }
+})
 
 module.exports = router

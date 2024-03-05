@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Post from './Post'
-export default function Personalpost() {
-    const [data, setdata] = useState({})
+export default function Personalpost({ username }) {
+    const [data, setdata] = useState([])
+    console.log(data)
     const userdata = async () => {
-        console.log("rofile afh")
-        const username = localStorage.getItem("username")
-        console.log(`username : `, username)
+        // const username = localStorage.getItem("username")
 
         const response = await fetch("http://localhost:8080/post/getuserdata", {
             method: 'POST',
@@ -18,7 +17,7 @@ export default function Personalpost() {
 
         const json = await response.json()
         const data2 = json.data
-        // console.log(`data2 : `, data2)
+        // console.log(data2)
         setdata(data2)
     }
 
@@ -39,9 +38,9 @@ export default function Personalpost() {
     return (
         <>
             {
-                result.map((data) => {
+                result.map((data, i) => {
                     return (
-                        <Post image={data[1].image} description={data[1].description} username={data[1].user} Tags={data[1].Tags} likes={data[1].likes.numbers} />
+                        <Post key={i} image={data[1].image} description={data[1].description} username={data[1].user} Tags={data[1].Tags} likes={data[1].likes} id={data[1]._id} Comments={data[1].comment} />
                     )
                 })
             }

@@ -30,6 +30,10 @@ const postschema = new schema({
     },
     user: {
         type: String
+    },
+    Date: {
+        type: Date,
+        default: Date.now
     }
 })
 

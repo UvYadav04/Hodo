@@ -43,11 +43,11 @@ export default function Poster() {
     }
 
     return (
-        <div className="poster">
+        <div className="poster mt-1">
             {
                 result.map((data, i) => {
                     return (
-                        <Post key={i} image={data[1].image} description={data[1].description} username={data[1].user} Tags={data[1].Tags} likes={data[1].likes} id={data[1]._id} Comments={data[1].comment} />
+                        <Post key={i} image={data[1].image} description={data[1].description} username={data[1].user} Tags={data[1].Tags} likes={data[1].likes} id={data[1]._id} Comments={data[1].comment} Date={data[1].Date} />
                     )
                 })
             }

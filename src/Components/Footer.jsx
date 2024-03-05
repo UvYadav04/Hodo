@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Footer() {
     return (
-        <footer className="site-footer mt-5">
+        <footer className="site-footer footer mt-5 bg bg-dark text-white">
             <div className="container">
                 <div className="row">
                     <div className="col-sm-12 col-md-6">
@@ -11,7 +11,7 @@ export default function Footer() {
 
                     <div className="col-xs-6 col-md-3">
                         <h6>Categories</h6>
-                        <ul className="footer-links">
+                        <ul className="footer-links text-white">
                             <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
                             <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
                             <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
@@ -26,20 +26,20 @@ export default function Footer() {
                             <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
                         </ul>
                     </div>
-                </div>
+                </div >
                 <hr />
-            </div>
-            <div className="container">
+            </div >
+            <div className="container text-white    ">
                 <div className="row justify-content-center">
                     <div className="col-5">
                         <p className="copyright-text">Copyright &copy; 2017 All Rights Reserved by
-                            <a href="#">Scanfcode</a>.
+                            <a href="#" className='text-white'>Scanfcode</a>.
                         </p>
                     </div>
 
 
                 </div>
             </div>
-        </footer>
+        </footer >
     )
 }
