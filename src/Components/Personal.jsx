@@ -30,52 +30,44 @@ export default function Personal({ username }) {
     }, [])
 
     return (
-        <div className='profile p-0'>
-            <div className="container-fluid profile m-0 p-0" style={{
-                backgroundImage: `url(${c1})`,
-                backgroundSize: '1600px',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
-            }}>
-                <div className="row p1 m-0" >
-                    {/* <img src={c1} alt="" /> */}
-                </div>
-                <div className="row p2 justify-content-between ">
-                    <div className="col-auto usericon">
-                        <img src={usericon} alt="" className='d-inline' />
-                    </div>
-                    <div className="col-auto name bg bg-transparent text-start">
-                        <h5 className='m-0 mt-1'>{user.Username}</h5>
-                        <h6 className='m-0 opacity-75'>{user.Name}</h6>
-                    </div>
-                    <div className="col-8 follow text-center d-flex justify-content-around ">
-                        <button className={owner !== username ? ' border border-primary text-white bg bg-primary' : "d-none"}>Follow+</button>
-                        <button><span className="text-black">{found ? user.Followers.length : null}</span> Followers</button>
-                        <button><span className="text-black">{found ? user.Following.length : null}</span> Following</button>
-                    </div>
+        <>
 
-                </div>
-                <div className="row p3 bio justify-content-between pb-3">
-                    <div className="col-6 ">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae quis corrupti commodi earum quisquam maxime nisi, accusamus nulla possimus, velit provident numquam dolorum architecto quod iste, rem eveniet optio voluptatem!
+            <div className="container-fluid profile">
+                <div className="row prow justify-content-around pt-2 ps-2 ">
+                    <div className="col-xxl-4 col-xl-4 col-lg-5 col-12 position-lg-sticky position-static info d-flex flex-column justify-content-start p-0 text-align-center p-2">
+                        <div className="image d-flex flex-row justify-content-start gap-0 ">
+                            <img src={usericon} className='mx-1 ' width={145} height={145} alt="" />
+                            <span className="mx-2 name text-start ">
+                                <h4 className='mb-0 '>{user.Username}</h4>
+                                <h5 className='opacity-75 m-0 '>{user.Name}</h5>
+                                <button className='rounded-2 text-white bg bg-primary my-2 border border-none'>Follow+ </button> <br />
+                                <button className='rounded-1 bg bg-primary text-white me-2' ><span>{found ? user.Followers.length : null}</span> Followers</button>
+                                <button className='rounded-1 bg bg-primary text-white me-2' ><span >{found ? user.Following.length : null}</span> Following</button>
+                            </span>
+
+                        </div>
+
+
+                        <div className="infor text-start mt-2">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, dolorem ullam! Nulla, ratione. At, et laboriosam quidem eius quasi facilis sequi aut quo voluptatem odio neque sapiente ipsam officiis autem?
+                        </div>
+
+                        <div className="interests text-start mt-2">
+                            <h5>Interests : </h5>
+                            <button className='bg bg-primary text-white mx-2'>kashmir</button>
+                            <button className='bg bg-primary text-white mx-2'>Las vegas</button>
+                            <button className='bg bg-primary text-white mx-2'>Paris</button>
+                            <button className='bg bg-primary text-white mx-2'>Dubai</button>
+                        </div>
                     </div>
-                    <div className="col-2">
-                        <button className={username === owner ? 'bg bg-primary ' : "d-none"}>Edit Profile</button>
+                    <div className="col-xl-5 col-md-7 col-sm-10 col-12 posts mt-lg-0 mt-3">
+                        <Personalpost username={username} />
+                    </div>
+                    <div className=" col-xl-3 col-lg-3 col-md-4 d-xl-inline d-lg-none d-md-inline d-none mt-lg-0 mt-3 chater border border-black">
+                        Live Chat Section
                     </div>
                 </div>
             </div>
-
-
-            <div className="data row justify-content-end gap-3 px-3 mt-2    ">
-                <div className="posts mt-1 col-6 ">
-                    <Personalpost username={username} />
-                </div>
-
-                <div className="chats col-3 mt-1">
-                    <h3 className='mx-3 mt-3'>Chat section</h3>
-                </div>
-
-            </div>
-        </div>
+        </>
     )
 }

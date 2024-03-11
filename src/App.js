@@ -20,6 +20,7 @@ import Profile from './Screens.jsx/Profile.jsx';
 import Home from './Screens.jsx/Home.jsx'
 import SWR from './Screens.jsx/SWR.jsx';
 import Usersprofile from './Screens.jsx/Usersprofile.jsx';
+import Search from './Screens.jsx/Search.jsx'
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
           <Route path='/profile' element={<Profile />} />
           <Route path='/error' element={<SWR />} />
           <Route path='/usersprofile' element={<Usersprofile />} />
-
+          <Route path='/search' element={<Search />} />
         </Routes>
       </Router>
     </>

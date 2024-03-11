@@ -6,6 +6,8 @@ const postrouter = require('./routers/post')
 const userrouter = require('./routers/user')
 const updater = require('./routers/Update')
 const Follow = require('./routers/Follow')
+const Searcher = require('./routers/Searcher')
+
 const cors = require('cors')
 const path = require('path')
 var jwt = require('jsonwebtoken');
@@ -44,6 +46,7 @@ app.use('/register/login', loginrouter)
 app.use('/post', postrouter)
 app.use('/update', updater)
 app.use('/follow', Follow)
+app.use('/search', Searcher)
 
 app.listen(8080, (req, res) => {
     console.log("listening on 8080")

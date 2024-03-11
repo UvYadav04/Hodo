@@ -7,9 +7,9 @@ export default function Homepage() {
   return (
     <div className="Home ">
       <Navbar />
-      <hr className="hr mt-0 w-100" />
+      {/* <hr className="hr mt-0 w-100" /> */}
       <Main className=" text-center" />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

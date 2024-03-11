@@ -32,8 +32,13 @@ export default function Personalpost({ username }) {
     }, [])
 
 
-    if (data.length <= 0)
-        return null;
+    if (data.length <= 0) {
+        return (
+            <>
+                <h5 className='mt-5 fs-1 opacity-50'>No Posts Yet</h5>
+            </>
+        )
+    }
 
     return (
         <>

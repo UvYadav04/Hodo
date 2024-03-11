@@ -8,11 +8,7 @@ import Commentor from './Commentor';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-export default function Post({ image, Tags, likes, description, username, id, Comments, Date }) {
-
-    var curd = new window.Date()
-    if (Date !== null)
-        console.log(curd, Date)
+export default function Post({ image, Tags, likes, description, username, id, Comments }) {
 
     let navigate = useNavigate()
     const [like, setlike] = useState(likes.length)
@@ -182,12 +178,9 @@ export default function Post({ image, Tags, likes, description, username, id, Co
         getuserdata()
     }, [])
 
-    // useEffect(() => {
-
-    // }, [])
 
     return (
-        <div className="post p-0 container text-center">
+        <div className="post p-0 container text-center ">
             <div className="row user m-0 p-1 justify-content-start align-items-center mb-0 pb-0 ">
                 <div className="col-auto logo p-0">
                     <img src={c1} alt="" width={40} height={40} />
