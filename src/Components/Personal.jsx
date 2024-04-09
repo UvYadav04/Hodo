@@ -213,290 +213,290 @@ export default function Personal({ username }) {
                 setfollowing(true)
                 navigate(0)
             }
+.
+}
 
-        }
-
-        if (following) {
-            const response = await fetch("http://localhost:8080/follow/following", {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorisation': `bearer ${localStorage.getItem('token')}`
-                },
-                body: JSON.stringify({ username, owner: owner })
-            })
-            const json = await response.json()
-            // console.log(json)    
-            if (json.success) {
-                setfollowing(false)
-                navigate(0)
-            }
-        }
+if (following) {
+    const response = await fetch("http://localhost:8080/follow/following", {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorisation': `bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ username, owner: owner })
+    })
+    const json = await response.json()
+    // console.log(json)    
+    if (json.success) {
+        setfollowing(false)
+        navigate(0)
+    }
+}
     }
 
-    const removefollower = async (item) => {
+const removefollower = async (item) => {
 
-        const response = await fetch("http://localhost:8080/follow/removefollower", {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'authorisation': `bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify({ item, owner })
+    const response = await fetch("http://localhost:8080/follow/removefollower", {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorisation': `bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ item, owner })
+    })
+    const json = await response.json()
+    // console.log(json)
+    if (json.success) {
+        setfound(true)
+        setuser(json.user)
+        setimage(json.user.image)
+        setinterests(json.user.Interest)
+        setnewuser((prev) => {
+            return {
+                owner: owner,
+                Username: json.user.Username,
+                Name: json.user.Name,
+                About: json.user.About,
+                Interest: json.user.Interest
+            }
         })
-        const json = await response.json()
+        if (json.user.Followers.includes(owner))
+            setfollowing(true)
+    }
+
+}
+
+const handlephoto = async (e) => {
+    setfile(e.target.files[0])
+    const formdata = new FormData();
+    formdata.append('file', e.target.files[0])
+    formdata.append('userid', user._id)
+    axios.post("http://localhost:8080/update/photo",
+        formdata, {
+        headers: {
+            'content-type': 'text/json',
+            'authorisation': `bearer ${localStorage.getItem('token')}`
+        }
+    }).then(async (res) => {
+        // const json = await res.json();
+        // console.log(res)
         // console.log(json)
-        if (json.success) {
-            setfound(true)
-            setuser(json.user)
-            setimage(json.user.image)
-            setinterests(json.user.Interest)
-            setnewuser((prev) => {
-                return {
-                    owner: owner,
-                    Username: json.user.Username,
-                    Name: json.user.Name,
-                    About: json.user.About,
-                    Interest: json.user.Interest
-                }
-            })
-            if (json.user.Followers.includes(owner))
-                setfollowing(true)
-        }
-
-    }
-
-    const handlephoto = async (e) => {
-        setfile(e.target.files[0])
-        const formdata = new FormData();
-        formdata.append('file', e.target.files[0])
-        formdata.append('userid', user._id)
-        axios.post("http://localhost:8080/update/photo",
-            formdata, {
-            headers: {
-                'content-type': 'text/json',
-                'authorisation': `bearer ${localStorage.getItem('token')}`
-            }
-        }).then(async (res) => {
-            // const json = await res.json();
-            // console.log(res)
-            // console.log(json)
-            setimage(file)
-            // navigate(0)
+        setimage(file)
+        // navigate(0)
+    })
+        .catch((e) => {
+            console.log("something went wrong try again : ", e)
         })
-            .catch((e) => {
-                console.log("something went wrong try again : ", e)
-            })
-    }
+}
 
-    const getactiveusers = async () => {
-        const response = await fetch("http://localhost:8080/activeuser", {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json',
-                'authorisation': `bearer ${localStorage.getItem('token')}`
-            }
-        })
-
-        const json = await response.json()
-        if (json.success) {
-            setactives(json.active)
+const getactiveusers = async () => {
+    const response = await fetch("http://localhost:8080/activeuser", {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'authorisation': `bearer ${localStorage.getItem('token')}`
         }
-        else if (!json.success)
-            console.log("no user")
+    })
+
+    const json = await response.json()
+    if (json.success) {
+        setactives(json.active)
     }
+    else if (!json.success)
+        console.log("no user")
+}
 
 
 
-    useEffect(() => {
-        getuserdata()
-        getownerdata()
-        getactiveusers()
-    }, [])
+useEffect(() => {
+    getuserdata()
+    getownerdata()
+    getactiveusers()
+}, [])
 
-    return (
-        <>
-            <div className="container-fluid profile">
-                <div className={passwording ? "d-none" : "row prow  justify-content-around pt-2 ps-2 "}>
+return (
+    <>
+        <div className="container-fluid profile">
+            <div className={passwording ? "d-none" : "row prow  justify-content-around pt-2 ps-2 "}>
 
-                    <div className={Edit ? "d-none" : "col-xxl-4 col-xl-4 col-lg-5 col-12 info d-flex flex-column justify-content-start text-align-center p-2 profilepage position-relative border"}>
-                        <div className={settings ? "bg bg-dark text-white position-absolute slider z-index-3 rounded-2 mt-0" : "d-none"}>
-                            <ul className='p-0 pt-2'>
-                                <li className="d-block mb-1  fs-6    w-100 text-start mx-2" onClick={() => setEdit(true)} >Edit profile</li>
-                                <li className="d-block  mb-1 fs-6    w-100 text-start mx-2" onClick={() => navigate('/privacy')}>Privacy</li>
-                                <li className="d-block  mb-1 fs-6    w-100 text-start mx-2" onClick={() => setpasswording(true)} >Change password</li>
-                                <li onClick={() => {
-                                    localStorage.removeItem("username")
-                                    localStorage.removeItem("token")
-                                    navigate('/auth')
-                                }} className="d-block mb-1  fs-6      w-100 text-start mx-2 text-danger mt-auto"
-                                >Log Out</li>
-                            </ul>
-                        </div>
-                        <div className="image d-flex flex-row justify-content-start gap-0 position-relative">
-                            <img src={"http://localhost:8080/Images/" + user.image} className='rounded-1 border border-dark' alt="" />
-                            <span className="mx-2 name text-start w-100">
-                                <h4 className='mb-0 w-100 '>{user.Username ? user.Username : "User inactive"} </h4>
-                                <h5 className='opacity-75 m-0 mb-1'>{user.Name}</h5>
-                                <button className={owner !== username && !following ? 'rounded-2 text-white bg bg-primary border border-none  d-block m-0' : "d-none"} onClick={() => handlefollow()} >Follow+</button>
-                                <button className={owner !== username && following ? 'rounded-2 text-white bg bg-primary border border-none d-block ' : "d-none"} onClick={() => handlefollow()} >Following</button>
-
-                                <span className="followers position-relative text-center p-0">
-                                    <button className='rounded-0 bg bg-primary text-white me-2 mt-lg-2 mt-0' onClick={() => setseefolls(!seefolls)} ><span>{found ? user.Followers.length : null}</span> Followers</button>
-                                    <button className='rounded-0 bg bg-primary text-white' onClick={() => setseefolls(!seefolls)}><span >{found ? user.Following.length : null}</span> Following</button>
-
-                                </span>
-
-                                <span className="following position-relative">
-
-
-                                </span>
-                            </span>
-                            <SettingsIcon className={owner === username ? settings ? "text-white z-index-3 sicon " : "text-black z-index-3 bg bg-white sicon" : "d-none"} onClick={() => setsettings(!settings)} />
-                        </div>
-
-                        <div className="infor text-start mt-2">
-                            {user.About}
-                        </div>
-
-                        <div className="interests text-start mt-2">
-                            <h5 className='opacity-75 mb-2'>Interests</h5>
-                            <ul className='p-0'>
-                                {
-                                    interests.length > 0 ? interests.map((item, i) => {
-                                        return <li key={i} className='w-25 list-style-none d-inline bg bg-primary text-white me-2 px-2 py-1 rounded-1'>{item}</li>
-                                    }) : <h4 className='opacity-50'>Add interest to view here </h4>
-
-                                }
-                            </ul>
-                        </div>
+                <div className={Edit ? "d-none" : "col-xxl-4 col-xl-4 col-lg-5 col-12 info d-flex flex-column justify-content-start text-align-center p-2 profilepage position-relative border"}>
+                    <div className={settings ? "bg bg-dark text-white position-absolute slider z-index-3 rounded-2 mt-0" : "d-none"}>
+                        <ul className='p-0 pt-2'>
+                            <li className="d-block mb-1  fs-6    w-100 text-start mx-2" onClick={() => setEdit(true)} >Edit profile</li>
+                            <li className="d-block  mb-1 fs-6    w-100 text-start mx-2" onClick={() => navigate('/privacy')}>Privacy</li>
+                            <li className="d-block  mb-1 fs-6    w-100 text-start mx-2" onClick={() => setpasswording(true)} >Change password</li>
+                            <li onClick={() => {
+                                localStorage.removeItem("username")
+                                localStorage.removeItem("token")
+                                navigate('/auth')
+                            }} className="d-block mb-1  fs-6      w-100 text-start mx-2 text-danger mt-auto"
+                            >Log Out</li>
+                        </ul>
                     </div>
-                    <div className={!Edit ? "d-none" : "col-xxl-4 col-xl-4 col-lg-5 col-12 position-lg-sticky position-static info d-flex flex-column justify-content-start p-0 text-align-center p-2"}>
-                        <div className="image d-flex flex-row justify-content-start gap-0 position-relative">
+                    <div className="image d-flex flex-row justify-content-start gap-0 position-relative">
+                        <img src={"http://localhost:8080/Images/" + user.image} className='rounded-1 border border-dark' alt="" />
+                        <span className="mx-2 name text-start w-100">
+                            <h4 className='mb-0 w-100 '>{user.Username ? user.Username : "User inactive"} </h4>
+                            <h5 className='opacity-75 m-0 mb-1'>{user.Name}</h5>
+                            <button className={owner !== username && !following ? 'rounded-2 text-white bg bg-primary border border-none  d-block m-0' : "d-none"} onClick={() => handlefollow()} >Follow+</button>
+                            <button className={owner !== username && following ? 'rounded-2 text-white bg bg-primary border border-none d-block ' : "d-none"} onClick={() => handlefollow()} >Following</button>
 
-                            <label htmlFor="image">
-                                <img src={edit} className='mx-1 rounded-1 opacity-50 ' alt="..." />
-                            </label>
-                            <input type="file" onChange={(e) => handlephoto(e)} id='image' name='image' className='d-none' />
-                            <span className="mx-2 name text-start ">
+                            <span className="followers position-relative text-center p-0">
+                                <button className='rounded-0 bg bg-primary text-white me-2 mt-lg-2 mt-0' onClick={() => setseefolls(!seefolls)} ><span>{found ? user.Followers.length : null}</span> Followers</button>
+                                <button className='rounded-0 bg bg-primary text-white' onClick={() => setseefolls(!seefolls)}><span >{found ? user.Following.length : null}</span> Following</button>
 
-                                <input type="text" value={newuser.Username} name='Username' className='mb-0 d-block updateusername' onChange={(event) => handlechanges(event)} disabled />
-                                <p className='updateusername text-danger mb-1'>Sorry can't change username, will be fixed soon.</p>
-                                <input type="text" value={newuser.Name} name='Name' className='mb-2 ' onChange={(event) => handlechanges(event)} />
-
-                                <button className={owner !== username && !following ? 'rounded-2 text-white bg bg-primary my-2 border border-none' : "d-none"} onClick={() => handlefollow()} >Follow+</button>
-                                <button className={owner !== username && following ? 'rounded-2 text-white bg bg-primary my-2 border border-none' : "d-none"} onClick={() => handlefollow()} >Following</button>
-                                <br />
-                                <button className='rounded-1 bg bg-primary text-white me-2' ><span>{found ? user.Followers.length : null}</span> Followers</button>
-                                <button className='rounded-1 bg bg-primary text-white me-2' ><span >{found ? user.Following.length : null}</span> Following</button>
                             </span>
 
-                        </div>
+                            <span className="following position-relative">
 
 
-                        <textarea name="About" id="bio" cols="10" rows="5" className='mt-3 rounded-3' value={newuser.About} placeholder='Add bio here' onChange={(event) => handlechanges(event)}  ></textarea>
-
-
-                        <div className="interests mt-3 text-start w-100" key={"uvyadav"}>
-                            <ul className='p-0' key={"down"}>
-                                {
-                                    interests.length > 0 ?
-                                        interests.map((item, i) => {
-                                            return (<>
-                                                <li key={i} className='w-25 list-style-none d-inline bg bg-primary text-white me-0 px-2 py-1 rounded-5'>{item} <CancelIcon onClick={() => deleteinterest(item)} />  </li>
-
-                                            </>
-                                            )
-                                        }) :
-                                        <h5>Add interests to view here</h5>
-                                }
-                            </ul>
-
-                            <div className="adder">
-                                <input type="text" name='interest' value={interest} onChange={(event) => setinterest(event.target.value)} className='rounded-5 w-50 ps-2 my-auto bg' placeholder='add interest' />
-                                <button className=' rounded-1 me-auto bg bg-primary border border-dark px-2 mx-2 text-white fs-6 my-auto' onClick={() => addinterest()}>Add</button>
-                            </div>
-                        </div>
-
-                        <button className="ms-auto me-3 bg bg-primary text-white rounded-1" onClick={() => handleupdation()}>Update</button>
-                    </div>
-                    <div className="col-xl-5 col-md-7 col-sm-10 col-12 posts mt-lg-0 mt-3">
-                        <Personalpost username={username} />
-                    </div>
-                    <div className="col-xl-3 col-lg-3 col-md-4 d-xl-inline d-lg-none d-md-inline d-none mt-lg-0 mt-3 profilechat border "   >
-                        <input type="text" name="search" placeholder="search friends" className=" ps-2 w-100 bg bg-white rounded-4 mt-2 mx-0" />
-                        <div className="activefriends mt-2 ">
-                            {Friends.map((item, i) => item.Username !== owner && actives.includes(item.Username) ? <li key={i} className=' p-1 fs-4 w-100 text-start'>  <img className='border border-success border-3 rounded-5' src={"http://localhost:8080/Images/" + item.image} width={40} height={40} alt="" /></li> : null)}
-
-                        </div>
-                        <ul className={!loading && !nofrnds ? "p-1 mt-0" : "d-none"}>
-                            {
-
-                                Friends.map((item, i) => {
-                                    return (<li key={i} className="text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row" onClick={() => navigate('/chat', { state: item.Username })} >
-                                        <img src={"http://localhost:8080/Images/" + item.image} width={50} height={50} className=" rounded-5 me-2" alt="" />
-                                        <section className="details cursor-pointer p-0">
-                                            {item.Username}
-                                            <span className="opacity-75 d-block fs-6 m-0">
-                                                Tap to chat</span>
-                                        </section>
-                                    </li>
-                                    )
-                                })
-                            }
-                        </ul>
-
-                        <section className={!loading && nofrnds ? "h-100 d-flex justify-content-center align-items-center" : "d-none"}>
-                            <h3 className="opacity-50">Connect Friends to Chat</h3>
-                        </section>
-
-                        <section className={loading ? "h-100 d-flex justify-content-center align-items-center" : "d-none"}>
-                            <h4 className="mx-auto opacity-75">Loading chats...</h4>
-                        </section>
-
+                            </span>
+                        </span>
+                        <SettingsIcon className={owner === username ? settings ? "text-white z-index-3 sicon " : "text-black z-index-3 bg bg-white sicon" : "d-none"} onClick={() => setsettings(!settings)} />
                     </div>
 
-                    <div className={seefolls ? "seefolls  d-flex flex-row mt-2" : "d-none"}>
-                        <ClearIcon className='d-block' onClick={() => setseefolls(false)} />
-                        <ul className=' w-50 text-center m-0 p-0 border-right'>
-                            <h5 className='text-black m-0 p-0  my-1' >Followers</h5>
+                    <div className="infor text-start mt-2">
+                        {user.About}
+                    </div>
+
+                    <div className="interests text-start mt-2">
+                        <h5 className='opacity-75 mb-2'>Interests</h5>
+                        <ul className='p-0'>
                             {
-                                found ?
-                                    user.Followers.map((item) => <li className='p-0 m-0 mb-2 text-center opacity-75 position-relative' ><span onClick={() => navigate('/usersprofile', { state: item })}>{item}</span> <button className='bg bg-transparent text-danger remover text-end p-0 d-inline' onClick={() => removefollower(item)}>remove</button></li>) :
-                                    null
-                            }
-                        </ul>
-                        <ul className=' w-50 text-center  p-0'    >
-                            <h5 className='text-black m-0 p-0 mb-2' >Followings</h5>
-                            {
-                                found ?
-                                    user.Following.map((item) => <li className='p-0 m-0 opacity-75 '>{item}</li>) :
-                                    null
+                                interests.length > 0 ? interests.map((item, i) => {
+                                    return <li key={i} className='w-25 list-style-none d-inline bg bg-primary text-white me-2 px-2 py-1 rounded-1'>{item}</li>
+                                }) : <h4 className='opacity-50'>Add interest to view here </h4>
+
                             }
                         </ul>
                     </div>
+                </div>
+                <div className={!Edit ? "d-none" : "col-xxl-4 col-xl-4 col-lg-5 col-12 position-lg-sticky position-static info d-flex flex-column justify-content-start p-0 text-align-center p-2"}>
+                    <div className="image d-flex flex-row justify-content-start gap-0 position-relative">
+
+                        <label htmlFor="image">
+                            <img src={edit} className='mx-1 rounded-1 opacity-50 ' alt="..." />
+                        </label>
+                        <input type="file" onChange={(e) => handlephoto(e)} id='image' name='image' className='d-none' />
+                        <span className="mx-2 name text-start ">
+
+                            <input type="text" value={newuser.Username} name='Username' className='mb-0 d-block updateusername' onChange={(event) => handlechanges(event)} disabled />
+                            <p className='updateusername text-danger mb-1'>Sorry can't change username, will be fixed soon.</p>
+                            <input type="text" value={newuser.Name} name='Name' className='mb-2 ' onChange={(event) => handlechanges(event)} />
+
+                            <button className={owner !== username && !following ? 'rounded-2 text-white bg bg-primary my-2 border border-none' : "d-none"} onClick={() => handlefollow()} >Follow+</button>
+                            <button className={owner !== username && following ? 'rounded-2 text-white bg bg-primary my-2 border border-none' : "d-none"} onClick={() => handlefollow()} >Following</button>
+                            <br />
+                            <button className='rounded-1 bg bg-primary text-white me-2' ><span>{found ? user.Followers.length : null}</span> Followers</button>
+                            <button className='rounded-1 bg bg-primary text-white me-2' ><span >{found ? user.Following.length : null}</span> Following</button>
+                        </span>
+
+                    </div>
+
+
+                    <textarea name="About" id="bio" cols="10" rows="5" className='mt-3 rounded-3' value={newuser.About} placeholder='Add bio here' onChange={(event) => handlechanges(event)}  ></textarea>
+
+
+                    <div className="interests mt-3 text-start w-100" key={"uvyadav"}>
+                        <ul className='p-0' key={"down"}>
+                            {
+                                interests.length > 0 ?
+                                    interests.map((item, i) => {
+                                        return (<>
+                                            <li key={i} className='w-25 list-style-none d-inline bg bg-primary text-white me-0 px-2 py-1 rounded-5'>{item} <CancelIcon onClick={() => deleteinterest(item)} />  </li>
+
+                                        </>
+                                        )
+                                    }) :
+                                    <h5>Add interests to view here</h5>
+                            }
+                        </ul>
+
+                        <div className="adder">
+                            <input type="text" name='interest' value={interest} onChange={(event) => setinterest(event.target.value)} className='rounded-5 w-50 ps-2 my-auto bg' placeholder='add interest' />
+                            <button className=' rounded-1 me-auto bg bg-primary border border-dark px-2 mx-2 text-white fs-6 my-auto' onClick={() => addinterest()}>Add</button>
+                        </div>
+                    </div>
+
+                    <button className="ms-auto me-3 bg bg-primary text-white rounded-1" onClick={() => handleupdation()}>Update</button>
+                </div>
+                <div className="col-xl-5 col-md-7 col-sm-10 col-12 posts mt-lg-0 mt-3">
+                    <Personalpost username={username} />
+                </div>
+                <div className="col-xl-3 col-lg-3 col-md-4 d-xl-inline d-lg-none d-md-inline d-none mt-lg-0 mt-3 profilechat border "   >
+                    <input type="text" name="search" placeholder="search friends" className=" ps-2 w-100 bg bg-white rounded-4 mt-2 mx-0" />
+                    <div className="activefriends mt-2 ">
+                        {Friends.map((item, i) => item.Username !== owner && actives.includes(item.Username) ? <li key={i} className=' p-1 fs-4 w-100 text-start'>  <img className='border border-success border-3 rounded-5' src={"http://localhost:8080/Images/" + item.image} width={40} height={40} alt="" /></li> : null)}
+
+                    </div>
+                    <ul className={!loading && !nofrnds ? "p-1 mt-0" : "d-none"}>
+                        {
+
+                            Friends.map((item, i) => {
+                                return (<li key={i} className="text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row" onClick={() => navigate('/chat', { state: item.Username })} >
+                                    <img src={"http://localhost:8080/Images/" + item.image} width={50} height={50} className=" rounded-5 me-2" alt="" />
+                                    <section className="details cursor-pointer p-0">
+                                        {item.Username}
+                                        <span className="opacity-75 d-block fs-6 m-0">
+                                            Tap to chat</span>
+                                    </section>
+                                </li>
+                                )
+                            })
+                        }
+                    </ul>
+
+                    <section className={!loading && nofrnds ? "h-100 d-flex justify-content-center align-items-center" : "d-none"}>
+                        <h3 className="opacity-50">Connect Friends to Chat</h3>
+                    </section>
+
+                    <section className={loading ? "h-100 d-flex justify-content-center align-items-center" : "d-none"}>
+                        <h4 className="mx-auto opacity-75">Loading chats...</h4>
+                    </section>
 
                 </div>
 
-                {/* col-xl-3 col-lg-3 col-md-5 d-xl-flex d-lg-none d-md-flex flex-row mt-lg-0 mt-3 m-0 border text-primary p-0 */}
+                <div className={seefolls ? "seefolls  d-flex flex-row mt-2" : "d-none"}>
+                    <ClearIcon className='d-block' onClick={() => setseefolls(false)} />
+                    <ul className=' w-50 text-center m-0 p-0 border-right'>
+                        <h5 className='text-black m-0 p-0  my-1' >Followers</h5>
+                        {
+                            found ?
+                                user.Followers.map((item) => <li className='p-0 m-0 mb-2 text-center opacity-75 position-relative' ><span onClick={() => navigate('/usersprofile', { state: item })}>{item}</span> <button className='bg bg-transparent text-danger remover text-end p-0 d-inline' onClick={() => removefollower(item)}>remove</button></li>) :
+                                null
+                        }
+                    </ul>
+                    <ul className=' w-50 text-center  p-0'    >
+                        <h5 className='text-black m-0 p-0 mb-2' >Followings</h5>
+                        {
+                            found ?
+                                user.Following.map((item) => <li className='p-0 m-0 opacity-75 '>{item}</li>) :
+                                null
+                        }
+                    </ul>
+                </div>
 
-                <div className={passwording ? "row password w-100 justify-content-center align-content-center" : "d-none"}>
-                    <div className=" col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10 d-flex flex-column align-items-center justify-content-center p-lg-5 p-md-3 p-sm-1 p-0 border border-sm-primary border-none border-3">
-                        <label htmlFor="current" className='m-0 ms-0 w-75 text-start text-primary'>current password</label>
-                        <input type="password" className='d-block mb-2 w-75' value={currentp} onChange={(e) => setcurrentp(e.target.value)} />
-                        <label htmlFor="new" className='m-0 ms-0 w-75 text-start text-primary' >new    password</label>
-                        <input type="password" className='d-block mb-2 w-75' value={newp} onChange={(e) => setnewp(e.target.value)} />
-                        <label htmlFor="confirm" className='m-0 ms-0 w-75 text-start text-primary'>confirm password</label>
-                        <input type="password" className='d-block mb-2 w-75' value={confp} onChange={(e) => setconfp(e.target.value)} />
-                        <p className={cwrong ? "d-inline m-0 p-0 text-start w-75 text-danger fs-6" : "d-none"}>Incorrect current password</p>
-                        <p className={nwrong ? "d-inline m-0 p-0 text-start w-75 text-danger fs-6" : "d-none"}>Password do not match</p>
-                        <p className={pwrong ? "d-inline m-0 p-0 text-start w-75 text-danger fs-6" : "d-none"}>Password must be 8 characters long</p>
-                        <button className=' mt-2 bg bg-primary text-white fs-6 rounded-3 px-2 border-white' onClick={() => handlepassword()}>Change</button>
-                        <button className=' mt-2 bg bg-primary text-white fs-6 rounded-3 px-2 border-white' onClick={() => navigate(0)}>Go back</button>
+            </div>
 
-                    </div>
-                </div >
+            {/* col-xl-3 col-lg-3 col-md-5 d-xl-flex d-lg-none d-md-flex flex-row mt-lg-0 mt-3 m-0 border text-primary p-0 */}
+
+            <div className={passwording ? "row password w-100 justify-content-center align-content-center" : "d-none"}>
+                <div className=" col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10 d-flex flex-column align-items-center justify-content-center p-lg-5 p-md-3 p-sm-1 p-0 border border-sm-primary border-none border-3">
+                    <label htmlFor="current" className='m-0 ms-0 w-75 text-start text-primary'>current password</label>
+                    <input type="password" className='d-block mb-2 w-75' value={currentp} onChange={(e) => setcurrentp(e.target.value)} />
+                    <label htmlFor="new" className='m-0 ms-0 w-75 text-start text-primary' >new    password</label>
+                    <input type="password" className='d-block mb-2 w-75' value={newp} onChange={(e) => setnewp(e.target.value)} />
+                    <label htmlFor="confirm" className='m-0 ms-0 w-75 text-start text-primary'>confirm password</label>
+                    <input type="password" className='d-block mb-2 w-75' value={confp} onChange={(e) => setconfp(e.target.value)} />
+                    <p className={cwrong ? "d-inline m-0 p-0 text-start w-75 text-danger fs-6" : "d-none"}>Incorrect current password</p>
+                    <p className={nwrong ? "d-inline m-0 p-0 text-start w-75 text-danger fs-6" : "d-none"}>Password do not match</p>
+                    <p className={pwrong ? "d-inline m-0 p-0 text-start w-75 text-danger fs-6" : "d-none"}>Password must be 8 characters long</p>
+                    <button className=' mt-2 bg bg-primary text-white fs-6 rounded-3 px-2 border-white' onClick={() => handlepassword()}>Change</button>
+                    <button className=' mt-2 bg bg-primary text-white fs-6 rounded-3 px-2 border-white' onClick={() => navigate(0)}>Go back</button>
+
+                </div>
             </div >
-        </>
-    )
+        </div >
+    </>
+)
 }
