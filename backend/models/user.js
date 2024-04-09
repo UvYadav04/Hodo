@@ -18,6 +18,9 @@ const userschema = new schema({
         type: schema.Types.Mixed,
         required: true
     },
+    About: {
+        type: String,
+    },
     Likes: {
         type: Array
     },
@@ -26,6 +29,20 @@ const userschema = new schema({
     },
     Following: {
         type: Array
+    },
+    image: {
+        type: String,
+        default: "https://th.bing.com/th/id/OIP.fqSvfYQB0rQ-6EG_oqvonQHaHa?rs=1&pid=ImgDetMain"
+    },
+    friends: {
+        type: [schema.Types.ObjectId],
+        ref: 'user'
+    },
+    Interest: {
+        type: []
+    },
+    Location: {
+        type: Object
     }
 })
 

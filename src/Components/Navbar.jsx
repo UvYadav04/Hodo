@@ -4,12 +4,14 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import logo from '../Photos/logo3.png'
 import c1 from '../Photos/c1.jpg'
+import { useCookies } from 'react-cookie';
 export default function Navbar() {
   let navigate = useNavigate()
   const [search, setsearch] = useState("")
   const [data, setdata] = useState([])
   const [result, setresult] = useState(false)
   const [menu, setmenu] = useState(false)
+  // const [cookie, setcookie, removecookie] = useCookies()
 
   const handlesearch = async (value) => {
     setsearch(value)
@@ -28,7 +30,7 @@ export default function Navbar() {
       let user = json.userdata
       let result = []
       result = Object.keys(user).map((key) => [user[key]]);
-      console.log(`result : `, result)
+      // console.log(`result : `, result)
       setdata(result)
     }
 
@@ -54,20 +56,19 @@ export default function Navbar() {
             <h4 className='d-inline-block'>HODO</h4>
           </div>
         </div>
-        <div className="col-md-4 col-5 col-lg-5  col-xl-4 mx-0 search text-md-center p-0 text-end ms-auto ms-md-0 ">
-          <input type="text" className='m-0' placeholder='search' value={search} name='search' onChange={(e) => handlesearch(e.target.value)} />
-          {/* <button className='mx-2' onClick={(e) => handlesearch(e.target.value)}>Search</button> */}
-          <div className={result ? "results d-block position-absolute text-start rounded-1  p-2" : "d-none"}>
+        <div className="col-md-4 col-5 col-lg-5 col-xl-4 mx-0 search text-md-start p-0 text-center ms-auto ms-md-0">
+          <input type="text" className='m-0 w-100 rounded-5 ps-2 position-relative' placeholder='search' value={search} name='search' onChange={(e) => handlesearch(e.target.value)} />
+          <div className={result ? "results d-block text-start position-absolute rounded-1 py-1 px-2 w-100" : "d-none"}>
             {
               data.map((item) => {
                 return (
-                  <div className='d-flex dipdop flex-row justify-content-start bg bg-white text-black my-1 w-md-auto w-75 rounded-1' onClick={() => navigate('/usersprofile', { state: item[0].Username })} >
-                    <div className="image w-100">
+                  <div className='d-flex dipdop flex-row justify-content-start bg bg-white text-black mb-1 w-md-auto w-100 rounded-3s' onClick={() => navigate('/usersprofile', { state: item[0].Username })} >
+                    <div className="image">
                       <img src={c1} width={40} height={40} className='d-inline rounded-5 my-1 mx-2' alt="" />
                     </div>
                     <div className="info">
-                      <h5 className='my-0 fs-md-5 fs-6' >{item[0].Username}</h5>
-                      <h6 className='my-0 opacity-75  fs-md-5 fs-6'>{item[0].Name}</h6>
+                      <h5 className='my-0 fs-md-5 ' >{item[0].Username}</h5>
+                      <h6 className='my-0 opacity-75  '>{item[0].Name}</h6>
                     </div>
                   </div>
 
@@ -78,7 +79,7 @@ export default function Navbar() {
         </div>
         <div className=" col-md-4 col-2 navs pt-0 d-md-flex align-items-center justify-content-around d-none px-md-2 px-0">
           <Link to={'/hodo'} className=" text-decoration-none text-black fs-5 mx-md-3 mx-1 ">Home</Link>
-          <Link to={'/hodo'} className=" text-decoration-none text-black fs-5 mx-md-3 mx-1">Chat</Link>
+          <Link to={'/chat'} className=" text-decoration-none text-black fs-5 mx-md-3 mx-1">Chat</Link>
           <Link to={'/privacy'} className="d-md-inline d-none text-decoration-none text-black fs-5 mx-md-3 mx-1">Privacy</Link>
 
           <button className=" fs-4 mx-md-2 mx-0 p-0 cursor-pointer text-decoration-none text-danger w-auto  d-lg-inline d-none" onClick={() => {
@@ -96,13 +97,15 @@ export default function Navbar() {
         </div>
 
         <div className={menu ? "menubar d-flex flex-column gap-2 col-4 col-sm-3 m-0 py-1 text-white show d-md-none d-inline rounded-1" : "menubar d-flex flex-column gap-2 col-4 col-sm-3 m-0 py-1 text-white hide d-md-none d-inline rounded-1"}>
-          <a href="/hodo" className='text-decoration-none text-black fs-4'>Home</a>
-          <a href="/hodo" className='text-decoration-none text-black fs-4'>Chat</a>
-          <a href="/privacy" className='text-decoration-none text-black fs-4'>Privacy</a>
-          <a href="/profile" className='text-decoration-none text-black fs-4 '>Profile</a>
+          <Link to={'/hodo'} className='text-decoration-none text-black fs-4'>Home</Link>
+          <Link to={'/chat'} className='text-decoration-none text-black fs-4'>Chat</Link>
+          <Link to={'/privacy'} className='text-decoration-none text-black fs-4'>Privacy</Link>
+          <Link to={'/profile'} className='text-decoration-none text-black fs-4'>Profile</Link>
           <button className=" fs-4 cursor-pointer text-decoration-none text-danger text-start p-0  m-0" onClick={() => {
             localStorage.removeItem('username')
             localStorage.removeItem('token')
+            // console.log(cookie.username)
+            // removecookie("username")
             navigate('/auth')
           }}>Logout</button>
         </div>

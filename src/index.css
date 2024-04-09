@@ -14,77 +14,82 @@ body {
 
 /* ************navbar******************* */
 
+li {
+  list-style: none;
+}
+
+button {
+  border: none !important;
+}
+
 
 .navbar {
   width: 100%;
   /* background-color: red; */
   align-items: end;
   margin: 0;
-  background: linear-gradient(to right, pink, rgb(42, 145, 236));
+  /* background: linear-gradient(to right, pink, rgb(42, 145, 236)); */
+
+  button {
+    background-color: transparent;
+    border: none;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .logo .name {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .logo h6 {
+    /* background-color: blue; */
+    margin-block-start: 10px;
+  }
+
+  .search {
+    position: relative;
+    padding: 0;
+    /* background-color: red; */
+  }
+
+  input {
+    height: inherit;
+
+  }
+
+  .search .results {
+    width: 70%;
+    max-height: 400px;
+    background-color: rgb(118, 118, 118);
+    border-radius: 10px;
+    z-index: 2;
+    margin-left: auto;
+    max-width: 300px;
+  }
+
+  .dipdop {
+    cursor: pointer;
+    max-width: 250px;
+    /* background-color: red; */
+  }
+
+  .menubar {
+    position: absolute;
+    transition: 1s;
+    background-color: rgb(211, 211, 211);
+    /* min-height: 50vh; */
+    right: 0;
+    top: 100%;
+    height: 80vh;
+    min-width: 150px;
+  }
+
+  hr.hr {
+    margin: auto;
+  }
 }
 
-.navbar input {
-  width: 80%;
-  height: inherit;
-  border-radius: 100px;
-  padding-left: 10px;
-  position: relative;
-  margin: 0;
-}
-
-.navbar button {
-  background-color: transparent;
-  border: none;
-  font-size: 1.2rem;
-  text-align: center;
-}
-
-hr.hr {
-  margin: auto;
-  /* outline: 1px solid black; */
-}
-
-.navbar .logo .name {
-  width: 100%;
-  margin-top: 10px;
-}
-
-.navbar .logo h6 {
-  /* background-color: blue; */
-  margin-block-start: 10px;
-}
-
-.navbar .search {
-  position: relative;
-  /* background-color: blue; */
-  padding: 0;
-}
-
-.navbar .search .results {
-  width: 70%;
-  max-height: 400px;
-  /* min-height: 300px; */
-  /* border: 1px solid black; */
-  background-color: rgb(204, 204, 204);
-  border-radius: 10px;
-  z-index: 2;
-  margin-left: 10px;
-}
-
-.navbar .dipdop {
-  cursor: pointer;
-}
-
-.navbar .menubar {
-  position: absolute;
-  transition: 1s;
-  background-color: rgb(211, 211, 211);
-  /* min-height: 50vh; */
-  right: 0;
-  top: 100%;
-  height: 80vh;
-  min-width: 150px;
-}
 
 .show {
   /* right: 0;
@@ -103,86 +108,84 @@ hr.hr {
 /* ************navbar******************* */
 
 /* *******************main********************** */
-.main {
-  width: 100%;
-  height: auto;
-  justify-content: space-evenly;
-  /* position: relative; */
-  /* border: 2px solid black; */
-  background-color: transparent;
+
+
+.main2 {
+  position: relative;
 }
 
-.main .index {
-  width: 19%;
-  height: 600px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
-  box-shadow: 3px 3px 7px black;
-  position: sticky;
-  top: 0;
-}
+.main2 {
+  .newpost {
+    position: fixed;
+    font-size: 5rem;
+    bottom: 5%;
+    right: 4%;
+    width: fit-content;
+    z-index: 4;
+    /* color: rgb(41, 134, 255); */
+    cursor: pointer;
+    /* background-color: red; */
+  }
 
+  .chatn {
+    height: 750px;
+    /* background: linear-gradient(to bottom, skyblue, pink); */
+    border-radius: 10px;
+    box-shadow: 3px 3px 7px black;
+    position: sticky;
+    top: 0;
 
-.main .posts {
-  width: 50%;
-  /* margin-left: auto; */
-  background-color: white;
-  border-radius: 10px;
-}
+    li {
+      list-style: none;
+    }
+  }
 
+  .userinfo {
+    height: 750px;
+    /* background: linear-gradient(to bottom, pink, teal); */
+    border-radius: 10px;
+    box-shadow: 3px 3px 7px black;
+    position: sticky;
+    top: 0;
 
+    li {
+      list-style: none;
+      cursor: pointer;
+    }
+  }
 
-.main .chats {
-  width: 30%;
-  min-width: 270px;
-  max-width: 330px;
-  height: 750px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
-  box-shadow: 3px 3px 7px black;
-  position: sticky;
-  top: 0;
-}
-
-.main .newpost {
-  position: fixed;
-  font-size: 5rem;
-  bottom: 5%;
-  right: 4%;
-  width: fit-content;
-  z-index: 4;
-  color: rgb(41, 134, 255);
-  cursor: pointer;
-  /* background-color: red; */
+  .activefriends {
+    width: 100%;
+    overflow-x: scroll;
+    scrollbar-width: none;
+  }
 }
 
 /* *******************main********************** */
 
 
-.post img {
-  border-radius: 100px;
-}
-
-.post li {
-  border-radius: 10px;
-  margin-left: 0;
-}
-
-.post .images img {
-  width: 100%;
-  border-radius: 10px;
-
-}
-
 .post {
   margin-bottom: 10px;
   background-color: white;
-  /* border-left: 1px solid black; */
   border-radius: 10px;
-}
 
-.post:hover {
-  background-color: rgb(234, 234, 234);
+  .images img {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  li {
+    border-radius: 10px;
+    margin-left: 0;
+  }
+
+  .post:hover {
+    background-color: rgb(234, 234, 234);
+  }
+
+  img {
+    border-radius: 100px;
+  }
 }
 
 
@@ -194,64 +197,51 @@ hr.hr {
 
 /* **************register************* */
 
-.register {
-  max-height: 90vh;
-  margin-top: 0;
-}
-
-.register .bott {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-}
-
-.register .full {
-  height: 700px;
-}
-
-.register input {
+.loginpage input {
   border: none !important;
   background-color: transparent;
-  border-bottom: 1px solid black !important;
+  border-bottom: 1px solid rgb(0, 0, 0) !important;
   border-radius: 0;
 }
+
+.loginpage input:enabled {
+  border: none;
+  outline: none;
+  /* background-color: blue; */
+}
+
+.loginpage {
+
+  .login,
+  .signup {
+    transition: 1s;
+  }
+}
+
+.show {
+  display: inline;
+}
+
+.hide {
+  display: none;
+}
+
+.loginpage {
+  padding-top: 70px;
+  /* background: linear-gradient(to right, pink, rgb(109, 197, 203)); */
+}
+
+.loginpage .register {
+  border-radius: 0 50px 0 50px;
+  height: 80vh;
+  width: 80vw;
+}
+
 
 /* **************register************* */
 
 
 /* ************cover************** */
-
-.overlay {
-  top: 0;
-  position: absolute;
-  width: 50%;
-  height: 90vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.image-overlay {
-  width: 70%;
-  margin: auto;
-  border-radius: 25px;
-  box-shadow: 5px 5px 10px black;
-  /* z-index: 1; */
-  /* margin-left: 0px; */
-}
-
-.overlay {
-  transition: transform 1s ease;
-}
-
-.cover-left {
-  transform: translateX(100%);
-}
-
-.cover-right {
-
-  transform: translateX(0%);
-}
 
 /* ************cover************** */
 
@@ -262,37 +252,24 @@ hr.hr {
 /* **********profile********** */
 
 
-.profile2 {
-  /* background-color: green; */
-  text-align: center;
-  padding: 0;
+.profile {
+  position: relative;
 }
+
 
 
 .matter {
   position: relative;
 }
 
-.chater {
-  position: sticky;
-  top: 0;
-  max-height: 750px;
-  /* background-color: red; */
-  min-width: 280px;
-  max-width: 320px;
+
+.profile .image img {
+  border-radius: 100px;
+  overflow: hidden;
 }
-
-
-.form2 {
-  background: linear-gradient(to right, rgb(139, 0, 0), rgb(0, 0, 0));
-  width: 100%;
-  height: 100vh;
-}
-
 
 
 .photo img {
-  /* width: 100%; */
   max-width: 100%;
   margin: auto;
   border-radius: 10px;
@@ -323,48 +300,325 @@ hr.hr {
 }
 
 /* ***************profile**************** */
-.profile .info {
+.info {
   max-height: 680px;
+  /* background-color: red; */
   position: sticky;
   top: 0;
   box-sizing: border-box;
-  box-shadow: 5px 5px 10px 1px pink;
+  /* box-shadow: 5px 5px 10px 1px pink; */
+}
+
+.post:hover {
+  background-color: rgb(200, 200, 200);
 }
 
 /* ***************profile**************** */
 
-@media (max-width: 1496px) {
-  .profile .p2 .usericon img {
-    width: 100%;
-    bottom: 50%;
+/* ************Chat************* */
+
+.chatbocx {
+  min-height: 100vh;
+  max-height: 100vh;
+}
+
+
+.chatpage .chatrow {
+  height: 91.5vh;
+
+  .friends {
+    /* background: linear-gradient(to bottom, wheat, skyblue); */
+
+    li {
+      list-style: none;
+    }
+
+    li.active img {
+      border: 3px solid green;
+    }
   }
 }
 
 
+.chatting {
+  background-color: cadetblue;
+  max-height: inherit;
+
+  .header {
+    background-color: rgb(80, 154, 156);
+  }
+}
+
+.chatpage button {
+  border: none !important;
+}
+
+.chatting .messages {
+  min-height: 78vh;
+  max-height: 79vh;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+/* ************Chat************* */
+
+
+/* ****messagebox******** */
+.mbox {
+  width: fit-content;
+  height: fit-content;
+  max-width: 30%;
+}
+
+/* ****messagebox******** */
+
+.profilechat {
+  min-height: 90vh;
+  /* background: linear-gradient(to right, pink, skyblue); */
+}
+
+.profilepage {
+  min-height: 90vh;
+}
+
+
+
+p.updateusername {
+  font-size: 0.8rem;
+}
+
+.profile .slider {
+  height: 70vh;
+  z-index: 3;
+  width: 50%;
+  right: 0;
+}
+
+.profile .sicon {
+  z-index: 3;
+}
+
+.profile .password {
+  height: 80vh;
+}
+
+
+.profile .seefolls {
+  z-index: 3;
+  background-color: rgb(210, 210, 210);
+  height: 750px;
+  /* position: absolute; */
+  /* background-color: red; */
+
+  button {
+    font-size: 0.8rem;
+    /* display: block; */
+    margin-top: -10px;
+  }
+}
+
+
+.profile .seefolls {
+  position: absolute;
+  min-width: 320px;
+  background-color: rgb(210, 210, 210);
+  max-width: 342px;
+  height: 93vh;
+  top: 0;
+  right: 0;
+  z-index: 9;
+
+  li {
+    font-size: 1rem;
+  }
+
+  button {
+    font-size: 0.8rem;
+    margin-left: 5px;
+  }
+}
+
+
+
+.form {
+  max-width: 320px;
+  background: linear-gradient(to right, red, black);
+}
+
+.form .formrow {
+  max-width: 400px;
+  padding: 10px;
+  height: 80vh;
+  background-color: rgb(210, 210, 210);
+}
+
+@media (min-width: 1400px) {
+  .profile .prow .image img {
+    min-width: 115px;
+    min-height: 115px;
+    max-width: 115px;
+    max-height: 115px;
+    height: fit-content;
+    bottom: 50%;
+  }
+}
+
+@media (max-width: 1400px) {
+
+
+  .profile .prow .image img {
+    /* width: 30%; */
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 100px;
+    max-height: 100px;
+    height: fit-content;
+    bottom: 50%;
+  }
+}
+
 @media (max-width: 992px) {
-  .main .posts {
-    width: 50%;
-    background-color: white;
-    margin: auto;
-    border-radius: 10px;
+
+  .info {
+    position: static;
+  }
+
+  .profile .prow {
+    .image img {
+      /* width: 15%; */
+      min-width: 95px;
+      min-height: 95px;
+      max-width: 95px;
+      max-height: 95px;
+      height: fit-content;
+      bottom: 50%;
+    }
+
+    .profilepage {
+      min-height: fit-content;
+    }
   }
 
 }
 
 @media (max-width: 768px) {
-  .main .posts {
-    width: 80%;
-    background-color: white;
-    margin: auto;
-    border-radius: 10px;
+
+
+  .profile .prow .image img {
+    /* width: 25%; */
+    min-width: 90px;
+    min-height: 90px;
+    max-width: 90px;
+    max-height: 90px;
+    height: fit-content;
+    bottom: 50%;
+  }
+
+  .navbar .search .dipdop {
+
+    h5,
+    h6 {
+      font-size: 0.9rem;
+    }
+
+    img {
+      width: 30px;
+      height: 30px;
+    }
   }
 
 }
 
 @media (max-width: 576px) {
-  .main .posts {
-    width: 90%;
-    background-color: white;
-    border-radius: 10px;
+
+
+  .post .photo img {
+    max-width: auto;
+    max-height: 390px;
+    margin-left: auto;
+  }
+
+  .profile .prow .image img {
+    /* width: 25%; */
+    min-width: 80px;
+    min-height: 80px;
+    max-width: 80px;
+    max-height: 80px;
+    height: fit-content;
+    bottom: 50%;
+    margin: 0;
+  }
+
+  .profile {
+
+    h4,
+    h5 {
+      font-size: 1rem;
+    }
+  }
+
+  .profile {
+    font-size: 0.9rem;
+  }
+
+  .navbar .search .dipdop {
+
+    h5,
+    h6 {
+      font-size: 0.8rem;
+    }
+
+    img {
+      width: 27px;
+      height: 27px;
+    }
+
+  }
+
+  .profile .camera {
+    top: 78px;
+    left: 78px
+  }
+
+  .loginpage .register {
+    height: 70vh;
+    width: 90vw;
+    margin-top: 40px;
+  }
+
+}
+
+@media (max-width:576px) {
+  .profile .seefolls {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 377px) {
+  .profile .prow .image img {
+    height: fit-content;
+    min-width: 75px;
+    min-height: 75px;
+    max-width: 75px;
+    max-height: 75px;
+    height: fit-content;
+    bottom: 50%;
+  }
+
+  .profile {
+
+    h4,
+    h5 {
+      font-size: 0.9rem;
+    }
+  }
+
+  .profile {
+    font-size: 0.8rem;
+  }
+
+  .formrow {
+    min-height: 93vh;
   }
 }

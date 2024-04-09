@@ -18,9 +18,8 @@ export default function Poster() {
         })
 
         const json = await response.json();
-        // console.log(json)
         if (json.success) {
-            // console.log(json.data)
+            // console.log(`data : `, json.data)
             json.data.reverse()
             setpostdata(json.data)
         }
@@ -47,7 +46,7 @@ export default function Poster() {
             {
                 result.map((data, i) => {
                     return (
-                        <Post key={i} image={data[1].image} description={data[1].description} username={data[1].user} Tags={data[1].Tags} likes={data[1].likes} id={data[1]._id} Comments={data[1].comment} Date={data[1].Date} />
+                        <Post key={i} image={data[1].image} description={data[1].description} username={data[1].user} Tags={data[1].Tags} likes={data[1].likes} id={data[1]._id} Comments={data[1].comment} date={data[1].Date} />
                     )
                 })
             }

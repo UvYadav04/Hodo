@@ -22,6 +22,7 @@ export default function Postform() {
     formdata.append('descp', descp)
     formdata.append('Tags', JSON.stringify(Tags))
     formdata.append('user', username)
+    formdata.append('date', new Date().getTime())
     axios.post("http://localhost:8080/post/new",
       formdata, {
       headers: {
@@ -39,27 +40,20 @@ export default function Postform() {
   return (
     <>
       <Navbar />
-      <div className="container-fluid text-white fs-5 form2">
-        <div className="container form">
-          <div className="row  justify-content-start p-0">
-            <div className="col-auto">
-              <input className='d-inline mt-5' type="file" onChange={(e) => setfile(e.target.files[0])} />
-            </div>
+      <div className="container form mx-auto text-center text-black pt-sm-4 pb-sm-4 p-0 px-0">
+        <div className="row formrow justify-content-start flex-column  mx-auto ">
+          <div className="col-auto mt-4 text-start">
+            {/* <label htmlFor="image ">Choose an Image:   </label> */}
+            <input className='' type="file" onChange={(e) => setfile(e.target.files[0])} />
+            {/* <label className='d-block' htmlFor="">Tags : </label> */}
+            <input className='d-block mx-0 mt-4 rounded-2' type="text" name='T1' placeholder='Tags' value={Tags.T1} onChange={(e) => handletags(e)} />
+            <input className='d-block mx-auto rounded-2 my-1' type="text" name='T2' placeholder='Tags' value={Tags.T2} onChange={(e) => handletags(e)} />
+            <input className='d-block ms-auto mx-0 rounded-2 my-1' type="text" name='T3' placeholder='Tags' value={Tags.T3} onChange={(e) => handletags(e)} />
           </div>
-          <div className="row mt-5  justify-content-start p-0">
-            <div className="col-auto">
-              <label className='d-inline' htmlFor="">Tags : </label>
-              <input className='d-inline mx-4 w-25 rounded-2' type="text" name='T1' value={Tags.T1} onChange={(e) => handletags(e)} />
-              <input className='d-inline mx-4 w-25 rounded-2' type="text" name='T2' value={Tags.T2} onChange={(e) => handletags(e)} />
-              <input className='d-inline mx-4 w-25 rounded-2' type="text" name='T3' value={Tags.T3} onChange={(e) => handletags(e)} />
-            </div>
-          </div>
-          <div className="row mt-5  justify-content-start p-0">
-            <div className="col-auto"> <label className='d-block' htmlFor="">Describe you experience : </label>
-              <textarea className='rounded-2' name="descp" id="" cols="100" rows="5" value={descp} onChange={(e) => setdescp(e.target.value)}></textarea></div>
-          </div>
-          <button className='px-3 mt-5 rounded-1' onClick={() => handleupload()}>upload</button>
+          <textarea className='rounded-2 w-100 mt-4' name="descp" id="" rows="5" placeholder='Describe your experience' value={descp} onChange={(e) => setdescp(e.target.value)}></textarea>
+          <button className='px-3 mt-3 rounded-1 mb-2 w-25 ms-auto me-2 bg bg-success text-white' onClick={() => handleupload()}>upload</button>
         </div>
-      </div></>
+      </div >
+    </>
   )
 }

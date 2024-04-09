@@ -32,8 +32,8 @@ const postschema = new schema({
         type: String
     },
     Date: {
-        type: Date,
-        default: Date.now
+        type: String,
+        default: new Date().getTime()
     }
 })
 

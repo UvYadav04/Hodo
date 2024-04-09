@@ -11,9 +11,10 @@ export default function Commentor({ cuser, comment, deleter }) {
     const username = localStorage.getItem('username')
 
     useEffect(() => {
+        console.log("called commentator")
+        console.log(comment)
         setusers(cuser)
         setcomments(comment)
-        // console.log(users)
     }, [])
     return (
         <>
@@ -21,7 +22,7 @@ export default function Commentor({ cuser, comment, deleter }) {
                 {users.length > 0 ? users.map((item, i) => {
                     return (
                         <>
-                            <div className="row user justify-content-start comment p-1 mb-2 rounded-2 ">
+                            <div className="row user justify-content-start comment p-1 mb-2 rounded-2 " key={i}>
                                 <div className="col-12 text-start">
                                     <img src={c1} width={30} height={30} className='d-inline rounded-5' alt="" />
                                     <button className='d-inline bg bg-transparent font-weight-bold text-primary mx-3 my-0'>{item}</button>

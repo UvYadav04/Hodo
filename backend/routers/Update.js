@@ -4,6 +4,7 @@ const path = require('path')
 const multer = require('multer');
 const post = require('../models/post')
 const verify = require('../routers/verification')
+const user = require('../models/user')
 
 
 router.put('/like', verify, async (req, res) => {
@@ -93,5 +94,37 @@ router.put('/comment/delete', async (req, res) => {
         res.json({ success: false })
     }
 })
+
+const storage = multer.diskStorage({
+    destination: (req, res, cb) => {
+        cb(null, 'public/Images')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname))
+    }
+});
+
+const upload = multer({ storage: storage });
+
+router.post('/photo', verify, upload.single('file'), async (req, res) => {
+    try {
+        console.log("get here")
+        const id = req.body.userid
+        console.log(req.body)
+        await user.findByIdAndUpdate(id, { image: req.file.filename })
+        const c = await user.findById(id);
+        if (c) {
+            res.json({ success: true, user: c })
+        }
+        else {
+            res.json({ success: false, message: "something went wrong" })
+        }
+
+    }
+    catch (e) {
+        res.json({ success: false, message: "something went wrong" })
+    }
+})
+
 
 module.exports = router

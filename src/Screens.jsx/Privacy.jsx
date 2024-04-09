@@ -1,12 +1,12 @@
 import React from 'react'
 import Navbar from '../Components/Navbar'
-import Privacy from '../Components/Privacy'
+import Privacydocs from '../Components/Privacydocs'
 
 export default function Privacy() {
   return (
     <div className="privacy">
-        <Navbar/>
-        <Privacy/>
+      <Navbar />
+      <Privacydocs />
     </div>
   )
 }

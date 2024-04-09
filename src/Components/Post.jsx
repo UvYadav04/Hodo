@@ -5,11 +5,14 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import Commentor from './Commentor';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import io from 'socket.io-client'
+const socket = io.connect(`http://localhost:3001`, {
+})
 
-export default function Post({ image, Tags, likes, description, username, id, Comments }) {
 
+export default function Post({ image, Tags, likes, description, username, id, Comments, date }) {
     let navigate = useNavigate()
     const [like, setlike] = useState(likes.length)
     const [liked, setliked] = useState(false)
@@ -20,6 +23,46 @@ export default function Post({ image, Tags, likes, description, username, id, Co
     const [comments, setcomments] = useState([])
     const user = localStorage.getItem('username')
     const [following, setfollowing] = useState(false)
+    const [follower, setfollower] = useState(false)
+    const [time, settime] = useState("...")
+
+    const handletime = () => {
+        let d = new Date().getTime()
+        let f = parseInt(date)
+        const T = d - f;
+
+        const Y = Math.floor(T / (1000 * 60 * 60 * 24 * 365));
+        if (Y !== 0) {
+            settime(Y + "y")
+            return
+        }
+        const M = Math.floor(T / (1000 * 60 * 60 * 24 * 31));
+        if (M !== 0) {
+            settime(M + "months")
+            return
+        }
+        const D = Math.floor(T / (1000 * 60 * 60 * 24));
+        if (D !== 0) {
+            settime(D + "d")
+            return
+        }
+        const H = Math.floor(T / (1000 * 60 * 60));
+        if (H !== 0) {
+            settime(H + "h")
+            return
+        }
+        const m = Math.floor(T / (1000 * 60));
+        if (m !== 0) {
+            settime(m + "min")
+            return
+        }
+        const S = Math.floor(T / (1000));
+        if (S !== 0) {
+            settime(S + "s")
+            return
+        }
+
+    }
 
     const getuserdata = async () => {
         const response = await fetch("http://localhost:8080/user/userdata", {
@@ -34,6 +77,8 @@ export default function Post({ image, Tags, likes, description, username, id, Co
         const json = await response.json()
         if (json.user.Following.includes(username))
             setfollowing(true)
+        if (json.user.Followers.includes(username))
+            setfollower(true)
     }
 
     const handlelikes = async () => {
@@ -50,9 +95,13 @@ export default function Post({ image, Tags, likes, description, username, id, Co
             })
 
             const json = await response.json()
-            // console.log(data.data.p.likes)
-            const newlike = json.data.p.likes
-            setlike(newlike.length)
+            if (json.success) {
+                const newlike = json.data.p.likes
+                setlike(newlike.length)
+
+            }
+            else if (!json.success)
+                alert("something went wrong")
 
         }
         else if (liked) {
@@ -67,16 +116,19 @@ export default function Post({ image, Tags, likes, description, username, id, Co
                 body: JSON.stringify({ user, id })
 
             })
-
             const json = await response.json()
-            // console.log(data.postdata.q.likes)
-            const newlike = json.data.q.likes
-            setlike(newlike.length)
-
+            if (json.success) {
+                const newlike = json.data.q.likes
+                setlike(newlike.length)
+            }
+            else if (!json.success)
+                alert("something went wrong")
         }
     }
 
     const handlecomment = async () => {
+        if (newcomment === "")
+            return
         const response = await fetch("http://localhost:8080/update/comment/add", {
             method: 'PUT',
             headers: {
@@ -87,16 +139,17 @@ export default function Post({ image, Tags, likes, description, username, id, Co
         })
 
         const json = await response.json()
-        // console.log(json)
-        // setupcomment(json.data.q.comment)
-        setcuser(json.data.q.comment.users)
-        setcomments(json.data.q.comment.comment)
-        navigate(0)
+        if (json.success) {
+            setcuser(json.data.q.comment.users)
+            setnewcomment(" ")
+            setcomments(json.data.q.comment.comment)
+        }
+        else if (!json.success)
+            alert("something went wrong")
     }
 
 
     const handledelete = async (item, index) => {
-        console.log("delete activated")
         const response = await fetch("http://localhost:8080/update/comment/delete", {
             method: 'PUT',
             headers: {
@@ -105,16 +158,17 @@ export default function Post({ image, Tags, likes, description, username, id, Co
             },
             body: JSON.stringify({ username, item, index, id })
         })
-        // console.log("aa gayi")
         const json = await response.json()
-        console.log(json)
-        setcuser(json.data.comment.users)
-        setcomments(json.data.comment.comment)
-        navigate(0)
+        if (json.success) {
+            setcuser(json.data.comment.users)
+            setcomments(json.data.comment.comment)
+        }
+        else if (!json.success)
+            alert("something went wrong")
+
     }
 
     const handleshare = async (text) => {
-        console.log(text)
         if ('clipboard' in navigator) {
             alert("link copied")
             return await navigator.clipboard.writeText(text);
@@ -140,12 +194,12 @@ export default function Post({ image, Tags, likes, description, username, id, Co
                 body: JSON.stringify({ username, owner: user })
             })
             const json = await response.json()
-            console.log(json)
             if (json.success) {
                 setfollowing(true)
-                navigate(0)
+                socket.emit("newfollow", { user: username, owner: user })
             }
-
+            else if (!json.success)
+                alert("something went wrong")
         }
 
         if (following) {
@@ -158,47 +212,51 @@ export default function Post({ image, Tags, likes, description, username, id, Co
                 body: JSON.stringify({ username, owner: user })
             })
             const json = await response.json()
-            console.log(json)
             if (json.success) {
                 setfollowing(false)
-                navigate(0)
             }
+            else if (!json.success)
+                alert("something went wrong")
         }
 
     }
-    useMemo(() => {
+
+    useEffect(() => {
+        // console.log("effect seen somewhere  ")
         let tag = JSON.parse(Tags)
         let tag2 = Object.values(tag)
         settags(tag2)
         setcuser(Comments.users)
         setcomments(Comments.comment)
-        // navigate(0)
+        // console.log(Comments.comment)
         if (likes.includes(user))
             setliked(true)
         getuserdata()
+        handletime()
     }, [])
 
 
     return (
-        <div className="post p-0 container text-center ">
-            <div className="row user m-0 p-1 justify-content-start align-items-center mb-0 pb-0 ">
+        <div className="post p-0 container text-center">
+            <div className="row user m-0 p-0 justify-content-start align-items-center mb-0 ps-sm-1 ps-0 pb-0  ">
                 <div className="col-auto logo p-0">
                     <img src={c1} alt="" width={40} height={40} />
                 </div>
-                <div className="col-auto p-1 text-start font-weight-bold">
-                    <button className='text-decoration-none text-black fs-5 font-weight-bold bg bg-transparent m-0 p-0' onClick={() => handleuser()}>{username}</button>
+                <div className="col-auto p-0 text-start font-weight-bold">
+                    <button className='mx-1 text-decoration-none text-black fs-5 font-weight-bold h-auto m-0 p-0 bg bg-transparent' onClick={() => handleuser()}>{username}</button>
                 </div>
                 <div className="col-auto fs-6 text-start opacity-75">
-                    4w.ago
+                    {time} ago
                 </div>
-                <div className=" col-1 text-center">
+                <div className=" col-1 text-center ">
                     <button className={user !== username && !following ? 'd-inline text-decoration-none border border-primary bg bg-primary text-white rounded-3' : "d-none"} onClick={() => handlefollow()} >Follow+</button>
                     <button className={user !== username && following ? 'd-inline text-decoration-none border border-primary bg bg-primary text-white rounded-3' : "d-none"} onClick={() => handlefollow()} >Following</button>
+                    {/* <button className={user !== username && following && follower ? 'd-inline text-decoration-none border border-primary bg bg-primary text-white rounded-3' : "d-none"} >Message</button> */}
                 </div>
             </div>
 
             <div className="row r2 tags justify-content-start p-0 m-0 text-primary ">
-                <div className="col-auto mx-3 mt-2">
+                <div className="col-auto mt-2">
                     <ul className="d-inline p-0 m-0 d-flex flex-row flex-nowrap gap-3">
                         {tags.length > 0 ?
                             tags.map((item, i) => {
@@ -217,7 +275,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
 
             <div className="row desc justify-content-start m-0">
                 <div className="col-12 text-start m-0">
-                    <p className='m-0 px-3 fs-6'>
+                    <p className='m-0 fs-6'>
                         {description}
                     </p>
                 </div>
@@ -241,9 +299,24 @@ export default function Post({ image, Tags, likes, description, username, id, Co
 
             <div className={commented ? "row justify-content-center Commentss mt-2 mb-0 m-0" : "d-none"}>
                 <div className="col-10 first rounded-2 p-1">
-                    <span className="commented ">
-                        <Commentor cuser={cuser} comment={comments} deleter={((item, i) => handledelete(item, i))} />
-                    </span>
+                    {/* <Commentor cuser={cuser} comment={comments} deleter={((item, i) => handledelete(item, i))} /> */}
+                    <div className=" p-2 m-2 container commentsection m-0">
+                        {cuser.length > 0 ? cuser.map((item, i) => {
+                            return (
+                                <div className="row user justify-content-start comment p-1 mb-2 rounded-2 " key={i}>
+                                    <div className="col-12 text-start">
+                                        <img src={c1} width={30} height={30} className='d-inline rounded-5' alt="" />
+                                        <button className='d-inline bg bg-transparent font-weight-bold text-primary mx-3 my-0'>{item}</button>
+                                        <button className={user === item ? "d-inline w-auto delete bg bg-transparent " : "d-none"} onClick={() => handledelete(comments[i], i)}><DeleteIcon sx={{ color: 'red' }} /> </button>
+                                    </div>
+                                    <div className="col-11 text-start offset-1 ">
+                                        {comments[i]}
+                                    </div>
+                                </div>
+                            )
+                        }) : null}
+                    </div>
+
 
                 </div>
             </div>

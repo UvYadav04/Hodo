@@ -6,11 +6,11 @@ const verify = require('./verification')
 router.post('/userdata', async (req, res) => {
     // console.log("getting here")
     try {
-        console.log(req.body)
+        // console.log(req.body)
         const username = req.body.username
-        console.log(username)
+        // console.log(username)
         const data = await user.find({ Username: { $regex: username } })
-        console.log(data)
+        // console.log(data)
         res.json({ success: true, userdata: data })
     }
     catch (e) {

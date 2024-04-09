@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Post from './Post'
 export default function Personalpost({ username }) {
     const [data, setdata] = useState([])
-    console.log(data)
+    // console.log(data)
     const userdata = async () => {
         // const username = localStorage.getItem("username")
 
@@ -24,7 +24,7 @@ export default function Personalpost({ username }) {
     var result = []
     if (data.length > 0) {
         result = Object.keys(data).map((key) => [key, data[key]]);
-        console.log(result)
+        // console.log(result)
     }
 
     useEffect(() => {
@@ -35,7 +35,7 @@ export default function Personalpost({ username }) {
     if (data.length <= 0) {
         return (
             <>
-                <h5 className='mt-5 fs-1 opacity-50'>No Posts Yet</h5>
+                <h5 className='mt-5 fs-1 opacity-50 w-100   text-center'>No Posts Yet</h5>
             </>
         )
     }

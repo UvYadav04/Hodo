@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const key = "dinesh yadav"
 
+
 router.post('/', async (req, res) => {
     // console.log("received")
     try {
@@ -27,12 +28,18 @@ router.post('/', async (req, res) => {
                         id: c._id,
                         time: new Date()
                     }
-                    console.log("loging in")
+                    // console.log("loging in")
+                    const userdata = {
+                        name: c.Username,
+                        id: c._id
+                    }
+
+                    res.cookie("userdata", userdata)
                     jwt.sign(data, key, (err, token) => {
                         if (err) {
                             res.json({ success: false, message: "Invalid credentials" })
                         }
-                        console.log(`authtoken : `, token)
+                        // console.log(`authtoken : `, token)
                         res.json({ success: true, token: token })
                     })
                 })
