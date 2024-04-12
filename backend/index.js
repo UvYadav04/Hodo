@@ -1,4 +1,4 @@
-const express = require('express')
+    const express = require('express')
 const app = express();
 // app.use(express.urlencoded({ extended: true }));
 const path = require('path')
@@ -13,6 +13,7 @@ const Searcher = require('./routers/Searcher')
 const forgetrouter = require('./routers/Forget')
 const user = require('./models/user')
 const cookieParser = require("cookie-parser")
+const mongoose = require('mongoose')
 
 
 app.set('view engine', 'ejs')
@@ -31,9 +32,8 @@ const { Server } = require('socket.io')
 const cors = require('cors')
 const server = http.createServer(app)
 
-const mongoose = require('mongoose')
 
-mongoose.connect("mongodb://127.0.0.1:27017/hodo")
+mongoose.connect("mongodb+srv://uvyadav04:uvyadav123@cluster1.ae0pw2e.mongodb.net/HODO")
     .then(() => {
         console.log("connected to mongo")
     })
@@ -50,7 +50,7 @@ app.use((req, res, next) => {
     //     "Origin,X-Requested-With,Content-type,Accept"
     // );
 
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -103,7 +103,7 @@ app.listen(8080, (req, res) => {
 
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "*",
         methods: ["GET", "POST"],
     },
     cookie: true
