@@ -8,7 +8,7 @@ export default function Poster() {
     let navigate = useNavigate()
 
     const loaddata = async () => {
-        const response = await fetch("http://localhost:8080/post/getpostdata", {
+        const response = await fetch("https://hodobackend.onrender.com/post/getpostdata", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

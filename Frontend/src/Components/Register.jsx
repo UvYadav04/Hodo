@@ -25,7 +25,7 @@ export default function Login() {
     if (fusername !== "") {
       console.log(fusername)
       setfusername("")
-      const response = await fetch("http://localhost:8080/forgetpassword", {
+      const response = await fetch("https://hodobackend.onrender.com/forgetpassword", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ export default function Login() {
 
   const handleloginsubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:8080/register/login", {
+    const response = await fetch("https://hodobackend.onrender.com/register/login", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -100,7 +100,7 @@ export default function Login() {
     // console.log("data : ", userdata);
 
     e.preventDefault();
-    const response = await fetch("http://localhost:8080/register/signup", {
+    const response = await fetch("https://hodobackend.onrender.com/register/signup", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

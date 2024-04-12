@@ -23,7 +23,7 @@ export default function Postform() {
     formdata.append('Tags', JSON.stringify(Tags))
     formdata.append('user', username)
     formdata.append('date', new Date().getTime())
-    axios.post("http://localhost:8080/post/new",
+    axios.post("https://hodobackend.onrender.com/post/new",
       formdata, {
       headers: {
         'content-type': 'text/json',

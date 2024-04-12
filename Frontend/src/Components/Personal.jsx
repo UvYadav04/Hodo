@@ -55,7 +55,7 @@ export default function Personal({ username }) {
             return
         }
 
-        const response = await fetch("http://localhost:8080/user/updatepassword", {
+        const response = await fetch("https://hodobackend.onrender.com/user/updatepassword", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ export default function Personal({ username }) {
 
     const handleupdation = async () => {
         setsettings(false)
-        const response = await fetch("http://localhost:8080/user/updateprofile", {
+        const response = await fetch("https://hodobackend.onrender.com/user/updateprofile", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -139,7 +139,7 @@ export default function Personal({ username }) {
 
     const getuserdata = async () => {
         setloading(true)
-        const response = await fetch("http://localhost:8080/user/userdata", {
+        const response = await fetch("https://hodobackend.onrender.com/user/userdata", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -173,7 +173,7 @@ export default function Personal({ username }) {
 
     const getownerdata = async () => {
         setloading(true)
-        const response = await fetch("http://localhost:8080/user/userdata", {
+        const response = await fetch("https://hodobackend.onrender.com/user/userdata", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -199,7 +199,7 @@ export default function Personal({ username }) {
 
     const handlefollow = async () => {
         if (!following) {
-            const response = await fetch("http://localhost:8080/follow/new", {
+            const response = await fetch("https://hodobackend.onrender.com/follow/new", {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -216,7 +216,7 @@ export default function Personal({ username }) {
         }
 
         if (following) {
-            const response = await fetch("http://localhost:8080/follow/following", {
+            const response = await fetch("https://hodobackend.onrender.com/follow/following", {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -235,7 +235,7 @@ export default function Personal({ username }) {
 
     const removefollower = async (item) => {
 
-        const response = await fetch("http://localhost:8080/follow/removefollower", {
+        const response = await fetch("https://hodobackend.onrender.com/follow/removefollower", {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -270,7 +270,7 @@ export default function Personal({ username }) {
         const formdata = new FormData();
         formdata.append('file', e.target.files[0])
         formdata.append('userid', user._id)
-        axios.post("http://localhost:8080/update/photo",
+        axios.post("https://hodobackend.onrender.com/update/photo",
             formdata, {
             headers: {
                 'content-type': 'text/json',
@@ -289,7 +289,7 @@ export default function Personal({ username }) {
     }
 
     const getactiveusers = async () => {
-        const response = await fetch("http://localhost:8080/activeuser", {
+        const response = await fetch("https://hodobackend.onrender.com/activeuser", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -334,7 +334,7 @@ export default function Personal({ username }) {
                         </div>
                         <div className="image d-flex flex-row justify-content-start gap-0 position-relative">
                             {
-                                image !== "" ? <img src={"http://localhost:8080/Images/" + user.image} className='rounded-1 border border-dark' alt="" /> :
+                                image !== "" ? <img src={"https://hodobackend.onrender.com/Images/" + user.image} className='rounded-1 border border-dark' alt="" /> :
                                     <img src={usericon} className='rounded-1 border border-dark' alt="" />
                             }
                             <span className="mx-2 name text-start w-100">
@@ -428,7 +428,7 @@ export default function Personal({ username }) {
                     <div className="col-xl-3 col-lg-3 col-md-4 d-xl-inline d-lg-none d-md-inline d-none mt-lg-0 mt-3 profilechat border "   >
                         <input type="text" name="search" placeholder="search friends" className=" ps-2 w-100 bg bg-white rounded-4 mt-2 mx-0" />
                         <div className="activefriends mt-2 ">
-                            {Friends.map((item, i) => item.Username !== owner && actives.includes(item.Username) ? <li key={i} className=' p-1 fs-4 w-100 text-start'>  <img className='border border-success border-3 rounded-5' src={"http://localhost:8080/Images/" + item.image} width={40} height={40} alt="" /></li> : null)}
+                            {Friends.map((item, i) => item.Username !== owner && actives.includes(item.Username) ? <li key={i} className=' p-1 fs-4 w-100 text-start'>  <img className='border border-success border-3 rounded-5' src={"https://hodobackend.onrender.com//Images/" + item.image} width={40} height={40} alt="" /></li> : null)}
 
                         </div>
                         <ul className={!loading && !nofrnds ? "p-1 mt-0" : "d-none"}>
@@ -436,7 +436,7 @@ export default function Personal({ username }) {
 
                                 Friends.map((item, i) => {
                                     return (<li key={i} className="text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row" onClick={() => navigate('/chat', { state: item.Username })} >
-                                        <img src={"http://localhost:8080/Images/" + item.image} width={50} height={50} className=" rounded-5 me-2" alt="" />
+                                        <img src={"https://hodobackend.onrender.com/Images/" + item.image} width={50} height={50} className=" rounded-5 me-2" alt="" />
                                         <section className="details cursor-pointer p-0">
                                             {item.Username}
                                             <span className="opacity-75 d-block fs-6 m-0">

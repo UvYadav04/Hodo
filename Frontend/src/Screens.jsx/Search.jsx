@@ -13,7 +13,7 @@ export default function Search() {
 
     const getalldata = async () => {
         // console.log(`getting data with usernaem : `, username)
-        const response = await fetch("http://localhost:8080/search/userdata", {
+        const response = await fetch("https://hodobackend.onrender.com/search/userdata", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

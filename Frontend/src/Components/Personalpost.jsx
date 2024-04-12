@@ -6,7 +6,7 @@ export default function Personalpost({ username }) {
     const userdata = async () => {
         // const username = localStorage.getItem("username")
 
-        const response = await fetch("http://localhost:8080/post/getuserdata", {
+        const response = await fetch("https://hodobackend.onrender.com/post/getuserdata", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

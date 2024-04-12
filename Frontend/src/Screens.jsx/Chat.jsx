@@ -29,7 +29,7 @@ function Chat({ socket }) {
         console.log(item)
         setSelected(item)
         setdisplay(true)
-        const request = await fetch("http://localhost:8080/chat/fetchchats", {
+        const request = await fetch("https://hodobackend.onrender.com/chat/fetchchats", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ function Chat({ socket }) {
 
     const handlesent = async () => {
         if (currentMessage !== "") {
-            const response = await fetch("http://localhost:8080/chat/newmessage", {
+            const response = await fetch("https://hodobackend.onrender.com/chat/newmessage", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ function Chat({ socket }) {
 
     const getuserdata = async () => {
         setloading(true)
-        const response = await fetch("http://localhost:8080/user/userdata", {
+        const response = await fetch("https://hodobackend.onrender.com/user/userdata", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ function Chat({ socket }) {
     }
 
     const getactiveusers = async () => {
-        const response = await fetch("http://localhost:8080/activeuser", {
+        const response = await fetch("https://hodobackend.onrender.com/activeuser", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -169,7 +169,7 @@ function Chat({ socket }) {
 
                                 Friends.map((item) => {
                                     return (<li key={item} className={actives.includes(item) ? "text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row active" : "text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row"} onClick={() => handleselect(item.Username)}>
-                                        {item.image !== "" ? <img src={"http://localhost:8080/Images/" + item.image} width={50} height={50} className=" rounded-5     me-2" alt="" /> : <img src={usericon} width={50} height={50} className=" rounded-5     me-2" alt="" />}
+                                        {item.image !== "" ? <img src={"https://hodobackend.onrender.com/Images/" + item.image} width={50} height={50} className=" rounded-5     me-2" alt="" /> : <img src={usericon} width={50} height={50} className=" rounded-5     me-2" alt="" />}
                                         <section className="details cursor-pointer">
                                             {item.Username}
                                             <span className="opacity-75 d-block fs-6">

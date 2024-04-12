@@ -67,7 +67,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
     }
 
     const getuserdata = async () => {
-        const response = await fetch("http://localhost:8080/user/userdata", {
+        const response = await fetch("https://hodobackend.onrender.com/user/userdata", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
         if (!liked) {
             setlike(like + 1)
             setliked(true)
-            const response = await fetch("http://localhost:8080/update/like", {
+            const response = await fetch("https://hodobackend.onrender.com/update/like", {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
         else if (liked) {
             setlike(like - 1)
             setliked(false)
-            const response = await fetch("http://localhost:8080/update/unlike", {
+            const response = await fetch("https://hodobackend.onrender.com/update/unlike", {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
     const handlecomment = async () => {
         if (newcomment === "")
             return
-        const response = await fetch("http://localhost:8080/update/comment/add", {
+        const response = await fetch("https://hodobackend.onrender.com/update/comment/add", {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -152,7 +152,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
 
 
     const handledelete = async (item, index) => {
-        const response = await fetch("http://localhost:8080/update/comment/delete", {
+        const response = await fetch("https://hodobackend.onrender.com/update/comment/delete", {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -187,7 +187,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
     const handlefollow = async () => {
 
         if (!following) {
-            const response = await fetch("http://localhost:8080/follow/new", {
+            const response = await fetch("https://hodobackend.onrender.com/follow/new", {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -205,7 +205,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
         }
 
         if (following) {
-            const response = await fetch("http://localhost:8080/follow/following", {
+            const response = await fetch("https://hodobackend.onrender.com/follow/following", {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -285,7 +285,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
 
             <div className="row photo px-0 justify-content-center m-0">
                 <div className="col-12 text-center w-100 px-0 py-2 ">
-                    <img src={"http://localhost:8080/Images/" + image} className="d-block " alt="..." />
+                    <img src={"https://hodobackend.onrender.com//Images/" + image} className="d-block " alt="..." />
                 </div>
             </div>
 

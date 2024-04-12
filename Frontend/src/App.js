@@ -38,7 +38,7 @@ function App() {
   const owner = localStorage.getItem("username")
 
   const getactiveusers = async () => {
-    const response = await fetch("http://localhost:8080/activeuser", {
+    const response = await fetch("https://hodobackend.onrender.com/activeuser", {
       method: "GET",
       headers: {
         'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ function App() {
       longitude = position.coords.longitude
       latitude = position.coords.latitude
 
-      const response = await fetch("http://localhost:8080/user/getlocation", {
+      const response = await fetch("https://hodobackend.onrender.com/user/getlocation", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ function App() {
   }
 
   const getnears = async (actives, longitude, latitude) => {
-    const response = await fetch("http://localhost:8080/user/getnears", {
+    const response = await fetch("https://hodobackend.onrender.com/ser/getnears", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
