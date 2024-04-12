@@ -84,18 +84,19 @@ router.post('/getnears', verify, async (req, res) => {
     try {
         const { actives, longitude, latitude, owner } = req.body
 
-        var store = new Map()
+        var store = []
 
         // console.log(store)
         let promises = actives.map((item) => {
             if (item !== owner) {
                 return user.findOne({ Username: item }).then((result) => {
-                    console.log(item)
-                    const { lon, lat } = result.Location
-                    const dis = calcCrow(latitude, longitude, lat, lon).toFixed(1)
-                    // console.log(`distance : `, dis)
-                    store.set(result.Username, dis);
-                    // console.log(store)
+
+                    if (result.Location) {
+                        const { lon, lat } = result.Location
+                        const dis = calcCrow(latitude, longitude, lat, lon).toFixed(1)
+                        store.push([result.Username, result.image, dis]);
+
+                    }
                 }).catch((E) => {
                     console.log(E)
                 })
@@ -104,7 +105,7 @@ router.post('/getnears', verify, async (req, res) => {
 
         Promise.all(promises).then(() => {
             // console.log(`store: `, store)
-            res.json({ success: true, data: Array.from(store) })
+            res.json({ success: true, data: store })
         }).catch((e) => {
             console.log(`error : `, e)
         })

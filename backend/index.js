@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express();
 // app.use(express.urlencoded({ extended: true }));
-
+const path = require('path')
 const signuprouter = require('./routers/signup')
 const loginrouter = require('./routers/login')
 const postrouter = require('./routers/post')
@@ -13,6 +13,11 @@ const Searcher = require('./routers/Searcher')
 const forgetrouter = require('./routers/Forget')
 const user = require('./models/user')
 const cookieParser = require("cookie-parser")
+
+
+app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, 'views'))
+
 app.use(cookieParser())
 app.use((err, req, res, next) => {
     console.error('Error parsing cookies:', err);
@@ -63,8 +68,9 @@ app.use(cors())
 app.use(express.json());
 app.use(express.static('public'))
 
-
-
+app.get('/', (req, res) => {
+    res.render('home')
+})
 app.use('/user', userrouter)
 app.use('/register/signup', signuprouter)
 app.use('/register/login', loginrouter)

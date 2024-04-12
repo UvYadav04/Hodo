@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import Post from './Post'
 export default function Poster() {
-
     const [postdata, setpostdata] = useState([])
     let navigate = useNavigate()
 

@@ -74,22 +74,18 @@ button {
     /* background-color: red; */
   }
 
-  .menubar {
-    position: absolute;
-    transition: 1s;
-    background-color: rgb(211, 211, 211);
-    /* min-height: 50vh; */
-    right: 0;
-    top: 100%;
-    height: 80vh;
-    min-width: 150px;
-  }
 
   hr.hr {
     margin: auto;
   }
 }
 
+.bottombar {
+  z-index: 3;
+  position: fixed;
+  bottom: 0;
+  background-color: rgb(180, 180, 180);
+}
 
 .show {
   /* right: 0;
@@ -179,13 +175,14 @@ button {
     margin-left: 0;
   }
 
-  .post:hover {
-    background-color: rgb(234, 234, 234);
-  }
 
   img {
     border-radius: 100px;
   }
+}
+
+.post .user:hover {
+  /* background-color: rgb(234, 234, 234); */
 }
 
 
@@ -309,8 +306,9 @@ button {
   /* box-shadow: 5px 5px 10px 1px pink; */
 }
 
+
 .post:hover {
-  background-color: rgb(200, 200, 200);
+  background-color: rgb(234, 234, 234);
 }
 
 /* ***************profile**************** */
@@ -388,14 +386,14 @@ p.updateusername {
 }
 
 .profile .slider {
-  height: 70vh;
-  z-index: 3;
-  width: 50%;
+  height: 080vh;
+  z-index: 1;
+  max-width: 40%;
   right: 0;
 }
 
 .profile .sicon {
-  z-index: 3;
+  z-index: 1;
 }
 
 .profile .password {
@@ -450,6 +448,13 @@ p.updateusername {
   padding: 10px;
   height: 80vh;
   background-color: rgb(210, 210, 210);
+}
+
+.likebar {
+  button {
+    padding: 0;
+    background-color: blue;
+  }
 }
 
 @media (min-width: 1400px) {

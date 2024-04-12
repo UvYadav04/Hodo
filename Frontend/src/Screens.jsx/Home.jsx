@@ -6,7 +6,7 @@ export default function Home() {
 
         const token = localStorage.getItem('token')
         if (token) {
-            console.log(`got token : `, token)
+            // console.log(`got token : `, token)
             const username = localStorage.getItem('username')
             const response = await fetch("http://localhost:8080/user/userdata", {
                 method: 'POST',

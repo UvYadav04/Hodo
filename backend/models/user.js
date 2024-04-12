@@ -32,7 +32,7 @@ const userschema = new schema({
     },
     image: {
         type: String,
-        default: "https://th.bing.com/th/id/OIP.fqSvfYQB0rQ-6EG_oqvonQHaHa?rs=1&pid=ImgDetMain"
+        default: ""
     },
     friends: {
         type: [schema.Types.ObjectId],

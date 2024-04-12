@@ -3,6 +3,8 @@ import SendIcon from '@mui/icons-material/Send';
 import Navbar from "../Components/Navbar";
 import Messagebox from "../Components/Messagebox";
 import logo from '../Photos/c6.jpg'
+import usericon from '../Photos/bg1.png'
+
 import { useLocation, useNavigate } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
 function Chat({ socket }) {
@@ -167,7 +169,7 @@ function Chat({ socket }) {
 
                                 Friends.map((item) => {
                                     return (<li key={item} className={actives.includes(item) ? "text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row active" : "text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row"} onClick={() => handleselect(item.Username)}>
-                                        <img src={"http://localhost:8080/Images/" + item.image} width={50} height={50} className=" rounded-5     me-2" alt="" />
+                                        {item.image !== "" ? <img src={"http://localhost:8080/Images/" + item.image} width={50} height={50} className=" rounded-5     me-2" alt="" /> : <img src={usericon} width={50} height={50} className=" rounded-5     me-2" alt="" />}
                                         <section className="details cursor-pointer">
                                             {item.Username}
                                             <span className="opacity-75 d-block fs-6">

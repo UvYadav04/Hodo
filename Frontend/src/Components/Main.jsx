@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import Poster from './Poster'
-import logo from '../Photos/c6.jpg'
+import usericon from '../Photos/bg1.png'
 import PlaceIcon from '@mui/icons-material/Place';
-import CreateIcon from '@mui/icons-material/Create';
+import { Locationcontext } from '../App';
 export default function Main() {
   let navigate = useNavigate()
   const [Friends, setFriends] = useState([])
   const [loading, setloading] = useState(false)
   const [nofrnds, setnofrnds] = useState(false)
-  const [actives, setactives] = useState([])
-  const [nears, setnears] = useState([])
   const [fnames, setfnames] = useState([])
-  const [location, setlocation] = useState({})
+  const { actives, nears, location } = useContext(Locationcontext)
   const owner = localStorage.getItem("username")
 
   const getuserdata = async () => {
@@ -46,72 +44,9 @@ export default function Main() {
     }
   }
 
-  const getactiveusers = async () => {
-    const response = await fetch("http://localhost:8080/activeuser", {
-      method: "GET",
-      headers: {
-        'Content-Type': 'application/json',
-        'authorisation': `bearer ${localStorage.getItem('token')}`
-      }
-    })
-
-    const json = await response.json()
-    if (json.success) {
-      setactives(json.active)
-      console.log(json.active)
-      getlocation(json.active)
-    }
-    else if (!json.success)
-      console.log("no user")
-  }
-
-  const getlocation = async (actives) => {
-    let longitude = 0, latitude = 0
-
-    navigator.geolocation.getCurrentPosition(showPosition);
-    async function showPosition(position) {
-      longitude = position.coords.longitude
-      latitude = position.coords.latitude
-
-      const response = await fetch("http://localhost:8080/user/getlocation", {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          'authorisation': `bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify({ longitude, latitude, owner: owner })
-      })
-
-      const json = await response.json()
-      if (json.success) {
-        setlocation(json.data)
-        getnears(actives, json.data.lon, json.data.lat)
-      }
-      else
-        console.log("error")
-    }
-  }
-
-  const getnears = async (actives, longitude, latitude) => {
-    const response = await fetch("http://localhost:8080/user/getnears", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        'authorisation': `bearer ${localStorage.getItem('token')}`
-      },
-      body: JSON.stringify({ actives, longitude, latitude, owner })
-    })
-
-    const json = await response.json()
-    if (json.success) {
-      console.log(json)
-      setnears(json.data)
-    }
-  }
 
   useEffect(() => {
     getuserdata()
-    getactiveusers()
   }, [])
   return (
     <div className="main2 mt-2 container-fluid p-0 m-0">
@@ -122,12 +57,12 @@ export default function Main() {
           <span className="w-100 px-1 rounded-2 bg bg-white d-block text-center mt-4"><h5>Active users in your nearby location</h5> </span>
           <h6 className='w-100 m-0 p-0 '><PlaceIcon className='m-0 p-0' />{location.state}</h6>
           <div className="actives mt-3">
-            {nears.map((item, i) => <li key={i} className='d-block p-0 ps-2 my-2 fs-4 rounded-3 bg bg-white' onClick={() => navigate('/usersprofile', { state: item[0] })}>{item[0]} <span className='ms-5 p-0'>~{item[1]}km</span></li>)}
+            {nears.map((item, i) => <li key={i} className='d-block p-0 ps-2 my-2 fs-4 rounded-3 bg bg-white' onClick={() => navigate('/usersprofile', { state: item[0] })}>{item[0]} <span className='ms-5 p-0'>~{item[2]}km</span></li>)}
           </div>
 
         </div>
 
-        <div className="post col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
+        <div className=" col-lg-6 col-md-8 col-sm-10 col-12 mx-auto mb-5">
           <Poster />
         </div>
 
@@ -142,7 +77,7 @@ export default function Main() {
 
               Friends.map((item, i) => {
                 return (<li key={i} className="text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row" onClick={() => navigate('/chat', { state: item.Username })} >
-                  <img src={"http://localhost:8080/Images/" + item.image} width={50} height={50} className=" rounded-5 me-2" alt="" />
+                  {item.image !== "" ? <img src={"http://localhost:8080/Images/" + item.image} width={50} height={50} className=" rounded-5 me-2" alt="" /> : <img src={usericon} width={50} height={50} className=" rounded-5 me-2" alt="" />}
                   <section className="details cursor-pointer p-0">
                     {item.Username}
                     <span className="opacity-75 d-block fs-6 m-0">
@@ -163,10 +98,6 @@ export default function Main() {
           </section>
 
         </div>
-
-        <span className="material-symbols-outlined newpost position-fixed bottom-4 bg bg-white rounded-3 p-1" onClick={() => navigate('/newpost')}>
-          <h4 className='m-0'>Add a post <CreateIcon className='p-0 m-0' sx={{ fontSize: 30 }} /></h4>
-        </span>
       </div>
     </div>
   )
