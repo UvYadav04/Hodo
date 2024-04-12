@@ -44,7 +44,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/hodo")
 
 app.use((req, res, next) => {
 
-    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    // res.setHeader('Access-Control-Allow-Origin', '*');
     // res.header(
     //     "Access-Control-Allow-Headers",
     //     "Origin,X-Requested-With,Content-type,Accept"
