@@ -91,7 +91,7 @@ app.get('/activeuser', (req, res) => {
     }
 })
 
-app.listen(8080, (req, res) => {
+app.listen(port, (req, res) => {
 
     console.log("listening on 8080")
 })
