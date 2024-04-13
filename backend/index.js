@@ -161,6 +161,6 @@ io.on("connection", async (socket) => {
     })
 })
 
-server.listen(port, () => {
+server.listen(3001, () => {
     console.log("server is running")
 })
