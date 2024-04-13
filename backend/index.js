@@ -1,4 +1,4 @@
-    const express = require('express')
+const express = require('express')
 const app = express();
 // app.use(express.urlencoded({ extended: true }));
 const path = require('path')
@@ -14,7 +14,7 @@ const forgetrouter = require('./routers/Forget')
 const user = require('./models/user')
 const cookieParser = require("cookie-parser")
 const mongoose = require('mongoose')
-
+const port = process.env.PORT || 8080
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
@@ -161,6 +161,6 @@ io.on("connection", async (socket) => {
     })
 })
 
-server.listen(3001, () => {
+server.listen(port, () => {
     console.log("server is running")
 })
