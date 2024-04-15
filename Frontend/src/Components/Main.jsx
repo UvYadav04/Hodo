@@ -67,7 +67,7 @@ export default function Main() {
         </div>
 
         <div className="chatn d-lg-inline d-none col-3">
-          <input type="text" name="search" placeholder="search friends" className="ps-2 w-100 bg bg-white rounded-4 mt-2 mx-0" />
+          <input type="text" name="search" placeholder="search friends" className=" fs-5 ps-2 w-100 bg bg-white rounded-4 mt-2 mx-0" />
           <div className="activefriends mt-2 ">
             {Friends.map((item, i) => item.Username !== owner && actives.includes(item.Username) ? <li key={i} className=' p-1 fs-4 w-100 text-start d-inline'>  <img className='border border-success border-3 rounded-5' src={"https://hodobackend.onrender.com/Images/" + item.image} width={40} height={40} alt="" onClick={() => navigate('/chat', { state: item.Username })} /></li> : null)}
 
