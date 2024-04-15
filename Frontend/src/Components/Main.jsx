@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Poster from './Poster'
 import usericon from '../Photos/bg1.png'
 import PlaceIcon from '@mui/icons-material/Place';

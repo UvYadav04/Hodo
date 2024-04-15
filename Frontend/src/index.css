@@ -107,21 +107,10 @@ button {
 
 
 .main2 {
-  position: relative;
+  /* position: relative; */
 }
 
 .main2 {
-  .newpost {
-    position: fixed;
-    font-size: 5rem;
-    bottom: 5%;
-    right: 4%;
-    width: fit-content;
-    z-index: 4;
-    /* color: rgb(41, 134, 255); */
-    cursor: pointer;
-    /* background-color: red; */
-  }
 
   .chatn {
     height: 750px;
