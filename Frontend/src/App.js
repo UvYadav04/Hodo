@@ -84,7 +84,7 @@ function App() {
   }
 
   const getnears = async (actives, longitude, latitude) => {
-    const response = await fetch("https://hodobackend.onrender.com/ser/getnears", {
+    const response = await fetch("https://hodobackend.onrender.com/user/getnears", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
