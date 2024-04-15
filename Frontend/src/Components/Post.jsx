@@ -10,7 +10,7 @@ import Commentor from './Commentor';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client'
-const socket = io.connect(`https://hodo-1.onrender.com`, {
+const socket = io.connect(`https://hodobackend.onrender.com`, {
 })
 
 
