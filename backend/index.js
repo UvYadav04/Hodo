@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const app = express();
 // app.use(express.urlencoded({ extended: true }));
@@ -14,7 +15,7 @@ const forgetrouter = require('./routers/Forget')
 const user = require('./models/user')
 const cookieParser = require("cookie-parser")
 const mongoose = require('mongoose')
-const port = process.env.PORT || 8080
+const port = process.env.PORT
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
@@ -43,23 +44,9 @@ mongoose.connect("mongodb+srv://uvyadav04:uvyadav123@cluster1.ae0pw2e.mongodb.ne
 
 
 app.use((req, res, next) => {
-
-    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    // res.header(
-    //     "Access-Control-Allow-Headers",
-    //     "Origin,X-Requested-With,Content-type,Accept"
-    // );
-
     res.setHeader('Access-Control-Allow-Origin', '*');
-
-    // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-    // Request headers you wish to allow
     res.setHeader('Access-Control-Allow-Headers', 'Origin,Accept,X-Requested-With, Content-Type,Authorisation');
-
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 })
@@ -89,6 +76,10 @@ app.get('/activeuser', (req, res) => {
     catch {
         res.json({ success: false })
     }
+})
+
+app.get('*', (req, res) => {
+    res.send('Something went wrong')
 })
 
 app.listen(port, (req, res) => {
@@ -161,6 +152,6 @@ io.on("connection", async (socket) => {
     })
 })
 
-server.listen(port, () => {
+server.listen(3001, () => {
     console.log("server is running")
 })
