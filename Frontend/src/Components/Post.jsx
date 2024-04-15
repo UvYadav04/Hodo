@@ -251,8 +251,8 @@ export default function Post({ image, Tags, likes, description, username, id, Co
                     {time} ago
                 </div>
                 <div className=" p-0 col-1 text-center ">
-                    <button className={user !== username && !following ? 'd-inline text-decoration-none border border-primary bg bg-primary text-white rounded-3' : "d-none"} onClick={() => handlefollow()} >Follow+</button>
-                    <button className={user !== username && following ? 'd-inline text-decoration-none border border-primary bg bg-primary text-white rounded-3' : "d-none"} onClick={() => handlefollow()} >Following</button>
+                    <button className={user !== username && !following ? 'd-inline text-decoration-none border border-primary bg bg-primary text-white rounded-3 fs-6' : "d-none"} onClick={() => handlefollow()} >Follow+</button>
+                    <button className={user !== username && following ? 'd-inline text-decoration-none border border-primary bg bg-primary text-white rounded-3 fs-6' : "d-none"} onClick={() => handlefollow()} >Following</button>
                     {/* <button className={user !== username && following && follower ? 'd-inline text-decoration-none border border-primary bg bg-primary text-white rounded-3' : "d-none"} >Message</button> */}
                 </div>
             </div>
