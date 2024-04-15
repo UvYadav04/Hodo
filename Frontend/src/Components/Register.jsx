@@ -7,7 +7,7 @@ import usericon from '../Photos/bg1.png'
 import { useCookies } from "react-cookie"
 
 import io from 'socket.io-client'
-const socket = io.connect(`http://localhost:3001`, {
+const socket = io.connect(`https://hodo-1.onrender.com`, {
 })
 const ref = React.createRef()
 export default function Login() {

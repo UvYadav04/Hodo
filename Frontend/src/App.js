@@ -25,7 +25,7 @@ import Chat from './Screens.jsx//Chat.jsx'
 import io from 'socket.io-client'
 import React, { useEffect, useState } from 'react';
 import Nearbys from './Screens.jsx/Nearbys.jsx';
-const socket = io.connect("http://localhost:3001")
+const socket = io.connect("https://hodo-1.onrender.com")
 
 export const Locationcontext = React.createContext()
 
