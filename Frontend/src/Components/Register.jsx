@@ -18,6 +18,7 @@ export default function Login() {
   const [cookie, setcookie, removecookie] = useCookies()
   const [forgot, setforgot] = useState(false)
   const [fusername, setfusername] = useState("")
+  const [loading, setloading] = useState(false)
   // console.log(logindata);
 
   const handleforgot = async () => {
@@ -25,6 +26,7 @@ export default function Login() {
     if (fusername !== "") {
       console.log(fusername)
       setfusername("")
+      setloading(true)
       const response = await fetch("https://hodobackend.onrender.com/forgetpassword", {
         method: "POST",
         headers: {
@@ -35,10 +37,12 @@ export default function Login() {
 
       const json = await response.json()
       if (json.success) {
+        setloading(false)
         setforgot(false)
       }
       else if (!json.success) {
-        console.log(json)
+        // console.log(json)
+        setloading(false)
         alert(json.message)
       }
     }
@@ -70,6 +74,7 @@ export default function Login() {
 
   const handleloginsubmit = async (e) => {
     e.preventDefault();
+    setloading(true)
     const response = await fetch("https://hodobackend.onrender.com/register/login", {
       method: 'POST',
       headers: {
@@ -80,14 +85,15 @@ export default function Login() {
 
     const json = await response.json()
 
-    if (!json.success)
+    if (!json.success) {
+      setloading(false)
       alert(json.message);
+    }
 
     else {
+      setloading(false)
       localStorage.setItem('token', json.token)
       localStorage.setItem('username', logindata.username)
-      setcookie("username", "dineshyadav", {
-      })
       navigate(`/hodo`,
         {
           state: {
@@ -100,6 +106,7 @@ export default function Login() {
     // console.log("data : ", userdata);
 
     e.preventDefault();
+    setloading(true)
     const response = await fetch("https://hodobackend.onrender.com/register/signup", {
       method: 'POST',
       headers: {
@@ -110,14 +117,15 @@ export default function Login() {
 
     const json = await response.json()
 
-    if (!json.success)
+    if (!json.success) {
+      setloading(false)
       alert(json.message);
+    }
 
     else {
-      alert("registered successfully")
+      setloading(false)
       localStorage.setItem('token', json.token)
       localStorage.setItem('username', userdata.username)
-      // localStorage.setItem('userid',)
       navigate('/hodo');
     }
 
@@ -128,13 +136,13 @@ export default function Login() {
       minHeight: "100vh", maxHeight: "100vh", backgroundColor: "#a8a5a5"
     }} >
 
-      <div className="row register justify-content-around align-items-md-center align-items-start mx-auto bg bg-white" style={{
+      <div className={!loading ? "row register justify-content-around align-items-md-center align-items-start mx-auto bg bg-white" : "d-none"} style={{
         backgroundColor: "beige"
       }}>
         <div className="col-xl-4 col-5 d-lg-inline d-none p-0 ">
           <img src={covers} className='w-100 m-0 rounded-2 h-100 ' alt="" />
         </div>
-        <div className={show && !forgot ? "col-xl-4 col-lg-5 col-md-7 col-sm-7 col-10 login  d-flex flex-column justify-content-center h-100 text-center show " : "d-none"}>
+        <div className={show && !forgot ? "col-xl-4 col-lg-5 col-md-7 col-sm-7 col-10 login d-flex flex-column justify-content-center h-100 text-center show " : "d-none"}>
           <img src={usericon} className='mx-auto w-25 rounded-5' alt="" />
           <h4 className='fs-sm-1 fs-3'>Welcome back!</h4>
           <input className='my-md-3 my-sm-2 my-2 fs-sm-5 fs-6' type="text" name='username' placeholder='username' value={logindata.username} onChange={(e) => handlelogin(e)} />
@@ -172,6 +180,9 @@ export default function Login() {
           <button className='my-3 w-25 text-white rounded-2 mx-auto bg bg-primary' onClick={() => handleforgot()} >Forgot</button>
         </div>
 
+      </div>
+      <div className={loading ? "row loader w-100 p-0 m-0 opacity-50 d-flex justify-content-center gap-0 align-items-center text-dark" : "d-none"}>
+        <div className="load m-0"></div>
       </div>
     </div >
   )

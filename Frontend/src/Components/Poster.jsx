@@ -5,9 +5,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import Post from './Post'
 export default function Poster() {
     const [postdata, setpostdata] = useState([])
+    const [loading, setloading] = useState(false)
     let navigate = useNavigate()
 
     const loaddata = async () => {
+        setloading(true)
         const response = await fetch("https://hodobackend.onrender.com/post/getpostdata", {
             method: 'POST',
             headers: {
@@ -21,10 +23,12 @@ export default function Poster() {
             // console.log(`data : `, json.data)
             json.data.reverse()
             setpostdata(json.data)
+            setloading(false)
         }
         else if (!json.success) {
             // console.log("got an error")
-            return navigate('/error')
+            setloading(false)
+            navigate('/error')
         }
     }
 

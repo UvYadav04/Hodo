@@ -239,7 +239,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
 
 
     return (
-        <div className="post p-0 container text-center mb-1 ">
+        <div className="post p-0 container text-center mb-1 pb-1">
             <div className="row user m-0 p-0 justify-content-start align-items-center mb-0 ps-sm-1 ps-0 pb-0  ">
                 <div className="col-auto logo p-0">
                     <img src={c1} alt="" width={40} height={40} />
@@ -303,16 +303,16 @@ export default function Post({ image, Tags, likes, description, username, id, Co
                 cuser.length > 0 ?
                     <div className={commented ? "row justify-content-center Commentss mt-0 mb-0 m-0 w-100 " : "d-none"}>
                         <div className="col-12 first rounded-2 p-0">
-                            <div className="container commentsection m-0 w-100  p-0">
+                            <div className="container commentsection m-0 w-100 px-2 p-0">
                                 {cuser.length > 0 ? cuser.map((item, i) => {
                                     return (
-                                        <div className="row user justify-content-start comment p-1  mx-0 mb-2 rounded-2 w-100" key={i}>
+                                        <div className="row user justify-content-start bg bg-white comment p-1 mb-2 rounded-2 w-100 mx-auto" key={i}>
                                             <div className="col-12 text-start">
                                                 <img src={c1} width={30} height={30} className='d-inline rounded-5' alt="" />
                                                 <button className='d-inline bg bg-transparent font-weight-bold text-primary my-0'>{item}</button>
-                                                <button className={user === item ? "d-inline w-auto delete bg bg-transparent " : "d-none"} onClick={() => handledelete(comments[i], i)}><DeleteIcon sx={{ color: 'red' }} /> </button>
+                                                <button className={user === item ? "d-inline w-auto delete bg bg-transparent " : "d-none"} onClick={() => handledelete(comments[i], i)}><DeleteIcon sx={{ color: 'gray' }} /> </button>
                                             </div>
-                                            <div className="col-12 text-start bg bg-white mt-1">
+                                            <div className="col-12 text-start bg bg-transparent mt-1">
                                                 {comments[i]}
                                             </div>
                                         </div>
@@ -322,13 +322,12 @@ export default function Post({ image, Tags, likes, description, username, id, Co
                         </div>
                     </div> : null
             }
-            <div className={commented ? "row justify-content-center m-0 pt-1 mb-0" : "d-none"}>
+            <div className={commented ? "row justify-content-center m-0 pt-1 mt-1" : "d-none"}>
                 <span className="addcmnt mt-0 p-0">
-                    <input className='px-2 py-0 mx-md-3 mx-0 rounded-5 w-75 d-inline bg bg' type="text" name="newcomment" value={newcomment} onChange={(e) => setnewcomment(e.target.value)} placeholder="Add a new comment here" />
+                    <input className='px-2 py-0 mx-md-3 mx-0 rounded-3 w-75 d-inline bg bg' type="text" name="newcomment" value={newcomment} onChange={(e) => setnewcomment(e.target.value)} placeholder="Add a new comment here" />
                     <button className="text-primary bg bg-transparent" onClick={() => handlecomment()}><NearMeIcon className='p-0 bg bg-transparent my-auto mb-1' sx={{ fontSize: 25 }} /></button>
                 </span>
             </div>
-            {/* <hr className='/' /> */}
         </div >
 
     )

@@ -51,7 +51,7 @@ export default function Main() {
   return (
     <div className="main2 mt-2 container-fluid p-0 m-0">
 
-      <div className="row w-100 p-0 m-0">
+      <div className={!loading ? "row w-100 p-0 m-0" : "d-none"}>
         <div className="userinfo col-lg-3 col-4 d-md-inline d-none border border-dark pt-2 px-0">
 
           <span className="w-100 px-1 rounded-2 bg bg-white d-block text-center mt-4"><h5>Active users in your nearby location</h5> </span>
@@ -98,6 +98,10 @@ export default function Main() {
           </section>
 
         </div>
+      </div>
+      <div className={loading ? "row loader w-100 p-0 m-0 opacity-50 d-flex justify-content-center align-items-center text-dark" : "d-none"}>
+        <div className="load m-0"></div>
+        <h5 className='text-center'>Please wait</h5>
       </div>
     </div>
   )

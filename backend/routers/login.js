@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
                     if (err) {
                         return res.json({ success: false, message: "token problem" })
                     }
-                    return res.json({ success: true, token: token })
+                    return res.json({ success: true, token: token, id: c._id })
                 })
             }
             else if (!valid) {

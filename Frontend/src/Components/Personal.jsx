@@ -26,6 +26,7 @@ export default function Personal({ username }) {
     const [newuser, setnewuser] = useState({})
     const [Friends, setFriends] = useState([])
     const [loading, setloading] = useState(false)
+    const [loadingchat, setloadingchat] = useState(false)
     const [nofrnds, setnofrnds] = useState(false)
     const [actives, setactives] = useState([])
     const [interests, setinterests] = useState([])
@@ -54,7 +55,7 @@ export default function Personal({ username }) {
             setnwrong(true)
             return
         }
-
+        setloading(true)
         const response = await fetch("https://hodobackend.onrender.com/user/updatepassword", {
             method: "POST",
             headers: {
@@ -67,6 +68,7 @@ export default function Personal({ username }) {
         const json = await response.json()
         if (json.success) {
             alert("password updated successfully")
+            setloading(false)
             setpasswording(false)
         }
         else if (!json.success) {
@@ -107,6 +109,7 @@ export default function Personal({ username }) {
 
     const handleupdation = async () => {
         setsettings(false)
+        setloading(true)
         const response = await fetch("https://hodobackend.onrender.com/user/updateprofile", {
             method: "POST",
             headers: {
@@ -131,10 +134,13 @@ export default function Personal({ username }) {
                 }
             })
             setEdit(false)
+            setloading(false)
         }
 
-        else
+        else {
+            setloading(false)
             alert("somethign went wrong try after sometime")
+        }
     }
 
     const getuserdata = async () => {
@@ -154,6 +160,7 @@ export default function Personal({ username }) {
             setuser(json.user)
             setimage(json.user.image)
             setinterests(json.user.Interest)
+            setloading(false)
             setnewuser((prev) => {
                 return {
                     owner: owner,
@@ -167,7 +174,8 @@ export default function Personal({ username }) {
                 setfollowing(true)
         }
         else if (!json.success) {
-            console.log("no user")
+            setloading(false)
+            alert("Something went wrong")
         }
     }
 
@@ -301,8 +309,9 @@ export default function Personal({ username }) {
         if (json.success) {
             setactives(json.active)
         }
-        else if (!json.success)
-            console.log("no user")
+        else if (!json.success) {
+            setloadingchat(false)
+        }
     }
 
 
@@ -316,8 +325,7 @@ export default function Personal({ username }) {
     return (
         <>
             <div className="container-fluid profile">
-                <div className={passwording ? "d-none" : "row prow  justify-content-around pt-2 ps-2 "}>
-
+                <div className={passwording || loading ? "d-none" : "row prow  justify-content-around pt-2 ps-2 "}>
                     <div className={Edit ? "d-none" : "col-xxl-4 col-xl-4 col-lg-5 col-12 info d-flex flex-column justify-content-start text-align-center p-2 profilepage position-relative border"}>
                         <div className={settings ? "bg bg-dark text-white position-absolute slider  rounded-2  " : "d-none"}>
                             <ul className='p-0 pt-2 mt-2'>
@@ -399,7 +407,7 @@ export default function Personal({ username }) {
                         <textarea name="About" id="bio" cols="10" rows="5" className='mt-3 rounded-3' value={newuser.About} placeholder='Add bio here' onChange={(event) => handlechanges(event)}  ></textarea>
 
 
-                        <div className="interests mt-3 text-start w-100" key={"uvyadav"}>
+                        <div className="interests mt-3 text-start w-100" key={"different"}>
                             <ul className='p-0' key={"down"}>
                                 {
                                     interests.length > 0 ?
@@ -431,9 +439,8 @@ export default function Personal({ username }) {
                             {Friends.map((item, i) => item.Username !== owner && actives.includes(item.Username) ? <li key={i} className=' p-1 fs-4 w-100 text-start'>  <img className='border border-success border-3 rounded-5' src={"https://hodobackend.onrender.com//Images/" + item.image} width={40} height={40} alt="" /></li> : null)}
 
                         </div>
-                        <ul className={!loading && !nofrnds ? "p-1 mt-0" : "d-none"}>
+                        <ul className={!loadingchat && !nofrnds ? "p-1 mt-0" : "d-none"}>
                             {
-
                                 Friends.map((item, i) => {
                                     return (<li key={i} className="text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row" onClick={() => navigate('/chat', { state: item.Username })} >
                                         <img src={"https://hodobackend.onrender.com/Images/" + item.image} width={50} height={50} className=" rounded-5 me-2" alt="" />
@@ -448,11 +455,11 @@ export default function Personal({ username }) {
                             }
                         </ul>
 
-                        <section className={!loading && nofrnds ? "h-100 d-flex justify-content-center align-items-center" : "d-none"}>
+                        <section className={!loadingchat && nofrnds ? "h-100 d-flex justify-content-center align-items-center" : "d-none"}>
                             <h3 className="opacity-50">Connect Friends to Chat</h3>
                         </section>
 
-                        <section className={loading ? "h-100 d-flex justify-content-center align-items-center" : "d-none"}>
+                        <section className={loadingchat ? "h-100 d-flex justify-content-center align-items-center" : "d-none"}>
                             <h4 className="mx-auto opacity-75">Loading chats...</h4>
                         </section>
 
@@ -482,7 +489,7 @@ export default function Personal({ username }) {
 
                 {/* col-xl-3 col-lg-3 col-md-5 d-xl-flex d-lg-none d-md-flex flex-row mt-lg-0 mt-3 m-0 border text-primary p-0 */}
 
-                <div className={passwording ? "row password w-100 justify-content-center align-content-center" : "d-none"}>
+                <div className={passwording && !loading ? "row password w-100 justify-content-center align-content-center" : "d-none"}>
                     <div className=" col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10 d-flex flex-column align-items-center justify-content-center p-lg-5 p-md-3 p-sm-1 p-0 border border-sm-primary border-none border-3">
                         <label htmlFor="current" className='m-0 ms-0 w-75 text-start text-primary'>current password</label>
                         <input type="password" className='d-block mb-2 w-75' value={currentp} onChange={(e) => setcurrentp(e.target.value)} />
@@ -498,6 +505,11 @@ export default function Personal({ username }) {
 
                     </div>
                 </div >
+
+                <div className={loading ? "row loader w-100 p-0 m-0 opacity-50 d-flex justify-content-center gap-0 align-items-center text-dark" : "d-none"}>
+                    <div className="load"></div>
+                    <h3 className='m-0 bg '>Please wait...</h3>
+                </div>
             </div >
         </>
     )

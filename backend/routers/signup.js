@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
                             res.json({ success: false, message: "Invalid credentials" })
                         }
                         // console.log(`authtoken : `, token)
-                        res.json({ success: true, token: token })
+                        res.json({ success: true, token: token, id: c._id })
                     })
                 })
                 .catch((e) => {
