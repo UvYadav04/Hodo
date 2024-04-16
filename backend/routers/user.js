@@ -104,9 +104,9 @@ router.post('/getnears', verify, async (req, res) => {
         })
 
         Promise.all(promises).then(() => {
-            // console.log(`store: `, store)
             res.json({ success: true, data: store })
         }).catch((e) => {
+            res.json({ success: false })
             console.log(`error : `, e)
         })
 

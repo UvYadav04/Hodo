@@ -3,7 +3,7 @@ const router = express.Router()
 const user = require('../models/user')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const key = "dinesh yadav"
+const key = process.env.KEY
 const cookieParser = require("cookie-parser")
 router.use(cookieParser())
 

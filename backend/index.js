@@ -34,7 +34,7 @@ const cors = require('cors')
 const server = http.createServer(app)
 
 
-mongoose.connect("mongodb+srv://uvyadav04:uvyadav123@cluster1.ae0pw2e.mongodb.net/HODO")
+mongoose.connect(process.env.MONGO_URL)
     .then(() => {
         console.log("connected to mongo")
     })
@@ -82,10 +82,10 @@ app.get('*', (req, res) => {
     res.send('Something went wrong')
 })
 
-app.listen(port, (req, res) => {
+// app.listen(port, (req, res) => {
 
-    console.log("listening on 8080")
-})
+//     console.log("listening on 8080")
+// })
 
 
 // ************ server *************
@@ -152,6 +152,6 @@ io.on("connection", async (socket) => {
     })
 })
 
-server.listen(3001, () => {
+server.listen(port, () => {
     console.log("server is running")
 })

@@ -30,10 +30,11 @@ export default function Postform() {
         'authorisation': `bearer ${localStorage.getItem('token')}`
       }
     }).then(() => {
-      navigate('/hodo')
+      alert("post uploaded successfully")
+      navigate('/')
     })
       .catch(() => {
-        console.log("something went wrong try again")
+        alert("something went wrong")
         navigate(0)
       })
   }
