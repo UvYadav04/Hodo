@@ -22,9 +22,9 @@ export default function Login() {
   // console.log(logindata);
 
   const handleforgot = async () => {
-    console.log(fusername)
+    // console.log(fusername)
     if (fusername !== "") {
-      console.log(fusername)
+      // console.log(fusername)
       setfusername("")
       setloading(true)
       const response = await fetch("https://hodobackend.onrender.com/forgetpassword", {

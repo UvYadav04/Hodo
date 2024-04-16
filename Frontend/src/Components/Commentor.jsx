@@ -11,8 +11,8 @@ export default function Commentor({ cuser, comment, deleter }) {
     const username = localStorage.getItem('username')
 
     useEffect(() => {
-        console.log("called commentator")
-        console.log(comment)
+        // console.log("called commentator")
+        // console.log(comment)
         setusers(cuser)
         setcomments(comment)
     }, [])

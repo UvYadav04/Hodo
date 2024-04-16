@@ -43,9 +43,9 @@ export default function Personal({ username }) {
 
 
     const handlepassword = async (item) => {
-        console.log(currentp)
-        console.log(newp)
-        console.log(confp)
+        // console.log(currentp)
+        // console.log(newp)
+        // console.log(confp)
         if (newp.length < 8) {
             setpwrong(true)
             return;
@@ -102,7 +102,7 @@ export default function Personal({ username }) {
         setnewuser((prev) => {
             let arr = prev.Interest
             arr = arr.filter((item) => item !== item2)
-            console.log(arr)
+            // console.log(arr)
             return { ...prev, Interest: arr }
         })
     }
@@ -195,7 +195,7 @@ export default function Personal({ username }) {
             setfollowing(true)
 
         if (json.user.friends.length === 0) {
-            console.log("nofriends")
+            // console.log("nofriends")
             setloading(false)
             setnofrnds(true)
         }
@@ -508,7 +508,7 @@ export default function Personal({ username }) {
 
                 <div className={loading ? "row loader w-100 p-0 m-0 opacity-50 d-flex justify-content-center gap-0 align-items-center text-dark" : "d-none"}>
                     <div className="load"></div>
-                    <h3 className='m-0 bg '>Please wait...</h3>
+                    {/* <h3 className='m-0 bg '>Please wait...</h3> */}
                 </div>
             </div >
         </>

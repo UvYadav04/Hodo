@@ -4,6 +4,7 @@ import Navbar from "../Components/Navbar";
 import Messagebox from "../Components/Messagebox";
 import logo from '../Photos/c6.jpg'
 import usericon from '../Photos/bg1.png'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import { useLocation, useNavigate } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
@@ -26,7 +27,7 @@ function Chat({ socket }) {
     const navigate = useNavigate()
 
     const handleselect = async (item) => {
-        console.log(item)
+        // console.log(item)
         setSelected(item)
         setdisplay(true)
         const request = await fetch("https://hodobackend.onrender.com/chat/fetchchats", {
@@ -54,6 +55,7 @@ function Chat({ socket }) {
 
     const handlesent = async () => {
         if (currentMessage !== "") {
+
             const response = await fetch("https://hodobackend.onrender.com/chat/newmessage", {
                 method: "POST",
                 headers: {
@@ -64,12 +66,11 @@ function Chat({ socket }) {
             })
             const json = await response.json()
             if (json.success) {
-                // console.log("message stored")
-                setCurrentMessage("")
-                sendMessage(json.message)
                 setmessages((data) => {
                     return [...data, json.message]
                 })
+                setCurrentMessage("")
+                sendMessage(json.message)
             }
         }
 
@@ -105,8 +106,9 @@ function Chat({ socket }) {
                 setloading(false)
             }
         }
-        else if (!json.success)
-            console.log("no user")
+        else if (!json.success) {
+            setloading(false)
+        }
     }
 
     const getactiveusers = async () => {
@@ -123,8 +125,6 @@ function Chat({ socket }) {
             // console.log(json.active)
             setactives(json.active)
         }
-        else if (!json.success)
-            console.log("no user")
     }
 
     const receiveMessage = (data) => {
@@ -146,7 +146,7 @@ function Chat({ socket }) {
 
 
     useEffect(() => {
-        console.log("got started")
+        // console.log("got started")
 
         socket.emit("setup", { username: localStorage.getItem("username") })
         getuserdata()
@@ -158,68 +158,67 @@ function Chat({ socket }) {
     }, [])
 
     return (
-        <div className="chatbocx">
-            <Navbar />
-            <div className="container-fluid chatpage">
-                <div className="row justify-content-start chatrow ">
-                    <div className="col-3 friends ">
-                        <input type="text" name="search" placeholder="search friends" className=" ps-2 w-100  bg bg-white rounded-4 mt-2" />
-                        <ul className={!loading && !nofrnds ? "p-1 mt-4 " : "d-none"}>
-                            {
 
-                                Friends.map((item) => {
-                                    return (<li key={item} className={actives.includes(item) ? "text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row active" : "text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row"} onClick={() => handleselect(item.Username)}>
-                                        {item.image !== "" ? <img src={"https://hodobackend.onrender.com/Images/" + item.image} width={50} height={50} className=" rounded-5     me-2" alt="" /> : <img src={usericon} width={50} height={50} className=" rounded-5     me-2" alt="" />}
-                                        <section className="details cursor-pointer">
-                                            {item.Username}
-                                            <span className="opacity-75 d-block fs-6">
-                                                Tap to chat</span>
-                                        </section>
-                                    </li>
-                                    )
-                                })
-                            }
-                        </ul>
+        <div className="container-fluid chatpage pb-0">
+            <div className="navbar m-0 p-0 d-md-inline d-none"><Navbar /></div>
+            <div className="row justify-content-start chatrow pb-0">
+                <div className="col-lg-3 col-4 d-md-inline d-none friends pb-0">
+                    <input type="text" name="search" placeholder="search friends" className=" ps-2 w-100  bg bg-white rounded-4 mt-2" />
+                    <ul className={!loading && !nofrnds ? "p-1 mt-4 friendsul" : "d-none"}>
+                        {
 
-                        <section className={!loading && nofrnds ? "h-100 d-flex justify-content-center align-items-center" : "d-none"}>
-                            <h3 className="opacity-50">Connect Friends to Chat</h3>
-                        </section>
+                            Friends.map((item) => {
+                                return (<li key={item} className={actives.includes(item) ? "text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row active" : "text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row"} onClick={() => handleselect(item.Username)}>
+                                    {item.image !== "" ? <img src={"https://hodobackend.onrender.com/Images/" + item.image} width={50} height={50} className=" rounded-5     me-2" alt="" /> : <img src={usericon} width={50} height={50} className=" rounded-5     me-2" alt="" />}
+                                    <section className="details cursor-pointer">
+                                        {item.Username}
+                                        <span className="opacity-75 d-block fs-6">
+                                            Tap to chat</span>
+                                    </section>
+                                </li>
+                                )
+                            })
+                        }
+                    </ul>
 
-                        <section className={loading ? "h-100 d-flex justify-content-center align-items-center" : "d-none"}>
-                            <h4 className="mx-auto opacity-75">Loading chats...</h4>
-                        </section>
-                    </div>
-                    <div className={"col chatting d-flex flex-column position-relative p-0"}>
-                        <div className={display ? "header w-auto py-1 px-1 d-flex justify-content-start align-items-center" : "d-none"}>
-                            <img src={logo} width={40} height={40} alt="" className=" me-2 rounded-5" />
-                            <button onClick={() => navigate('/usersprofile', { state: currentuser })} className="d-inline text-decoration-none text-black fs-5 bg bg-transparent border-none p-0 ">{currentuser}</button>
-                            <button className={display ? "ms-auto fs-5 bg bg-transparent border-none p-0 mx-2" : "d-inline"} onClick={() => setdisplay(false)}><CloseIcon sx={{ fontSize: 40 }} /></button>
-                        </div>
-                        <div className={display ? "messages px-2 mb-2" : "d-none"}>
-                            {
-                                messages.map((item, i) => {
-                                    return (
-                                        <Messagebox key={i} message={item.Text} seen={item.seen} time={item.time} sender={item.sender} owner={owner} />
-                                    )
-                                })
-                            }
-                        </div>
-                        <div className={display ? " messenger position-relative my-0 mx-0 text-start" : "d-none"} >
-                            <input type="text" placeholder="type message here..." className="w-75 bg bg-white rounded-4 ms-2 px-2 mt-0 " value={currentMessage} onChange={(event) => setCurrentMessage(event.target.value)}
-                                onKeyDown={(event) => {
-                                    if (event.key === "Enter")
-                                        handlesent()
+                    <section className={!loading && nofrnds ? "h-100 d-flex justify-content-center align-items-center" : "d-none"}>
+                        <h3 className="opacity-50">Connect Friends to Chat</h3>
+                    </section>
 
-                                }} />
-                            <button className="bg bg-transparent pb-0 m-0" onClick={() => handlesent()}> <SendIcon className=" pb-1" sx={{ fontSize: 35 }} /></button>
-                        </div>
-
-                        <div className={!display ? "d-block text-center fs-2 opacity-75 my-auto" : "d-none"}>Tap on friends list to chat</div>
-                    </div>
-
+                    <section className={loading ? "h-100 d-flex justify-content-center align-items-center" : "d-none"}>
+                        <h4 className="mx-auto opacity-75">Loading chats...</h4>
+                    </section>
                 </div>
-            </div >
-        </div>
+                <div className={"col-lg-9 col-md-8 col-12 chatting d-flex flex-column position-relative justify-content-between p-0 m-0 pb-0"}>
+                    <div className={display ? "header w-auto py-1 px-1 d-flex justify-content-start align-items-center" : "d-none"}>
+                        <button className="fs-5 bg bg-transparent border-none p-0 mx-2 d-md-none" onClick={() => navigate('/friends')}><ArrowBackIcon sx={{ fontSize: 35 }} /></button>
+                        <img src={logo} width={40} height={40} alt="" className=" me-2 rounded-5" />
+                        <button onClick={() => navigate('/usersprofile', { state: currentuser })} className="d-inline text-decoration-none text-black fs-5 bg bg-transparent border-none p-0 ">{currentuser}</button>
+                        <button className={display ? "ms-auto fs-5 bg bg-transparent border-none p-0 mx-2 d-md-inline d-none" : "d-inline"} onClick={() => setdisplay(false)}><CloseIcon sx={{ fontSize: 35 }} /></button>
+                    </div>
+                    <div className={display ? "messages  mb-auto" : "d-none"}>
+                        {
+                            messages.map((item, i) => {
+                                return (
+                                    <Messagebox key={i} message={item.Text} seen={item.seen} time={item.time} sender={item.sender} owner={owner} />
+                                )
+                            })
+                        }
+                    </div>
+                    <div className={display ? "messenger position-relative text-start m-0 p-0 d-flex align-items-center" : "d-none"} >
+                        <input type="text" placeholder="type message here..." className="w-75 bg bg-white rounded-4 ms-2 px-2 mt-0 mb-0 " value={currentMessage} onChange={(event) => setCurrentMessage(event.target.value)}
+                            onKeyDown={(event) => {
+                                if (event.key === "Enter")
+                                    handlesent()
+
+                            }} />
+                        <button className="bg bg-transparent" onClick={() => handlesent()}> <SendIcon className="   p-0" sx={{ fontSize: 30 }} /></button>
+                    </div>
+                    <div className={!display ? "d-block text-center fs-2 opacity-75 my-auto" : "d-none"}>Tap on friends list to chat</div>
+                </div>
+
+            </div>
+        </div >
     );
 }
 

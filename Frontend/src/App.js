@@ -25,6 +25,7 @@ import Chat from './Screens.jsx//Chat.jsx'
 import io from 'socket.io-client'
 import React, { useEffect, useState } from 'react';
 import Nearbys from './Screens.jsx/Nearbys.jsx';
+import Chatlist from './Screens.jsx/Chatlist.jsx';
 const socket = io.connect("https://hodobackend.onrender.com")
 
 export const Locationcontext = React.createContext()
@@ -139,6 +140,7 @@ function App() {
             <Route path='/search' element={<Search />} />
             <Route path='/chat' element={<Chat socket={socket} />} />
             <Route path='/nearby' element={<Nearbys />} />
+            <Route path='/friends' element={<Chatlist socket={socket} />} />
           </Routes>
         </Router>
       </Locationcontext.Provider>

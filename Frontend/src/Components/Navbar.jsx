@@ -26,7 +26,7 @@ export default function Navbar() {
     setsearch(value)
     if (value !== "") {
       setresult(true)
-      console.log(`value : `, value)
+      // console.log(`value : `, value)
       const response = await fetch("https://hodobackend.onrender.com/search/userdata", {
         method: "POST",
         headers: {
@@ -87,22 +87,17 @@ export default function Navbar() {
           </div>
         </div>
         <div className=" col-md-4 col-2 navs pt-0 d-md-flex align-items-center justify-content-around d-none px-md-2 px-0">
-          <Link to={'/hodo'} className=" text-decoration-none text-black fs-5 mx-md-3 mx-1 ">Home</Link>
-          <Link to={'/chat'} className=" text-decoration-none text-black fs-5 mx-md-3 mx-1">Chat</Link>
-          <Link to={'/privacy'} className="d-md-inline d-none text-decoration-none text-black fs-5 mx-md-3 mx-1">Privacy</Link>
+          <Link to={'/hodo'} className=" text-decoration-none text-black fs-5 mx-lg-3 mx-md-2 mx-1 ">Home</Link>
+          <Link to={'/chat'} className=" text-decoration-none text-black fs-5 mx-lg-3 mx-md-2 mx-1">Chat</Link>
+          <Link to={'/privacy'} className="d-md-inline d-none text-decoration-none text-black fs-5 mx-lg-3 mx-md-2 mx-1">Privacy</Link>
 
-          <button className=" fs-4 mx-md-2 mx-0 p-0 cursor-pointer text-decoration-none text-danger w-auto  d-lg-inline d-none" onClick={() => {
-            localStorage.removeItem('username')
-            localStorage.removeItem('token')
-            navigate('/auth')
-          }}>Logout</button>
           <Link to={'/profile'} className="fs-5 mx-0 cursor-pointer text-decoration-none text-black "> <AccountCircleIcon
             className="m-0" sx={{ fontSize: 40 }} />
           </Link>
         </div>
       </div>
-      <div className="row d-md-none bar p-0 w-100 m-0">
-        <div className="bottombar col-12 text-black d-flex justify-content-between px-2 w-100">
+      <div className="row d-md-none bar p-0 w-100 m-0 my-0">
+        <div className="bottombar col-12 text-black d-flex m-0 justify-content-between px-2 w-100">
           <HomeIcon sx={{ fontSize: 35 }} onClick={() => navigate('/hodo')} />
           <NearMeIcon sx={{ fontSize: 35 }} onClick={() => navigate('/nearby')} />
           <AddCircleIcon sx={{ fontSize: 35 }} onClick={() => navigate('/newpost')} />

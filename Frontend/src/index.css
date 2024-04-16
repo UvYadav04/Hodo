@@ -304,14 +304,22 @@ button {
 
 /* ************Chat************* */
 
-.chatbocx {
+.chatpage {
   min-height: 100vh;
   max-height: 100vh;
+  width: 100%;
+  background-color: beige;
+
+  .friendsul li {
+    cursor: pointer;
+  }
 }
 
 
 .chatpage .chatrow {
-  height: 91.5vh;
+  height: 91vh;
+  /* background-color: red; */
+  /* overflow: hidden; */
 
   .friends {
     /* background: linear-gradient(to bottom, wheat, skyblue); */
@@ -336,12 +344,17 @@ button {
   }
 }
 
-.chatpage button {
+.chatlist {
+  max-height: 100vh;
+  min-height: 100vh;
+}
+
+.page button {
   border: none !important;
 }
 
 .chatting .messages {
-  min-height: 78vh;
+  min-height: 75vh;
   max-height: 79vh;
   overflow-y: scroll;
   scrollbar-width: none;
@@ -354,7 +367,12 @@ button {
 .mbox {
   width: fit-content;
   height: fit-content;
-  max-width: 30%;
+  min-width: 20%;
+  max-width: 40%;
+
+  h6 {
+    font-weight: 300;
+  }
 }
 
 /* ****messagebox******** */
@@ -524,6 +542,9 @@ p.updateusername {
     }
   }
 
+  .mbox {
+    max-width: 85%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -550,7 +571,21 @@ p.updateusername {
       width: 30px;
       height: 30px;
     }
+
+
   }
+
+  .chatpage .chatrow {
+    height: 100vh;
+  }
+
+  .chatting .messages {
+    min-height: 88vh;
+    max-height: 88vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
+  }
+
 
 }
 
@@ -642,6 +677,7 @@ p.updateusername {
   .profile {
     font-size: 0.8rem;
   }
+
 
 }
 

@@ -28,7 +28,7 @@ export default function Main() {
     if (json.success) {
       // console.log(json)
       if (json.user.friends.length === 0) {
-        console.log("nofriends")
+        // console.log("nofriends")
         setloading(false)
         setnofrnds(true)
       }
@@ -40,7 +40,7 @@ export default function Main() {
       }
     }
     else if (!json.success) {
-      console.log("no user")
+      // console.log("no user")
     }
   }
 

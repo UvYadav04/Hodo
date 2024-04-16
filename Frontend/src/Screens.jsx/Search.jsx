@@ -9,7 +9,7 @@ export default function Search() {
     let location = useLocation()
     const username = location.state
     const [users, setusers] = useState([])
-    console.log(`users : `, users)
+    // console.log(`users : `, users)
 
     const getalldata = async () => {
         // console.log(`getting data with usernaem : `, username)
@@ -26,7 +26,7 @@ export default function Search() {
         let user = json.userdata
         let result = []
         result = Object.keys(user).map((key) => [user[key]]);
-        console.log(result)
+        // console.log(result)
         setusers(result)
     }
 

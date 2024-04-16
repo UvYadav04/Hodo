@@ -8,6 +8,7 @@ export default function Postform() {
   const [file, setfile] = useState()
   const [descp, setdescp] = useState("")
   const [Tags, settags] = useState({ T1: "", T2: "", T3: "" })
+  const [loading, setloading] = true
   const handletags = (e) => {
     const name = e.target.name
     const value = e.target.value
@@ -23,6 +24,7 @@ export default function Postform() {
     formdata.append('Tags', JSON.stringify(Tags))
     formdata.append('user', username)
     formdata.append('date', new Date().getTime())
+    setloading(true)
     axios.post("https://hodobackend.onrender.com/post/new",
       formdata, {
       headers: {
@@ -30,10 +32,12 @@ export default function Postform() {
         'authorisation': `bearer ${localStorage.getItem('token')}`
       }
     }).then(() => {
+      setloading(false)
       alert("post uploaded successfully")
       navigate('/')
     })
       .catch(() => {
+        setloading(false)
         alert("something went wrong")
         navigate(0)
       })
@@ -52,7 +56,10 @@ export default function Postform() {
           <textarea className='rounded-2 w-100 mt-4' name="descp" id="" rows="5" placeholder='Describe your experience' value={descp} onChange={(e) => setdescp(e.target.value)}></textarea>
           <button className='px-3 mt-3  rounded-1 w-25 ms-sm-auto mx-auto me-2 bg bg-success text-white' onClick={() => handleupload()}>Share</button>
         </div>
-        {/* <hr /> */}
+        <div className={loading ? "row loader w-100 p-0 m-0 opacity-50 d-flex justify-content-center align-items-center text-dark" : "d-none"}>
+          <div className="load m-0"></div>
+          <h5 className='text-center'>Please wait</h5>
+        </div>
       </div >
     </>
   )
