@@ -53,8 +53,8 @@ function App() {
       // console.log(json.active)
       getlocation(json.active)
     }
-    else if (!json.success)
-      console.log("no user")
+    // else if (!json.success)
+    // console.log("no user")
   }
 
   const getlocation = async (actives) => {
