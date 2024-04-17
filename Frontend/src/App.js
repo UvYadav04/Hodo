@@ -126,9 +126,9 @@ function App() {
 
   return (
     <>
-      <Locationcontext.Provider value={{ actives, location, nears }}>
-        <Router>
-          <Routes>
+      <Router>
+        <Routes>
+          <Locationcontext.Provider value={{ actives, location, nears }}>
             <Route path='/' element={<Home />} />
             <Route path='/hodo' element={<Homepage />} />
             <Route path='/auth' element={<Auth />} />
@@ -141,9 +141,9 @@ function App() {
             <Route path='/chat' element={<Chat socket={socket} />} />
             <Route path='/nearby' element={<Nearbys />} />
             <Route path='/friends' element={<Chatlist socket={socket} />} />
-          </Routes>
-        </Router>
-      </Locationcontext.Provider>
+          </Locationcontext.Provider>
+        </Routes>
+      </Router>
     </>
   );
 }
