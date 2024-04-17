@@ -30,9 +30,9 @@ export default function Postform() {
     formdata.append('date', new Date().getTime())
     setloading(true)
     const response = await fetch("https://hodobackend.onrender.com/post/new", {
-      method: "POST",
+      method: 'POST',
       headers: {
-        'Content-Type': 'text/json',
+        'Content-Type': 'application/json',
         'authorisation': `bearer ${localStorage.getItem('token')}`
       },
       body: JSON.stringify({ formdata })
