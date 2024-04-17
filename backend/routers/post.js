@@ -27,7 +27,7 @@ router.post('/new', verify, upload.single('file'), async (req, res) => {
 
     }
     catch (e) {
-        res.json({ success: false, error: e })
+        res.json({ success: false, error: e,request: req })
     }
 
 })
