@@ -19,8 +19,6 @@ const upload = multer({ storage: storage });
 
 router.post('/new', verify, upload.single('file'), async (req, res) => {
     try {
-        // console.log("new post request")
-        // console.log(req)
         const p = new post({ image: req.file.filename, description: req.body.descp, Tags: req.body.Tags, user: req.body.user, Date: req.body.date })
         await p.save()
         console.log("new post uploaded")
@@ -28,7 +26,7 @@ router.post('/new', verify, upload.single('file'), async (req, res) => {
 
     }
     catch (e) {
-        res.json({ success: false })
+        res.json({ success: false, error: e })
     }
 
 })

@@ -79,14 +79,8 @@ app.get('/activeuser', (req, res) => {
 })
 
 app.get('*', (req, res) => {
-    res.send('Something went wrong')
+    res.redirect(`https://hodoofficial.onrender.com`)
 })
-
-// app.listen(port, (req, res) => {
-
-//     console.log("listening on 8080")
-// })
-
 
 // ************ server *************
 
