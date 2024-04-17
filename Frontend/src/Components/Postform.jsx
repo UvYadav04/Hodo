@@ -16,8 +16,12 @@ export default function Postform() {
       return { ...data, [name]: value }
     })
   }
-  const handleupload = () => {
+  const handleupload = async () => {
     const username = localStorage.getItem("username")
+    if (descp === "" || file === "") {
+      alert("fill necessary details")
+      return;
+    }
     const formdata = new FormData();
     formdata.append('file', file)
     formdata.append('descp', descp)
@@ -25,22 +29,27 @@ export default function Postform() {
     formdata.append('user', username)
     formdata.append('date', new Date().getTime())
     setloading(true)
-    axios.post("https://hodobackend.onrender.com/post/new",
-      formdata, {
+    const response = await fetch("https://hodobackend.onrender.com/post/new", {
+      method: "POST",
       headers: {
         'content-type': 'text/json',
         'authorisation': `bearer ${localStorage.getItem('token')}`
-      }
-    }).then(() => {
+      },
+      body: JSON.stringify({ formdata })
+    })
+    const json = await response.json()
+    if (json.success) {
       setloading(false)
       alert("post uploaded successfully")
       navigate('/')
-    })
-      .catch(() => {
-        setloading(false)
-        alert("something went wrong")
-        navigate(0)
-      })
+
+    }
+    else if (!json.success) {
+      setloading(false)
+      alert("something went wrong")
+      navigate(0)
+    }
+
   }
   return (
     <>
