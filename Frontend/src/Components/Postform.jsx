@@ -45,6 +45,7 @@ export default function Postform() {
     }
     else if (!json.success) {
       setloading(false)
+      console.log(json.error)
       alert("something went wrong")
       navigate(0)
     }
