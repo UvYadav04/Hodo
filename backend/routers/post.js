@@ -17,26 +17,30 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.post('/new', verify, async (req, res) => {
-    // console.log("new post request")
-    //     console.log("new post request")
-    // console.log(req)
-    const p = new post({ image: req.file.filename, description: req.body.descp, Tags: req.body.Tags, user: req.body.user, Date: req.body.date })
-    await p.save()
-        .then(() => {
-            // console.log("new post uploaded")
-            res.json({ success: true })
-        })
-        .catch((e) => {
-            // console.log("error got : ", e)
-            res.json({ success: false })
-        })
+router.post('/new', verify, upload.single('file'), async (req, res) => {
+    try {
+        // console.log("new post request")
+        // console.log(req)
+        const p = new post({ image: req.file.filename, description: req.body.descp, Tags: req.body.Tags, user: req.body.user, Date: req.body.date })
+        await p.save()
+        console.log("new post uploaded")
+        res.json({ success: true })
+
+    }
+    catch (e) {
+        res.json({ success: false })
+    }
 
 })
 
 router.post('/getpostdata', verify, async (req, res) => {
-    const data = await post.find({})
-    res.json({ data: data, success: true })
+    try {
+        const data = await post.find({})
+        res.json({ data: data, success: true })
+    }
+    catch {
+        res.json({ success: false })
+    }
 })
 
 router.post('/getuserdata', verify, async (req, res) => {
