@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
         const hashed = await bcrypt.hash(password, 10);
         const c = await user.findOne({ Username: username });
         if (c) {
-            console.log("already taken")
+            // console.log("already taken")
             res.json({ success: false, message: "username already taken" })
         }
         else if (!c) {

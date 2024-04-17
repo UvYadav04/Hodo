@@ -8,7 +8,7 @@ export default function Postform() {
   const [file, setfile] = useState()
   const [descp, setdescp] = useState("")
   const [Tags, settags] = useState({ T1: "", T2: "", T3: "" })
-  const [loading, setloading] = true
+  const [loading, setloading] = useState(false)
   const handletags = (e) => {
     const name = e.target.name
     const value = e.target.value

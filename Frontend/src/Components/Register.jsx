@@ -157,7 +157,7 @@ export default function Login() {
               <Link href="/" className=" text-decoration-none text-primary fs-6" onClick={() => setforgot(true)}>Forgot password?</Link>
             </div>
           </div>
-          <button className='w-50 mx-auto rounded-5 bg bg-primary text-white fs-sm-4 fs-5' onClick={(e) => handleloginsubmit(e)}>Login</button>
+          <button className='w-50 mx-auto rounded-5 bg bg-primary text-white fs-sm-4 fs-5 mt-3' onClick={(e) => handleloginsubmit(e)}>Login</button>
         </div>
 
         <div className={!show && !forgot ? "col-xl-4 col-lg-5 col-md-7 col-sm-7 col-10 signup  d-flex flex-column show text-center justify-content-center h-100" : "d-none"} >

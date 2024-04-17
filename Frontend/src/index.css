@@ -344,10 +344,16 @@ button {
   }
 }
 
-.chatlist {
-  max-height: 100vh;
+
+.friendslist {
+  max-width: 400px;
   min-height: 100vh;
+  max-height: 100vh;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  background-color: rgb(234, 234, 234);
 }
+
 
 .page button {
   border: none !important;
@@ -678,14 +684,15 @@ p.updateusername {
     font-size: 0.8rem;
   }
 
-
-}
-
-@media (max-width:320px) {
   .loginpage .register {
     border-radius: 5px;
     height: 400px;
   }
+
+}
+
+@media (max-width:320px) {
+
 
   .formrow {
     margin-top: 100px;

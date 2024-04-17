@@ -4,6 +4,7 @@ import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import logo from '../Photos/logo3.png'
 import c1 from '../Photos/c1.jpg'
 import usericon from '../Photos/bg1.png'
+import BoltIcon from '@mui/icons-material/Bolt';
 
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -56,7 +57,7 @@ export default function Navbar() {
 
   return (
     <div className="container-fluid c1 mt-md-0 mt-0 px-0">
-      <div className="row navbar  justify-content-md-around align-items-center p-0 px-2 m-0">
+      <div className="row navbar  justify-content-md-around justify-content-between align-items-center p-0 px-2 m-0  w-100">
         <div className="col-md-auto col-2 d-md-flex text-center align-items-center p-0 me-md-none me-0 justify-content-around ">
           <img src={logo} alt="" width={50} height={40} onClick={() => {
             navigate('/hodo')
@@ -65,7 +66,7 @@ export default function Navbar() {
             <h4 className='d-inline-block'>HODO</h4>
           </div>
         </div>
-        <div className="col-md-4 col-sm-5 col-8 col-lg-5 col-xl-4 mx-0 search text-md-start p-0 text-center ms-auto ms-md-0">
+        <div className="col-md-4 col-sm-5 col-7 col-lg-5 col-xl-4 mx-0 search text-md-start p-0 text-center ms-auto ms-md-0">
           <input type="text" className='m-0 w-100 rounded-5 ps-2 position-relative' placeholder='search' value={search} name='search' onChange={(e) => handlesearch(e.target.value)} />
           <div className={result ? "results d-block text-start position-absolute rounded-1 py-1 px-2 w-100" : "d-none"}>
             {
@@ -89,12 +90,14 @@ export default function Navbar() {
         <div className=" col-md-4 col-2 navs pt-0 d-md-flex align-items-center justify-content-around d-none px-md-2 px-0">
           <Link to={'/hodo'} className=" text-decoration-none text-black fs-5 mx-lg-3 mx-md-2 mx-1 ">Home</Link>
           <Link to={'/chat'} className=" text-decoration-none text-black fs-5 mx-lg-3 mx-md-2 mx-1">Chat</Link>
-          <Link to={'/privacy'} className="d-md-inline d-none text-decoration-none text-black fs-5 mx-lg-3 mx-md-2 mx-1">Privacy</Link>
-
+          <Link to={'/privacy'} className="text-decoration-none text-black fs-5 mx-lg-3 mx-md-2 mx-1">Privacy</Link>
           <Link to={'/profile'} className="fs-5 mx-0 cursor-pointer text-decoration-none text-black "> <AccountCircleIcon
             className="m-0" sx={{ fontSize: 40 }} />
           </Link>
         </div>
+
+        <Link to={'/friends'} className="col-1 d-md-none text-decoration-none text-black fs-5 m-0 ms-2 me-1 mb-1 p-0 bg bg text-center"><BoltIcon className='p-0 m-0' sx={{ fontSize: 30 }} /></Link>
+
       </div>
       <div className="row d-md-none bar p-0 w-100 m-0 my-0">
         <div className="bottombar col-12 text-black d-flex m-0 justify-content-between px-2 w-100">
