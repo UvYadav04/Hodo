@@ -125,26 +125,24 @@ function App() {
 
 
   return (
-    <>
-      <Router>
-        <Routes>
-          <Locationcontext.Provider value={{ actives, location, nears }}>
-            <Route path='/' element={<Home />} />
-            <Route path='/hodo' element={<Homepage />} />
-            <Route path='/auth' element={<Auth />} />
-            <Route path='/newpost' element={<Postform />} />
-            <Route path='/privacy' element={<Privacy />} />
-            <Route path='/profile' element={<Profile />} />
-            <Route path='/error' element={<SWR />} />
-            <Route path='/usersprofile' element={<Usersprofile />} />
-            <Route path='/search' element={<Search />} />
-            <Route path='/chat' element={<Chat socket={socket} />} />
-            <Route path='/nearby' element={<Nearbys />} />
-            <Route path='/friends' element={<Chatlist socket={socket} />} />
-          </Locationcontext.Provider>
-        </Routes>
-      </Router>
-    </>
+    <Router>
+      <Routes>
+        <Locationcontext.Provider value={{ actives, location, nears }}>
+          <Route path='/' element={<Home />} />
+          <Route path='/hodo' element={<Homepage />} />
+          <Route path='/auth' element={<Auth />} />
+          <Route path='/newpost' element={<Postform />} />
+          <Route path='/privacy' element={<Privacy />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/error' element={<SWR />} />
+          <Route path='/usersprofile' element={<Usersprofile />} />
+          <Route path='/search' element={<Search />} />
+          <Route path='/chat' element={<Chat socket={socket} />} />
+          <Route path='/nearby' element={<Nearbys />} />
+          <Route path='/friends' element={<Chatlist socket={socket} />} />
+        </Locationcontext.Provider>
+      </Routes>
+    </Router>
   );
 }
 
