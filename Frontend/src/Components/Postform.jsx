@@ -32,7 +32,7 @@ export default function Postform() {
     const response = await fetch("https://hodobackend.onrender.com/post/new", {
       method: "POST",
       headers: {
-        'content-type': 'text/json',
+        'Content-Type': 'text/json',
         'authorisation': `bearer ${localStorage.getItem('token')}`
       },
       body: JSON.stringify({ formdata })
