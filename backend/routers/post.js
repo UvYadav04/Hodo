@@ -20,7 +20,7 @@ const upload = multer({ storage: storage });
 router.post('/new', verify, async (req, res) => {
     try {
         console.log("reqrested\n")
-        const p = new post({ description: req.body.descp, Tags: req.body.Tags, user: req.body.user, Date: req.body.date })
+        const p = new post({ description: req.body.description, Tags: req.body.Tags, user: req.body.user, date: req.body.date })
         await p.save()
         console.log("new post uploaded")
         res.json({ success: true })
