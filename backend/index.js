@@ -78,7 +78,7 @@ app.get('/activeuser', (req, res) => {
     }
 })
 
-app.get('*', (req, res) => {
+app.get('/hodo', (req, res) => {
     res.redirect(`https://hodoofficial.onrender.com`)
 })
 

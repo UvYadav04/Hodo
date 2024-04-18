@@ -4,7 +4,6 @@ const schema = mongoose.Schema
 const postschema = new schema({
     image: {
         type: String,
-        required: true
     },
     description: {
         type: String,

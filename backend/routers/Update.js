@@ -53,7 +53,7 @@ router.put('/comment/add', async (req, res) => {
         u = [...u, username]
         let c = cmnt.comment
         c = [...c, comment]
-        console.log(u)
+        // console.log(u)
         let Comments = {
             users: u,
             comment: c
@@ -73,14 +73,14 @@ router.put('/comment/delete', async (req, res) => {
         const index = req.body.index
         const comment = req.body.item
         const username = req.body.user
-        console.log(req.body)
+        // console.log(req.body)
         const p = await post.findOne({ _id: id });
         const cmnt = p.comment
         let u = cmnt.users
         u.splice(index, 1)
         let c = cmnt.comment
         c.splice(index, 1)
-        console.log(u)
+        // console.log(u)
         let Comments = {
             users: u,
             comment: c
@@ -108,9 +108,9 @@ const upload = multer({ storage: storage });
 
 router.post('/photo', verify, upload.single('file'), async (req, res) => {
     try {
-        console.log("get here")
+        // console.log("get here")
         const id = req.body.userid
-        console.log(req.body)
+        // console.log(req.body)
         await user.findByIdAndUpdate(id, { image: req.file.filename })
         const c = await user.findById(id);
         if (c) {

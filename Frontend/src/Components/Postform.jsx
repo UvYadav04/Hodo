@@ -34,7 +34,7 @@ export default function Postform() {
       headers: {
         'authorisation': `bearer ${localStorage.getItem('token')}`
       },
-      body: formdata
+      body: JSON.stringify({ formdata })
     })
     const json = await response.json()
     if (json.success) {
