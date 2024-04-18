@@ -23,19 +23,18 @@ export default function Postform() {
       return;
     }
     const formdata = new FormData();
-    // formdata.append('file', file)
+    formdata.append('file', file)
     formdata.append('descp', descp)
     formdata.append('Tags', JSON.stringify(Tags))
     formdata.append('user', username)
     formdata.append('date', new Date().getTime())
-    const description = descp, user = username, date = new Date().getTime()
     setloading(true)
     const response = await fetch("https://hodobackend.onrender.com/post/new", {
       method: 'POST',
       headers: {
         'authorisation': `bearer ${localStorage.getItem('token')}`
       },
-      body: JSON.stringify({ description, user, date })
+      body: formdata
     })
     const json = await response.json()
     if (json.success) {
