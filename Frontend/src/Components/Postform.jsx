@@ -42,12 +42,9 @@ export default function Postform() {
       setloading(false)
       alert("post uploaded successfully")
       navigate('/')
-
     }
     else if (!json.success) {
       setloading(false)
-      console.log(json.error)
-      console.log(json.request)
       alert("something went wrong")
       navigate(0)
     }
