@@ -3,12 +3,8 @@ const schema = mongoose.Schema
 
 const postschema = new schema({
     image: {
-<<<<<<< HEAD
         type: String,
     },
-=======
-        type: String    },
->>>>>>> 8d64a29bca6339df645143453be34fd1652e3ef4
     description: {
         type: String,
         required: true
