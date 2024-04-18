@@ -242,7 +242,10 @@ export default function Post({ image, Tags, likes, description, username, id, Co
         <div className="post p-0 container text-center mb-1 pb-1">
             <div className="row user m-0 p-0 justify-content-start align-items-center mb-0 ps-sm-1 ps-0 pb-0  ">
                 <div className="col-auto logo p-0">
-                    <img src={c1} alt="" width={40} height={40} />
+                    {
+                        image === "" ? <img src={c1} alt="" width={40} height={40} />
+                            : <img src={"https://hodobackend.onrender.com/Images/" + image} alt="" width={40} height={40} />
+                    }
                 </div>
                 <div className="col-auto p-0 text-start font-weight-bold">
                     <button className='mx-1 text-decoration-none text-black fs-5 font-weight-bold h-auto m-0 p-0 bg bg-transparent' onClick={() => handleuser()}>{username}</button>
@@ -285,7 +288,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
 
             <div className="row photo px-0 justify-content-center m-0">
                 <div className="col-12 text-center w-100 px-0 py-2 ">
-                    <img src={"https://hodobackend.onrender.com//Images/" + image} className="d-block " alt="..." />
+                    <img src={"https://hodobackend.onrender.com/Images/" + image} className="d-block " alt="..." />
                     {/* <img src="" alt="uploaded image" /> */}
                 </div>
             </div>
