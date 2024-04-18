@@ -10,8 +10,7 @@ const postschema = new schema({
         required: true
     },
     Tags: {
-        type: Object,
-        required: true
+        type: Object
     },
     likes: {
         type: Array
