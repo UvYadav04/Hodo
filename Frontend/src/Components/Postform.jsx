@@ -23,7 +23,7 @@ export default function Postform() {
       return;
     }
     const formdata = new FormData();
-    formdata.append('file', file)
+    // formdata.append('file', file)
     formdata.append('descp', descp)
     formdata.append('Tags', JSON.stringify(Tags))
     formdata.append('user', username)
@@ -34,7 +34,7 @@ export default function Postform() {
       headers: {
         'authorisation': `bearer ${localStorage.getItem('token')}`
       },
-      body: JSON.stringify({ formdata })
+      body: JSON.stringify({ descp, Tags: JSON.stringify(Tags), user: username, data: new Date().getTime() })
     })
     const json = await response.json()
     if (json.success) {
