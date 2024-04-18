@@ -32,7 +32,7 @@ const userschema = new schema({
     },
     image: {
         type: String,
-        default: ""
+        default: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vecteezy.com%2Fpng%2F20911740-user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon&psig=AOvVaw1Ii9H0ISBzRamlCROsftiP&ust=1713532777501000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODJiZbty4UDFQAAAAAdAAAAABAE"
     },
     friends: {
         type: [schema.Types.ObjectId],
