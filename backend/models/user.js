@@ -32,7 +32,7 @@ const userschema = new schema({
     },
     image: {
         type: String,
-        default: ""
+        default:""
     },
     friends: {
         type: [schema.Types.ObjectId],
