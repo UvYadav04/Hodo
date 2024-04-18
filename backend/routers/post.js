@@ -26,6 +26,7 @@ router.post('/new', verify, async (req, res) => {
         res.json({ success: true })
     }
     catch (e) {
+        console.log(e)
         res.json({ success: false, error: e})
     }
 
