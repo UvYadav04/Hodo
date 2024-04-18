@@ -1,24 +1,14 @@
 import React, { useEffect, useState } from "react";
-import SendIcon from '@mui/icons-material/Send';
-import Navbar from "../Components/Navbar";
-import Messagebox from "../Components/Messagebox";
-import logo from '../Photos/c6.jpg'
 import usericon from '../Photos/bg1.png'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import { useLocation, useNavigate } from "react-router-dom";
-import CloseIcon from '@mui/icons-material/Close';
 function Chat({ socket }) {
 
-    let location = useLocation()
-
-    const [currentMessage, setCurrentMessage] = useState("");
     const [Friends, setFriends] = useState([])
-    const [currentuser, setSelected] = useState("uvyadav")
-    const [display, setdisplay] = useState(false)
+
     const [loading, setloading] = useState(false)
     const [nofrnds, setnofrnds] = useState(false)
-    const [messages, setmessages] = useState([])
     const [actives, setactives] = useState([])
     // console.log(currentuser)
 
