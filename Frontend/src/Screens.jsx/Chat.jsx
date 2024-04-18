@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import SendIcon from '@mui/icons-material/Send';
 import Navbar from "../Components/Navbar";
+import c1 from '../Photos/c1.jpg'
+
 import Messagebox from "../Components/Messagebox";
 import logo from '../Photos/c6.jpg'
 import usericon from '../Photos/bg1.png'
@@ -169,7 +171,7 @@ function Chat({ socket }) {
 
                             Friends.map((item) => {
                                 return (<li key={item} className={actives.includes(item) ? "text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row active" : "text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row"} onClick={() => handleselect(item.Username)}>
-                                    {item.image !== "" ? <img src={"https://hodobackend.onrender.com/Images/" + item.image} width={50} height={50} className=" rounded-5     me-2" alt="" /> : <img src={usericon} width={50} height={50} className=" rounded-5     me-2" alt="" />}
+                                    {item.image !== "" ? <img src={"https://hodobackend.onrender.com/Images/" + item.image} width={50} height={50} className=" rounded-5     me-2" alt="" /> : <img src={c1} width={50} height={50} className=" rounded-5     me-2" alt="" />}
                                     <section className="details cursor-pointer">
                                         {item.Username}
                                         <span className="opacity-75 d-block fs-6">

@@ -343,7 +343,7 @@ export default function Personal({ username }) {
                         <div className="image d-flex flex-row justify-content-start gap-0 position-relative">
                             {
                                 image !== "" ? <img src={"https://hodobackend.onrender.com/Images/" + user.image} className='rounded-1 border border-dark' alt="" /> :
-                                    <img src={usericon} className='rounded-1 border border-dark' alt="" />
+                                    <img src={c1} className='rounded-1 border border-dark' alt="" />
                             }
                             <span className="mx-2 name text-start w-100">
                                 <h4 className='mb-0 w-100 '>{user.Username ? user.Username : "User inactive"} </h4>
@@ -443,7 +443,9 @@ export default function Personal({ username }) {
                             {
                                 Friends.map((item, i) => {
                                     return (<li key={i} className="text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row" onClick={() => navigate('/chat', { state: item.Username })} >
-                                        <img src={"https://hodobackend.onrender.com/Images/" + item.image} width={50} height={50} className=" rounded-5 me-2" alt="" />
+                                        {
+                                            item.image === "" ? <img src={c1} width={50} height={50} className=" rounded-5 me-2" alt="" /> : <img src={"https://hodobackend.onrender.com/Images/" + item.image} width={50} height={50} className=" rounded-5 me-2" alt="" />
+                                        }
                                         <section className="details cursor-pointer p-0">
                                             {item.Username}
                                             <span className="opacity-75 d-block fs-6 m-0">
