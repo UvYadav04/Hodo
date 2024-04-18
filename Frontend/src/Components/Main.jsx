@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Poster from './Poster'
-import usericon from '../Photos/bg1.png'
 import PlaceIcon from '@mui/icons-material/Place';
+import usericon from '../Photos/usericon.png'
+
 import c1 from '../Photos/c1.jpg'
 
 import { Locationcontext } from '../App';
@@ -72,7 +73,7 @@ export default function Main() {
           <input type="text" name="search" placeholder="search friends" className=" fs-5 ps-2 w-100 bg bg-white rounded-4 mt-2 mx-0" />
           <div className="activefriends mt-2 ">
             {Friends.map((item, i) => item.Username !== owner && actives.includes(item.Username) ? <li key={i} className=' p-1 fs-4 w-100 text-start d-inline'> {
-              item.image === "" ? <img src={c1} alt="" width={40} height={40} /> : <img className='border border-success border-3 rounded-5' src={"https://hodobackend.onrender.com/Images/" + item.image} width={40} height={40} alt="" onClick={() => navigate('/chat', { state: item.Username })} />
+              item.image === "" ? <img src={usericon} alt="" width={40} height={40} /> : <img className='border border-success border-3 rounded-5' src={"https://hodobackend.onrender.com/Images/" + item.image} width={40} height={40} alt="" onClick={() => navigate('/chat', { state: item.Username })} />
             }</li> : null)}
 
           </div>
@@ -81,7 +82,7 @@ export default function Main() {
 
               Friends.map((item, i) => {
                 return (<li key={i} className="text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row" onClick={() => navigate('/chat', { state: item.Username })} >
-                  {item.image !== "" ? <img src={"https://hodobackend.onrender.com/Images/" + item.image} width={50} height={50} className=" rounded-5 me-2" alt="" /> : <img src={c1} width={50} height={50} className=" rounded-5 me-2" alt="" />}
+                  {item.image !== "" ? <img src={"https://hodobackend.onrender.com/Images/" + item.image} width={50} height={50} className=" rounded-5 me-2" alt="" /> : <img src={usericon} width={50} height={50} className=" rounded-5 me-2" alt="" />}
                   <section className="details cursor-pointer p-0 fs-5">
                     <h5 className='m-0'>{item.Username} </h5>
                     <span className="opacity-75 d-block fs-6 m-0">

@@ -5,6 +5,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import NearMeIcon from '@mui/icons-material/NearMe';
+import usericon from '../Photos/usericon.png'
 
 import Commentor from './Commentor';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -243,7 +244,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
             <div className="row user m-0 p-0 justify-content-start align-items-center mb-0 ps-sm-1 ps-0 pb-0  ">
                 <div className="col-auto logo p-0">
                     {
-                        image === "" ? <img src={c1} alt="" width={40} height={40} />
+                        image === "" ? <img src={usericon} alt="" width={40} height={40} />
                             : <img src={"https://hodobackend.onrender.com/Images/" + image} alt="" width={40} height={40} />
                     }
                 </div>

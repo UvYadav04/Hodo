@@ -5,7 +5,7 @@ import c1 from '../Photos/c1.jpg'
 
 import Messagebox from "../Components/Messagebox";
 import logo from '../Photos/c6.jpg'
-import usericon from '../Photos/bg1.png'
+import usericon from '../Photos/usericon.png'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import { useLocation, useNavigate } from "react-router-dom";
@@ -171,7 +171,7 @@ function Chat({ socket }) {
 
                             Friends.map((item) => {
                                 return (<li key={item} className={actives.includes(item) ? "text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row active" : "text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row"} onClick={() => handleselect(item.Username)}>
-                                    {item.image !== "" ? <img src={"https://hodobackend.onrender.com/Images/" + item.image} width={50} height={50} className=" rounded-5     me-2" alt="" /> : <img src={c1} width={50} height={50} className=" rounded-5     me-2" alt="" />}
+                                    {item.image !== "" ? <img src={"https://hodobackend.onrender.com/Images/" + item.image} width={50} height={50} className=" rounded-5     me-2" alt="" /> : <img src={usericon} width={50} height={50} className=" rounded-5     me-2" alt="" />}
                                     <section className="details cursor-pointer">
                                         {item.Username}
                                         <span className="opacity-75 d-block fs-6">
@@ -194,7 +194,7 @@ function Chat({ socket }) {
                 <div className={"col-lg-9 col-md-8 col-12 chatting d-flex flex-column position-relative justify-content-between p-0 m-0 pb-0"}>
                     <div className={display ? "header w-auto py-1 px-1 d-flex justify-content-start align-items-center" : "d-none"}>
                         <button className="fs-5 bg bg-transparent border-none p-0 mx-2 d-md-none" onClick={() => navigate('/friends')}><ArrowBackIcon sx={{ fontSize: 35 }} /></button>
-                        <img src={logo} width={40} height={40} alt="" className=" me-2 rounded-5" />
+                        <img src={usericon} width={40} height={40} alt="" className=" me-2 rounded-5" />
                         <button onClick={() => navigate('/usersprofile', { state: currentuser })} className="d-inline text-decoration-none text-black fs-5 bg bg-transparent border-none p-0 ">{currentuser}</button>
                         <button className={display ? "ms-auto fs-5 bg bg-transparent border-none p-0 mx-2 d-md-inline d-none" : "d-inline"} onClick={() => setdisplay(false)}><CloseIcon sx={{ fontSize: 35 }} /></button>
                     </div>
