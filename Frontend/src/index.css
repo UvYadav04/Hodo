@@ -536,6 +536,28 @@ p.updateusername {
   animation-timing-function: ease-in-out;
 }
 
+.homeloader {
+  width: 100vh;
+  height: 100vh;
+
+
+  img {
+    animation-name: goto;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 3s;
+  }
+}
+
+@keyframes goto {
+  from {
+    transform: translateX(0vw)
+  }
+
+  to {
+    transform: translateX(100vw);
+  }
+}
 
 .frnditem {
   background-color: rgb(254, 200, 146);

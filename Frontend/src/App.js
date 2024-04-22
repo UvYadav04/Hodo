@@ -3,6 +3,8 @@ import './App.css';
 import Navbar from './Components/Navbar';
 import Register from './Components/Register.jsx'
 import Postform from './Components/Postform.jsx'
+import cheetah from './Photos/cheetah2.gif'
+import deer from './Photos/deer.gif'
 import {
   BrowserRouter as Router,
   Routes,
@@ -37,6 +39,8 @@ function App() {
   const [location, setlocation] = useState({})
   const [nears, setnears] = useState([])
   const owner = localStorage.getItem("username")
+  const [loading, setloading] = useState(true)
+
 
   const getactiveusers = async () => {
     const response = await fetch("http://localhost:10000/activeuser", {
@@ -106,9 +110,9 @@ function App() {
   useEffect(() => {
     socket.emit("setup", { username: localStorage.getItem("username") })
     getactiveusers()
-    setInterval(() => {
+    setTimeout(() => {
       setloading(false)
-    }, 2000);
+    }, 2000)
   }, [])
 
   let received = false
@@ -126,27 +130,35 @@ function App() {
     socket.on("receive", receiveMessage);
   }, [socket]);
 
+  if (loading)
+    return (
+      <div className={loading ? "homeloader d-flex align-items-center p-0" : "d-none"}>
+        <img width={150} height={50} src={cheetah} alt="" />
+        <img width={100} height={50} src={deer} alt="" />
+      </div>
+    )
+  else
 
-  return (
-    <Locationcontext.Provider value={{ actives, location, nears }}>
-      <Router>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/hodo' element={<Homepage />} />
-          <Route path='/auth' element={<Auth />} />
-          <Route path='/newpost' element={<Postform />} />
-          <Route path='/privacy' element={<Privacy />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/error' element={<SWR />} />
-          <Route path='/usersprofile' element={<Usersprofile />} />
-          <Route path='/search' element={<Search />} />
-          <Route path='/chat' element={<Chat socket={socket} />} />
-          <Route path='/nearby' element={<Nearbys />} />
-          <Route path='/friends' element={<Chatlist socket={socket} />} />
-        </Routes>
-      </Router>
-    </Locationcontext.Provider>
-  );
+    return (
+      <Locationcontext.Provider value={{ actives, location, nears }}>
+        <Router>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/hodo' element={<Homepage />} />
+            <Route path='/auth' element={<Auth />} />
+            <Route path='/newpost' element={<Postform />} />
+            <Route path='/privacy' element={<Privacy />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/error' element={<SWR />} />
+            <Route path='/usersprofile' element={<Usersprofile />} />
+            <Route path='/search' element={<Search />} />
+            <Route path='/chat' element={<Chat socket={socket} />} />
+            <Route path='/nearby' element={<Nearbys />} />
+            <Route path='/friends' element={<Chatlist socket={socket} />} />
+          </Routes>
+        </Router>
+      </Locationcontext.Provider>
+    );
 }
 
 export default App;
