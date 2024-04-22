@@ -68,7 +68,7 @@ export default function Main() {
 
         </div>
 
-        <div className=" col-lg-6 col-md-8 col-sm-10 col-12 mx-auto mb-5 px-0">
+        <div className=" col-lg-6 col-md-8 col-sm-10 col-12 mx-auto mb-5 px-sm-1 px-0">
           <Poster />
         </div>
 
