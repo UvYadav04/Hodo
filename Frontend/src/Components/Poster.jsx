@@ -44,15 +44,23 @@ export default function Poster() {
         result = Object.keys(postdata).map((key) => [key, postdata[key]]);
     }
 
-    return (
-        <div className="poster mt-1">
-            {
-                result.map((data, i) => {
-                    return (
-                        <Post key={i} image={data[1].image} description={data[1].description} username={data[1].user} Tags={data[1].Tags} likes={data[1].likes} id={data[1]._id} Comments={data[1].comment} date={data[1].Date} />
-                    )
-                })
-            }
-        </div>
-    )
+    if (loading)
+        return (
+            <div className={loading ? "row loader w-100 p-0 m-0 opacity-50 d-flex justify-content-center align-items-center text-dark" : "d-none"}>
+                <div className="load m-0"></div>
+                <h5 className='text-center'>Please wait</h5>
+            </div>
+        )
+    else
+        return (
+            <div className="poster mt-1">
+                {
+                    result.map((data, i) => {
+                        return (
+                            <Post key={i} image={data[1].image} description={data[1].description} username={data[1].user} Tags={data[1].Tags} likes={data[1].likes} id={data[1]._id} Comments={data[1].comment} date={data[1].Date} />
+                        )
+                    })
+                }
+            </div>
+        )
 }
