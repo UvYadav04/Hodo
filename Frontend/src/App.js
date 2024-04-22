@@ -37,6 +37,7 @@ function App() {
   const [location, setlocation] = useState({})
   const [nears, setnears] = useState([])
   const owner = localStorage.getItem("username")
+  const [loading, setloading] = userState(true)
 
   const getactiveusers = async () => {
     const response = await fetch("http://localhost:10000/activeuser", {
@@ -106,6 +107,7 @@ function App() {
   useEffect(() => {
     socket.emit("setup", { username: localStorage.getItem("username") })
     getactiveusers()
+
   }, [])
 
   let received = false
@@ -123,27 +125,33 @@ function App() {
     socket.on("receive", receiveMessage);
   }, [socket]);
 
-
-  return (
-    <Locationcontext.Provider value={{ actives, location, nears }}>
-      <Router>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/hodo' element={<Homepage />} />
-          <Route path='/auth' element={<Auth />} />
-          <Route path='/newpost' element={<Postform />} />
-          <Route path='/privacy' element={<Privacy />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/error' element={<SWR />} />
-          <Route path='/usersprofile' element={<Usersprofile />} />
-          <Route path='/search' element={<Search />} />
-          <Route path='/chat' element={<Chat socket={socket} />} />
-          <Route path='/nearby' element={<Nearbys />} />
-          <Route path='/friends' element={<Chatlist socket={socket} />} />
-        </Routes>
-      </Router>
-    </Locationcontext.Provider>
-  );
+  if (loading)
+    return (
+      <div className={loading ? "row loader w-100 p-0 m-0 opacity-50 d-flex justify-content-center align-items-center text-dark" : "d-none"}>
+        <div className="load m-0"></div>
+      </div>
+    )
+  else
+    return (
+      <Locationcontext.Provider value={{ actives, location, nears }}>
+        <Router>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/hodo' element={<Homepage />} />
+            <Route path='/auth' element={<Auth />} />
+            <Route path='/newpost' element={<Postform />} />
+            <Route path='/privacy' element={<Privacy />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/error' element={<SWR />} />
+            <Route path='/usersprofile' element={<Usersprofile />} />
+            <Route path='/search' element={<Search />} />
+            <Route path='/chat' element={<Chat socket={socket} />} />
+            <Route path='/nearby' element={<Nearbys />} />
+            <Route path='/friends' element={<Chatlist socket={socket} />} />
+          </Routes>
+        </Router>
+      </Locationcontext.Provider>
+    );
 }
 
 export default App;
