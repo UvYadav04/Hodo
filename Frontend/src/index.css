@@ -564,7 +564,7 @@ p.updateusername {
 }
 
 .profile .info {
-  background-color: rgb(247, 171, 96);
+  background: linear-gradient(to bottom, rgb(255, 192, 130), white)
 }
 
 .addicon {
