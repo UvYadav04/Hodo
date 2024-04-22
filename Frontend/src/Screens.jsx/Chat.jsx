@@ -159,9 +159,9 @@ function Chat({ socket }) {
 
     return (
 
-        <div className="container-fluid chatpage">
-            <div className="navbar m-0 p-0 d-md-inline d-none w-100 "><Navbar /></div>
-            <div className="row justify-content-start chatrow pb-0">
+        <div className="container-fluid chatpage p-0">
+            <div className="navbar m-0 p-0 d-md-inline d-none w-100"><Navbar /></div>
+            <div className="row justify-content-start chatrow  p-0 m-0">
                 <div className="col-lg-3 col-4 d-md-inline d-none friends pb-0">
                     <input type="text" name="search" placeholder="search friends" className=" ps-2 w-100  bg bg-white rounded-4 mt-2" />
                     <ul className={!loading && !nofrnds ? "p-1 mt-4 friendsul" : "d-none"}>
@@ -189,14 +189,14 @@ function Chat({ socket }) {
                         <h4 className="mx-auto opacity-75">Loading chats...</h4>
                     </section>
                 </div>
-                <div className={"col-lg-9 col-md-8 col-12 chatting d-flex flex-column position-relative justify-content-between p-0 m-0 pb-0"}>
+                <div className={"col-lg-9 col-md-8 col-12 chatting d-flex flex-column position-relative justify-content-between p-0"}>
                     <div className={display ? "header w-auto py-1 px-1 d-flex justify-content-start align-items-center" : "d-none"}>
                         <button className="fs-5 bg bg-transparent border-none p-0 mx-2 d-md-none" onClick={() => navigate('/friends')}><ArrowBackIcon sx={{ fontSize: 35 }} /></button>
                         <img src={logo} width={40} height={40} alt="" className=" me-2 rounded-5" />
                         <button onClick={() => navigate('/usersprofile', { state: currentuser })} className="d-inline text-decoration-none text-black fs-5 bg bg-transparent border-none p-0 ">{currentuser}</button>
                         <button className={display ? "ms-auto fs-5 bg bg-transparent border-none p-0 mx-2 d-md-inline d-none" : "d-inline"} onClick={() => setdisplay(false)}><CloseIcon sx={{ fontSize: 35 }} /></button>
                     </div>
-                    <div className={display ? "messages  mb-auto" : "d-none"}>
+                    <div className={display ? "messages " : "d-none"}>
                         {
                             messages.map((item, i) => {
                                 return (

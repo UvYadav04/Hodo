@@ -336,8 +336,10 @@ button {
 .chatpage {
   min-height: 100vh;
   max-height: 100vh;
-  width: 100%;
-  background: linear-gradient(to bottom, rgb(250, 230, 210), white);
+  width: 100vh;
+  /* background: linear-gradient(to bottom, rgb(250, 230, 210), white); */
+  background-color: red;
+  padding: 0;
 
   .friendsul li {
     cursor: pointer;
@@ -346,12 +348,12 @@ button {
 
 
 .chatpage .chatrow {
-  height: 91vh;
-  /* background-color: red; */
+  height: 91.4vh;
+  width: 100%;
+  background-color: blue;
   /* overflow: hidden; */
 
   .friends {
-    /* background: linear-gradient(to bottom, wheat, skyblue); */
 
     li {
       list-style: none;
@@ -367,6 +369,7 @@ button {
 .chatting {
   background-color: rgb(255, 178, 95);
   max-height: inherit;
+  min-height: inherit;
 
   .header {
     background-color: rgb(255, 128, 0);
@@ -389,8 +392,10 @@ button {
 }
 
 .chatting .messages {
-  min-height: 75vh;
+  min-height: 79vh;
   max-height: 79vh;
+  /* background-color: red; */
+  /* max-height: vh; */
   overflow-y: scroll;
   scrollbar-width: none;
 }
@@ -666,7 +671,13 @@ p.updateusername {
   }
 
   .chatpage .chatrow {
-    height: 100vh;
+    min-height: 100vh;
+    max-height: 100vh;
+  }
+
+  .chatting {
+    min-height: 100vh;
+    max-height: 100vh;
   }
 
   .chatting .messages {
