@@ -1,41 +1,45 @@
-import React, { useEffect, useState } from 'react'
-import c1 from '../Photos/c1.jpg'
-import DeleteIcon from '@mui/icons-material/Delete';
+import React from 'react'
 
-export default function Commentor({ cuser, comment, deleter }) {
-    // console.log(cuser)
-    // console.log(deleter)
-    // console.log(comment)
-    const [users, setusers] = useState([])
-    const [comments, setcomments] = useState([])
-    const username = localStorage.getItem('username')
-
-    useEffect(() => {
-        // console.log("called commentator")
-        // console.log(comment)
-        setusers(cuser)
-        setcomments(comment)
-    }, [])
+export default function Footer() {
     return (
-        <>
-            <div className=" p-2 m-2 container commentsection m-0">
-                {users.length > 0 ? users.map((item, i) => {
-                    return (
-                        <>
-                            <div className="row user justify-content-start comment p-1 mb-2 rounded-2 " key={i}>
-                                <div className="col-12 text-start">
-                                    <img src={c1} width={30} height={30} className='d-inline rounded-5' alt="" />
-                                    <button className='d-inline bg bg-transparent font-weight-bold text-primary mx-3 my-0'>{item}</button>
-                                    <button className={item === username ? "d-inline w-auto delete bg bg-transparent " : "d-none"} onClick={() => { deleter(comments[i], i) }}><DeleteIcon sx={{ color: 'red' }} /> </button>
-                                </div>
-                                <div className="col-11 text-start offset-1 ">
-                                    {comments[i]}
-                                </div>
-                            </div>
-                        </>
-                    )
-                }) : null}
+        <footer className="site-footer footer mt-5 bg bg-dark text-white">
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm-12 col-md-6">
+                        <h6>About</h6>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde molestias deserunt ea quae molestiae? Adipisci omnis iure voluptatibus ducimus esse voluptas dicta nisi mollitia sint? Obcaecati alias dolorum ut aspernatur.</p>          </div>
+
+                    <div className="col-xs-6 col-md-3">
+                        <h6>Categories</h6>
+                        <ul className="footer-links text-white">
+                            <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
+                            <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
+                            <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
+                        </ul>
+                    </div>
+
+                    <div className="col-xs-6 col-md-3">
+                        <h6>Quick Links</h6>
+                        <ul className="footer-links">
+                            <li><a href="http://scanfcode.com/about/">About Us</a></li>
+                            <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
+                            <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div >
+                <hr />
+            </div >
+            <div className="container text-white    ">
+                <div className="row justify-content-center">
+                    <div className="col-5">
+                        <p className="copyright-text">Copyright &copy; 2017 All Rights Reserved by
+                            <a href="#" className='text-white'>Scanfcode</a>.
+                        </p>
+                    </div>
+
+
+                </div>
             </div>
-        </>
+        </footer >
     )
 }

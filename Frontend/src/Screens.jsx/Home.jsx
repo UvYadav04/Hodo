@@ -8,7 +8,7 @@ export default function Home() {
         if (token) {
             // console.log(`got token : `, token)
             const username = localStorage.getItem('username')
-            const response = await fetch("https://hodobackend.onrender.com/user/userdata", {
+            const response = await fetch("http://localhost:10000/user/userdata", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export default function Home() {
                     password: json.password,
                     jwt: true
                 }
-                const response2 = await fetch("https://hodobackend.onrender.com/register/login", {
+                const response2 = await fetch("http://localhost:10000/register/login", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

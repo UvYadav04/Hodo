@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import SendIcon from '@mui/icons-material/Send';
 import Navbar from "../Components/Navbar";
-import c1 from '../Photos/c1.jpg'
-
 import Messagebox from "../Components/Messagebox";
 import logo from '../Photos/c6.jpg'
-import usericon from '../Photos/usericon.png'
+import usericon from '../Photos/bg1.png'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import { useLocation, useNavigate } from "react-router-dom";
@@ -32,7 +30,7 @@ function Chat({ socket }) {
         // console.log(item)
         setSelected(item)
         setdisplay(true)
-        const request = await fetch("https://hodobackend.onrender.com/chat/fetchchats", {
+        const request = await fetch("http://localhost:10000/chat/fetchchats", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -58,7 +56,7 @@ function Chat({ socket }) {
     const handlesent = async () => {
         if (currentMessage !== "") {
 
-            const response = await fetch("https://hodobackend.onrender.com/chat/newmessage", {
+            const response = await fetch("http://localhost:10000/chat/newmessage", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -90,7 +88,7 @@ function Chat({ socket }) {
 
     const getuserdata = async () => {
         setloading(true)
-        const response = await fetch("https://hodobackend.onrender.com/user/userdata", {
+        const response = await fetch("http://localhost:10000/user/userdata", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -114,7 +112,7 @@ function Chat({ socket }) {
     }
 
     const getactiveusers = async () => {
-        const response = await fetch("https://hodobackend.onrender.com/activeuser", {
+        const response = await fetch("http://localhost:10000/activeuser", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -161,8 +159,8 @@ function Chat({ socket }) {
 
     return (
 
-        <div className="container-fluid chatpage pb-0">
-            <div className="navbar m-0 p-0 d-md-inline d-none"><Navbar /></div>
+        <div className="container-fluid chatpage">
+            <div className="navbar m-0 p-0 d-md-inline d-none w-100 "><Navbar /></div>
             <div className="row justify-content-start chatrow pb-0">
                 <div className="col-lg-3 col-4 d-md-inline d-none friends pb-0">
                     <input type="text" name="search" placeholder="search friends" className=" ps-2 w-100  bg bg-white rounded-4 mt-2" />
@@ -170,8 +168,8 @@ function Chat({ socket }) {
                         {
 
                             Friends.map((item) => {
-                                return (<li key={item} className={actives.includes(item) ? "text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row active" : "text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row"} onClick={() => handleselect(item.Username)}>
-                                    {item.image !== "" ? <img src={"https://hodobackend.onrender.com/Images/" + item.image} width={50} height={50} className=" rounded-5     me-2" alt="" /> : <img src={usericon} width={50} height={50} className=" rounded-5     me-2" alt="" />}
+                                return (<li key={item} className={actives.includes(item) ? "text-dark cursor-pointer ms-1 my-2 p-1  rounded-2 px-2 d-flex flex-row active frnditem" : "text-dark cursor-pointer ms-1 my-2 p-1 rounded-2 px-2 d-flex flex-row frnditem"} onClick={() => handleselect(item.Username)}>
+                                    {item.image !== "" ? <img src={"http://localhost:10000/Images/" + item.image} width={50} height={50} className=" rounded-5     me-2" alt="" /> : <img src={usericon} width={50} height={50} className=" rounded-5     me-2" alt="" />}
                                     <section className="details cursor-pointer">
                                         {item.Username}
                                         <span className="opacity-75 d-block fs-6">
@@ -194,7 +192,7 @@ function Chat({ socket }) {
                 <div className={"col-lg-9 col-md-8 col-12 chatting d-flex flex-column position-relative justify-content-between p-0 m-0 pb-0"}>
                     <div className={display ? "header w-auto py-1 px-1 d-flex justify-content-start align-items-center" : "d-none"}>
                         <button className="fs-5 bg bg-transparent border-none p-0 mx-2 d-md-none" onClick={() => navigate('/friends')}><ArrowBackIcon sx={{ fontSize: 35 }} /></button>
-                        <img src={usericon} width={40} height={40} alt="" className=" me-2 rounded-5" />
+                        <img src={logo} width={40} height={40} alt="" className=" me-2 rounded-5" />
                         <button onClick={() => navigate('/usersprofile', { state: currentuser })} className="d-inline text-decoration-none text-black fs-5 bg bg-transparent border-none p-0 ">{currentuser}</button>
                         <button className={display ? "ms-auto fs-5 bg bg-transparent border-none p-0 mx-2 d-md-inline d-none" : "d-inline"} onClick={() => setdisplay(false)}><CloseIcon sx={{ fontSize: 35 }} /></button>
                     </div>

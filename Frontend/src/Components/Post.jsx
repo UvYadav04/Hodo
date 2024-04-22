@@ -5,13 +5,12 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import NearMeIcon from '@mui/icons-material/NearMe';
-import usericon from '../Photos/usericon.png'
 
 import Commentor from './Commentor';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client'
-const socket = io.connect(`https://hodobackend.onrender.com`, {
+const socket = io.connect(`http://localhost:10000`, {
 })
 
 
@@ -68,7 +67,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
     }
 
     const getuserdata = async () => {
-        const response = await fetch("https://hodobackend.onrender.com/user/userdata", {
+        const response = await fetch("http://localhost:10000/user/userdata", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -88,7 +87,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
         if (!liked) {
             setlike(like + 1)
             setliked(true)
-            const response = await fetch("https://hodobackend.onrender.com/update/like", {
+            const response = await fetch("http://localhost:10000/update/like", {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -110,7 +109,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
         else if (liked) {
             setlike(like - 1)
             setliked(false)
-            const response = await fetch("https://hodobackend.onrender.com/update/unlike", {
+            const response = await fetch("http://localhost:10000/update/unlike", {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -132,7 +131,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
     const handlecomment = async () => {
         if (newcomment === "")
             return
-        const response = await fetch("https://hodobackend.onrender.com/update/comment/add", {
+        const response = await fetch("http://localhost:10000/update/comment/add", {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -153,7 +152,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
 
 
     const handledelete = async (item, index) => {
-        const response = await fetch("https://hodobackend.onrender.com/update/comment/delete", {
+        const response = await fetch("http://localhost:10000/update/comment/delete", {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -188,7 +187,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
     const handlefollow = async () => {
 
         if (!following) {
-            const response = await fetch("https://hodobackend.onrender.com/follow/new", {
+            const response = await fetch("http://localhost:10000/follow/new", {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -206,7 +205,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
         }
 
         if (following) {
-            const response = await fetch("https://hodobackend.onrender.com/follow/following", {
+            const response = await fetch("http://localhost:10000/follow/following", {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -243,9 +242,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
         <div className="post p-0 container text-center mb-1 pb-1">
             <div className="row user m-0 p-0 justify-content-start align-items-center mb-0 ps-sm-1 ps-0 pb-0  ">
                 <div className="col-auto logo p-0">
-                    <img src={usericon} alt="" width={40} height={40} />
-                    {/* usericon is not available currently */}
-
+                    <img src={c1} alt="" width={40} height={40} />
                 </div>
                 <div className="col-auto p-0 text-start font-weight-bold">
                     <button className='mx-1 text-decoration-none text-black fs-5 font-weight-bold h-auto m-0 p-0 bg bg-transparent' onClick={() => handleuser()}>{username}</button>
@@ -288,8 +285,8 @@ export default function Post({ image, Tags, likes, description, username, id, Co
 
             <div className="row photo px-0 justify-content-center m-0">
                 <div className="col-12 text-center w-100 px-0 py-2 ">
-                    <img src={"https://hodobackend.onrender.com/Images/" + image} className="d-block " alt="..." />
-                    {/* <img src="" alt="uploaded image" /> */}
+                    <img src={"http://localhost:10000/Images/" + image} className="d-block " alt="..." />
+                    {/* <img src="" /alt="uploaded image" /> */}
                 </div>
             </div>
 

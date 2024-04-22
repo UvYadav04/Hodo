@@ -28,7 +28,7 @@ export default function Navbar() {
     if (value !== "") {
       setresult(true)
       // console.log(`value : `, value)
-      const response = await fetch("https://hodobackend.onrender.com/search/userdata", {
+      const response = await fetch("http://localhost:10000/search/userdata", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ export default function Navbar() {
   }
 
   return (
-    <div className="container-fluid c1 mt-md-0 mt-0 px-0">
+    <div className="container-fluid c1 mt-md-0 mt-0 px-0 mx-0">
       <div className="row navbar  justify-content-md-around justify-content-between align-items-center p-0 px-2 m-0  w-100">
         <div className="col-md-auto col-2 d-md-flex text-center align-items-center p-0 me-md-none me-0 justify-content-around ">
           <img src={logo} alt="" width={50} height={40} onClick={() => {
@@ -74,7 +74,7 @@ export default function Navbar() {
                 return (
                   <div className='d-flex dipdop flex-row justify-content-start bg bg-white text-black mb-1 w-md-auto w-100 rounded-3s' onClick={() => navigate('/usersprofile', { state: item[0].Username })} >
                     <div className="image">
-                      {item[0].image !== "" ? <img src={`https://hodobackend.onrender.com//Images/` + item[0].image} width={40} height={40} className='d-inline rounded-5 my-1 mx-2' alt="" /> : <img src={usericon} width={40} height={40} className='d-inline rounded-5 my-1 mx-2' alt="" />}
+                      {item[0].image !== "" ? <img src={`http://localhost:10000//Images/` + item[0].image} width={40} height={40} className='d-inline rounded-5 my-1 mx-2' alt="" /> : <img src={usericon} width={40} height={40} className='d-inline rounded-5 my-1 mx-2' alt="" />}
                     </div>
                     <div className="info">
                       <h5 className='my-0 fs-md-5 ' >{item[0].Username}</h5>
@@ -100,10 +100,10 @@ export default function Navbar() {
 
       </div>
       <div className="row d-md-none bar p-0 w-100 m-0 my-0">
-        <div className="bottombar col-12 text-black d-flex m-0 justify-content-between px-2 w-100">
-          <HomeIcon sx={{ fontSize: 35 }} onClick={() => navigate('/hodo')} />
+        <div className="bottombar col-12 text-black d-flex m-0 justify-content-between px-2 w-100 py-0">
+          <HomeIcon sx={{ fontSize: 35 }} className='pb-0 bg bg-success mb-0' onClick={() => navigate('/hodo')} />
           <NearMeIcon sx={{ fontSize: 35 }} onClick={() => navigate('/nearby')} />
-          <AddCircleIcon sx={{ fontSize: 35 }} onClick={() => navigate('/newpost')} />
+          <AddCircleIcon className='position-relative bg rounded-5 addicon ' sx={{ fontSize: 35 }} onClick={() => navigate('/newpost')} />
           <NotificationsIcon sx={{ fontSize: 35 }} onClick={() => navigate('/')} />
           <AccountCircleIcon sx={{ fontSize: 35 }} onClick={() => navigate('/usersprofile', { state: owner })} />
         </div>

@@ -6,7 +6,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import edit from '../Photos/edit2.png'
 import Post from './Post'
 import axios from 'axios'
-import usericon from '../Photos/usericon.png'
+import usericon from '../Photos/bg1.png'
 import c1 from '../Photos/c1.jpg'
 import Personalpost from './Personalpost'
 import ClearIcon from '@mui/icons-material/Clear';
@@ -56,7 +56,7 @@ export default function Personal({ username }) {
             return
         }
         setloading(true)
-        const response = await fetch("https://hodobackend.onrender.com/user/updatepassword", {
+        const response = await fetch("http://localhost:10000/user/updatepassword", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ export default function Personal({ username }) {
     const handleupdation = async () => {
         setsettings(false)
         setloading(true)
-        const response = await fetch("https://hodobackend.onrender.com/user/updateprofile", {
+        const response = await fetch("http://localhost:10000/user/updateprofile", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -145,7 +145,7 @@ export default function Personal({ username }) {
 
     const getuserdata = async () => {
         setloading(true)
-        const response = await fetch("https://hodobackend.onrender.com/user/userdata", {
+        const response = await fetch("http://localhost:10000/user/userdata", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -181,7 +181,7 @@ export default function Personal({ username }) {
 
     const getownerdata = async () => {
         setloading(true)
-        const response = await fetch("https://hodobackend.onrender.com/user/userdata", {
+        const response = await fetch("http://localhost:10000/user/userdata", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -207,7 +207,7 @@ export default function Personal({ username }) {
 
     const handlefollow = async () => {
         if (!following) {
-            const response = await fetch("https://hodobackend.onrender.com/follow/new", {
+            const response = await fetch("http://localhost:10000/follow/new", {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -224,7 +224,7 @@ export default function Personal({ username }) {
         }
 
         if (following) {
-            const response = await fetch("https://hodobackend.onrender.com/follow/following", {
+            const response = await fetch("http://localhost:10000/follow/following", {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -243,7 +243,7 @@ export default function Personal({ username }) {
 
     const removefollower = async (item) => {
 
-        const response = await fetch("https://hodobackend.onrender.com/follow/removefollower", {
+        const response = await fetch("http://localhost:10000/follow/removefollower", {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -278,7 +278,7 @@ export default function Personal({ username }) {
         const formdata = new FormData();
         formdata.append('file', e.target.files[0])
         formdata.append('userid', user._id)
-        axios.post("https://hodobackend.onrender.com/update/photo",
+        axios.post("http://localhost:10000/update/photo",
             formdata, {
             headers: {
                 'content-type': 'text/json',
@@ -297,7 +297,7 @@ export default function Personal({ username }) {
     }
 
     const getactiveusers = async () => {
-        const response = await fetch("https://hodobackend.onrender.com/activeuser", {
+        const response = await fetch("http://localhost:10000/activeuser", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -325,9 +325,9 @@ export default function Personal({ username }) {
     return (
         <>
             <div className="container-fluid profile">
-                <div className={passwording || loading ? "d-none" : "row prow  justify-content-around pt-2 ps-2 "}>
+                <div className={passwording || loading ? "d-none" : "row prow  justify-content-around pt-2  "}>
                     <div className={Edit ? "d-none" : "col-xxl-4 col-xl-4 col-lg-5 col-12 info d-flex flex-column justify-content-start text-align-center p-2 profilepage position-relative border"}>
-                        <div className={settings ? "bg bg-dark text-white position-absolute slider  rounded-2  " : "d-none"}>
+                        <div className={settings ? "text-black position-absolute slider rounded-2  " : "d-none"}>
                             <ul className='p-0 pt-2 mt-2'>
                                 <li className="d-block mb-1  fs-5   w-auto text-start mx-2" onClick={() => setEdit(true)} >Edit profile</li>
                                 <li className="d-block  mb-1 fs-5   w-auto text-start mx-2" onClick={() => navigate('/privacy')}>Privacy</li>
@@ -342,7 +342,7 @@ export default function Personal({ username }) {
                         </div>
                         <div className="image d-flex flex-row justify-content-start gap-0 position-relative">
                             {
-                                image !== "" ? <img src={"https://hodobackend.onrender.com/Images/" + user.image} className='rounded-1 border border-dark' alt="" /> :
+                                image !== "" ? <img src={"http://localhost:10000/Images/" + user.image} className='rounded-1 border border-dark' alt="" /> :
                                     <img src={usericon} className='rounded-1 border border-dark' alt="" />
                             }
                             <span className="mx-2 name text-start w-100">
@@ -354,15 +354,9 @@ export default function Personal({ username }) {
                                 <span className="followers position-relative text-center p-0">
                                     <button className='rounded-0 bg bg-primary text-white me-2 mt-lg-2 mt-0' onClick={() => setseefolls(!seefolls)} ><span>{found ? user.Followers.length : null}</span> Followers</button>
                                     <button className='rounded-0 bg bg-primary text-white' onClick={() => setseefolls(!seefolls)}><span >{found ? user.Following.length : null}</span> Following</button>
-
-                                </span>
-
-                                <span className="following position-relative">
-
-
                                 </span>
                             </span>
-                            <SettingsIcon className={owner === username ? settings ? "text-white sicon " : "text-black z-index-3 bg bg-white sicon" : "d-none"} onClick={() => setsettings(!settings)} />
+                            <SettingsIcon className={owner === username ? settings ? "text-white sicon " : "text-black z-index-3 bg bg-transparent sicon" : "d-none"} onClick={() => setsettings(!settings)} />
                         </div>
 
                         <div className="infor text-start mt-2">
@@ -436,16 +430,14 @@ export default function Personal({ username }) {
                     <div className="col-xl-3 col-lg-3 col-md-4 d-xl-inline d-lg-none d-md-inline d-none mt-lg-0 mt-3 profilechat border "   >
                         <input type="text" name="search" placeholder="search friends" className=" ps-2 w-100 bg bg-white rounded-4 mt-2 mx-0" />
                         <div className="activefriends mt-2 ">
-                            {Friends.map((item, i) => item.Username !== owner && actives.includes(item.Username) ? <li key={i} className=' p-1 fs-4 w-100 text-start'>  {item.image === "" ? <img className='border border-success border-3 rounded-5' src={usericon} width={40} height={40} alt="" /> : <img className='border border-success border-3 rounded-5' src={"https://hodobackend.onrender.com//Images/" + item.image} width={40} height={40} alt="" />}</li> : null)}
+                            {Friends.map((item, i) => item.Username !== owner && actives.includes(item.Username) ? <li key={i} className=' p-1 fs-4 w-100 text-start'>  <img className='border border-success border-3 rounded-5' src={"http://localhost:10000//Images/" + item.image} width={40} height={40} alt="" /></li> : null)}
 
                         </div>
                         <ul className={!loadingchat && !nofrnds ? "p-1 mt-0" : "d-none"}>
                             {
                                 Friends.map((item, i) => {
-                                    return (<li key={i} className="text-dark cursor-pointer ms-1 my-2 p-1 bg bg-white rounded-2 px-2 d-flex flex-row" onClick={() => navigate('/chat', { state: item.Username })} >
-                                        {
-                                            item.image === "" ? <img src={usericon} width={50} height={50} className=" rounded-5 me-2" alt="" /> : <img src={"https://hodobackend.onrender.com/Images/" + item.image} width={50} height={50} className=" rounded-5 me-2" alt="" />
-                                        }
+                                    return (<li key={i} className="text-dark cursor-pointer ms-1 my-2 p-1  rounded-2 px-2 d-flex flex-row frnditem" onClick={() => navigate('/chat', { state: item.Username })} >
+                                        <img src={"http://localhost:10000/Images/" + item.image} width={50} height={50} className=" rounded-5 me-2" alt="" />
                                         <section className="details cursor-pointer p-0">
                                             {item.Username}
                                             <span className="opacity-75 d-block fs-6 m-0">
@@ -481,7 +473,7 @@ export default function Personal({ username }) {
                             <h5 className='text-black m-0 p-0 mb-2' >Followings</h5>
                             {
                                 found ?
-                                    user.Following.map((item) => <li className='p-0 m-0 opacity-75 '>{item}</li>) :
+                                    user.Following.map((item) => <li className='p-0 m-0 opacity-75 '><span onClick={() => navigate('/usersprofile', { state: item })}>{item}</span></li>) :
                                     null
                             }
                         </ul>

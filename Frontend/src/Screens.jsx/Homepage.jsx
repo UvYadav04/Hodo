@@ -5,7 +5,7 @@ import Main from '../Components/Main'
 
 export default function Homepage() {
   return (
-    <div>
+    <div className='homepage'>
       <Navbar />
       <Main className="text-center" />
     </div >

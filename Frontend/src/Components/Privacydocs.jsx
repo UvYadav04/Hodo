@@ -5,7 +5,7 @@ export default function Privacy() {
         <><Navbar />
             <div className='privacy'>
                 <p id="main">Privacy Policy for Hodo.com</p>
-                <p id="thin">Last updated: [18-02-2024]</p>
+                <p id="thin">Last updated: [22-04-2024]</p>
                 <p class="subheading">1. Introduction</p>
                 <p>Welcome to Hodo.com. This Privacy Policy explains how we collect, use, disclose, and
                     protect your personal information when you use our website.</p>
