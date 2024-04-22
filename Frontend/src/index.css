@@ -337,8 +337,8 @@ button {
   min-height: 100vh;
   max-height: 100vh;
   width: 100vh;
-  /* background: linear-gradient(to bottom, rgb(250, 230, 210), white); */
-  background-color: red;
+  background: linear-gradient(to bottom, rgb(250, 230, 210), white);
+  /* background-color: red; */
   padding: 0;
 
   .friendsul li {
@@ -350,7 +350,7 @@ button {
 .chatpage .chatrow {
   height: 91.4vh;
   width: 100%;
-  background-color: blue;
+  /* background-color: blue; */
   /* overflow: hidden; */
 
   .friends {
