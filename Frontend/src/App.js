@@ -107,7 +107,9 @@ function App() {
   useEffect(() => {
     socket.emit("setup", { username: localStorage.getItem("username") })
     getactiveusers()
-
+    setInterval(() => {
+      setloading(false)
+    }, 2000);
   }, [])
 
   let received = false

@@ -101,7 +101,7 @@ export default function Navbar() {
       </div>
       <div className="row d-md-none bar p-0 w-100 m-0 my-0">
         <div className="bottombar col-12 text-black d-flex m-0 justify-content-between px-2 w-100 py-0">
-          <HomeIcon sx={{ fontSize: 35 }} className='pb-0 bg bg-success mb-0' onClick={() => navigate('/hodo')} />
+          <HomeIcon sx={{ fontSize: 35 }} onClick={() => navigate('/hodo')} />
           <NearMeIcon sx={{ fontSize: 35 }} onClick={() => navigate('/nearby')} />
           <AddCircleIcon className='position-relative bg rounded-5 addicon ' sx={{ fontSize: 35 }} onClick={() => navigate('/newpost')} />
           <NotificationsIcon sx={{ fontSize: 35 }} onClick={() => navigate('/')} />
