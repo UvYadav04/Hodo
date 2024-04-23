@@ -28,7 +28,7 @@ import io from 'socket.io-client'
 import React, { useEffect, useState } from 'react';
 import Nearbys from './Screens.jsx/Nearbys.jsx';
 import Chatlist from './Screens.jsx/Chatlist.jsx';
-const socket = io.connect("https://hodobackend.onrender.com0")
+const socket = io.connect("https://hodobackend.onrender.com")
 
 export const Locationcontext = React.createContext()
 
@@ -43,7 +43,7 @@ function App() {
 
 
   const getactiveusers = async () => {
-    const response = await fetch("https://hodobackend.onrender.com0/activeuser", {
+    const response = await fetch("https://hodobackend.onrender.com/activeuser", {
       method: "GET",
       headers: {
         'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ function App() {
       longitude = position.coords.longitude
       latitude = position.coords.latitude
 
-      const response = await fetch("https://hodobackend.onrender.com0/user/getlocation", {
+      const response = await fetch("https://hodobackend.onrender.com/user/getlocation", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ function App() {
   }
 
   const getnears = async (actives, longitude, latitude) => {
-    const response = await fetch("https://hodobackend.onrender.com0/user/getnears", {
+    const response = await fetch("https://hodobackend.onrender.com/user/getnears", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',

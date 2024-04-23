@@ -15,7 +15,7 @@ export default function Nearbies({ children }) {
                         nears.map((item) => {
                             return (
                                 <li className='w-100 px-2 fs-3 d-flex justify-content-between align-items-center'>
-                                    <img src={`https://hodobackend.onrender.com0/images` + item[1]} className='rounded-2 me-2' height={35} width={35} alt="" />
+                                    <img src={`https://hodobackend.onrender.com/images` + item[1]} className='rounded-2 me-2' height={35} width={35} alt="" />
                                     <Link className='text-black text-decoration-none fs-2' onClick={() => navigate('/usersprofile', { state: item[0] })}>{item[0]}</Link>
                                     <span className='ms-5'>~{item[2]}km</span>
                                 </li>

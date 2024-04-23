@@ -17,7 +17,7 @@ export default function Main() {
 
   const getuserdata = async () => {
     setloading(true)
-    const response = await fetch("https://hodobackend.onrender.com0/user/userdata", {
+    const response = await fetch("https://hodobackend.onrender.com/user/userdata", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ export default function Main() {
         <div className="chatn d-lg-inline d-none col-3 bg bg-white">
           <input type="text" name="search" placeholder="search friends" className=" fs-5 ps-2 w-100 bg bg-white rounded-4 mt-2 mx-0" />
           <div className="activefriends mt-2 ">
-            {Friends.map((item, i) => item.Username !== owner && actives.includes(item.Username) ? <li key={i} className=' p-1 fs-4 w-100 text-start d-inline'>  <img className='border border-success border-3 rounded-5' src={"https://hodobackend.onrender.com0/Images/" + item.image} width={40} height={40} alt="" onClick={() => navigate('/chat', { state: item.Username })} /></li> : null)}
+            {Friends.map((item, i) => item.Username !== owner && actives.includes(item.Username) ? <li key={i} className=' p-1 fs-4 w-100 text-start d-inline'>  <img className='border border-success border-3 rounded-5' src={"https://hodobackend.onrender.com/Images/" + item.image} width={40} height={40} alt="" onClick={() => navigate('/chat', { state: item.Username })} /></li> : null)}
 
           </div>
           <ul className={!loading && !nofrnds ? "p-1 mt-0 " : "d-none"}>
@@ -83,7 +83,7 @@ export default function Main() {
 
               Friends.map((item, i) => {
                 return (<li key={i} className="text-dark cursor-pointer frnditem ms-1 my-2 p-1  rounded-2 px-2 d-flex flex-row" onClick={() => navigate('/chat', { state: item.Username })} >
-                  {item.image !== "" ? <img src={"https://hodobackend.onrender.com0/Images/" + item.image} width={50} height={50} className=" rounded-5 me-2" alt="" /> : <img src={usericon} width={50} height={50} className=" rounded-5 me-2" alt="" />}
+                  {item.image !== "" ? <img src={"https://hodobackend.onrender.com/Images/" + item.image} width={50} height={50} className=" rounded-5 me-2" alt="" /> : <img src={usericon} width={50} height={50} className=" rounded-5 me-2" alt="" />}
                   <section className="details cursor-pointer p-0 fs-5">
                     <h5 className='m-0'>{item.Username} </h5>
                     <span className="opacity-75 d-block fs-6 m-0">
