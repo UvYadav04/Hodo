@@ -197,6 +197,8 @@ button {
 }
 
 .loginpage {
+  width: 100vw;
+  height: 100vh;
 
   .login,
   .signup {
@@ -214,11 +216,10 @@ button {
 
 .loginpage {
   padding-top: 70px;
-  /* background-color: rgb(220, 142, 63); */
-  background-image: url(./Photos/dd1.jpg);
+  /* background-image: url(./Photos/dd1.jpg);
   background-size: auto;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
 
 }
 

@@ -133,9 +133,7 @@ export default function Login() {
   }
 
   return (
-    <div className="loginpage container-fluid m-0 text-center" style={{
-      minHeight: "100vh", maxHeight: "100vh"
-    }} >
+    <div className="loginpage container-fluid m-0 text-center"  >
 
       <div className={!loading ? "row register justify-content-around align-items-center mx-auto bg bg-white p-0" : "d-none"} >
         <div className="col-xl-4 col-5 d-lg-inline d-none p-0 cover">
