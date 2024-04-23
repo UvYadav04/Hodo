@@ -577,7 +577,7 @@ p.updateusername {
 
 .addicon {
   bottom: 10px;
-  transform: scale(1.3);
+  /* transform: scale(1.3); */
   background-color: rgb(253, 161, 69);
   /* font-size: 30rem; */
 }
