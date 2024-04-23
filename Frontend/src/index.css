@@ -216,7 +216,7 @@ button {
   padding-top: 70px;
   /* background-color: rgb(220, 142, 63); */
   background-image: url(./Photos/dd1.jpg);
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
