@@ -46,9 +46,7 @@ function Chat({ socket }) {
 
             if (!json.nochats) {
                 setmessages(json.data.message)
-
                 chatref.current.scrollTop = chatref.current.scrollHeight;
-
             }
             else {
                 setmessages([])
@@ -73,6 +71,7 @@ function Chat({ socket }) {
                 })
                 setCurrentMessage("")
                 sendMessage(json.message)
+                chatref.current.scrollTop = chatref.current.scrollHeight;
             }
         }
 
