@@ -207,7 +207,7 @@ function Chat({ socket }) {
                             })
                         }
                     </div>
-                    <div className={display ? "messenger position-sticky bottom-0 text-start m-0 p-0 d-flex align-items-center w-100" : "d-none"} >
+                    <div className={display ? "messenger pb-1 position-sticky bottom-0 text-start m-0 p-0 d-flex align-items-center w-100" : "d-none"} >
                         <input type="text" placeholder="type message here..." className="w-75 bg bg-white rounded-4 ms-2 px-2 mt-0 mb-0 " value={currentMessage} onChange={(event) => setCurrentMessage(event.target.value)}
                             onKeyDown={(event) => {
                                 if (event.key === "Enter")

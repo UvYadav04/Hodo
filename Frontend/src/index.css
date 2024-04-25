@@ -346,6 +346,10 @@ button {
   .header {
     background-color: rgb(255, 128, 0);
   }
+
+  .messenger {
+    background-color: rgb(255, 178, 95);
+  }
 }
 
 
@@ -365,9 +369,10 @@ button {
 
 .chatting .messages {
   height: 87vh;
-  /* background-color: red; */
   overflow-y: scroll;
   scrollbar-width: none;
+  word-wrap: break-word;
+  word-break: normal;
 }
 
 /* ************Chat************* */
@@ -660,11 +665,7 @@ p.updateusername {
 
   .chatting .messages {
     height: 95vh;
-    overflow-y: scroll;
-    scrollbar-width: none;
-    word-wrap: break-word;
-    word-break: normal;
-    scroll-behavior: smooth;
+
   }
 
 
