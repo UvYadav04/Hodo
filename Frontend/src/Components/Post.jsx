@@ -27,6 +27,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
     const [following, setfollowing] = useState(false)
     const [follower, setfollower] = useState(false)
     const [time, settime] = useState("...")
+    const [loading, setloading] = useState(false)
 
     const handletime = () => {
         let d = new Date().getTime()
@@ -131,6 +132,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
     const handlecomment = async () => {
         if (newcomment === "")
             return
+        setloading(true)
         const response = await fetch("https://hodobackend.onrender.com/update/comment/add", {
             method: 'PUT',
             headers: {
@@ -142,12 +144,15 @@ export default function Post({ image, Tags, likes, description, username, id, Co
 
         const json = await response.json()
         if (json.success) {
+            setloading(false)
             setcuser(json.data.q.comment.users)
             setnewcomment(" ")
             setcomments(json.data.q.comment.comment)
         }
-        else if (!json.success)
+        else if (!json.success) {
+            setloading(false)
             alert("something went wrong")
+        }
     }
 
 
@@ -239,97 +244,100 @@ export default function Post({ image, Tags, likes, description, username, id, Co
 
 
     return (
-        <div className="post p-0 container text-center mb-1 pb-1">
-            <div className="row user m-0 p-0 justify-content-start align-items-center mb-0 ps-sm-1 ps-0 pb-0  ">
-                <div className="col-auto logo p-0">
-                    <img src={c1} alt="" width={40} height={40} />
+        <div className='position-relative'>
+            <div className={!loading ? "post p-0 container text-center mb-1 pb-1" : "post p-0 container text-center mb-1 pb-1 opacity-25"}>
+                <div className="row user m-0 p-0 justify-content-start align-items-center mb-0 ps-sm-1 ps-0 pb-0 ">
+                    <div className="col-auto logo p-0">
+                        <img src={c1} alt="" width={40} height={40} />
+                    </div>
+                    <div className="col-auto p-0 text-start font-weight-bold">
+                        <button className='mx-1 text-decoration-none text-black fs-5 font-weight-bold h-auto m-0 p-0 bg bg-transparent' onClick={() => handleuser()}>{username}</button>
+                    </div>
+                    <div className="col-auto fs-6 text-start opacity-75">
+                        {time} ago
+                    </div>
+                    <div className=" p-0 col-1 text-center ">
+                        <button className={user !== username && !following ? 'd-inline text-decoration-none border border-primary bg bg-primary text-white rounded-3 fs-6' : "d-none"} onClick={() => handlefollow()} >Follow+</button>
+                        <button className={user !== username && following ? 'd-inline text-decoration-none border border-primary bg bg-primary text-white rounded-3 fs-6' : "d-none"} onClick={() => handlefollow()} >Following</button>
+                        {/* <button className={user !== username && following && follower ? 'd-inline text-decoration-none border border-primary bg bg-primary text-white rounded-3' : "d-none"} >Message</button> */}
+                    </div>
                 </div>
-                <div className="col-auto p-0 text-start font-weight-bold">
-                    <button className='mx-1 text-decoration-none text-black fs-5 font-weight-bold h-auto m-0 p-0 bg bg-transparent' onClick={() => handleuser()}>{username}</button>
+
+                <div className="row r2 tags justify-content-start p-0 m-0 text-primary ">
+                    <div className="col-auto mt-2">
+                        <ul className="d-inline p-0 m-0 d-flex flex-row flex-nowrap gap-3">
+                            {tags.length > 0 ?
+                                tags.map((item, i) => {
+                                    return (
+                                        item.length > 0 ? <li key={i} >#{item}</li> : null
+                                    )
+                                })
+                                : null
+                            }
+                        </ul>
+                    </div>
                 </div>
-                <div className="col-auto fs-6 text-start opacity-75">
-                    {time} ago
+
+                {/* <hr className='m-0' /> */}
+
+                <div className="row desc justify-content-start m-0">
+                    <div className="col-12 text-start m-0">
+                        <p className='m-0 fs-6'>
+                            {description}
+                        </p>
+                    </div>
                 </div>
-                <div className=" p-0 col-1 text-center ">
-                    <button className={user !== username && !following ? 'd-inline text-decoration-none border border-primary bg bg-primary text-white rounded-3 fs-6' : "d-none"} onClick={() => handlefollow()} >Follow+</button>
-                    <button className={user !== username && following ? 'd-inline text-decoration-none border border-primary bg bg-primary text-white rounded-3 fs-6' : "d-none"} onClick={() => handlefollow()} >Following</button>
-                    {/* <button className={user !== username && following && follower ? 'd-inline text-decoration-none border border-primary bg bg-primary text-white rounded-3' : "d-none"} >Message</button> */}
+
+                <div className="row photo px-0 justify-content-center m-0">
+                    <div className="col-12 text-center w-100 px-0 py-2 ">
+                        <img src={"https://hodobackend.onrender.com/Images/" + image} className="d-block " alt="..." />
+                    </div>
                 </div>
-            </div>
-
-            <div className="row r2 tags justify-content-start p-0 m-0 text-primary ">
-                <div className="col-auto mt-2">
-                    <ul className="d-inline p-0 m-0 d-flex flex-row flex-nowrap gap-3">
-                        {tags.length > 0 ?
-                            tags.map((item, i) => {
-                                return (
-                                    item.length > 0 ? <li key={i} >#{item}</li> : null
-                                )
-
-                            })
-                            : null
-                        }
-                    </ul>
-                </div>
-            </div>
-
-            {/* <hr className='m-0' /> */}
-
-            <div className="row desc justify-content-start m-0">
-                <div className="col-12 text-start m-0">
-                    <p className='m-0 fs-6'>
-                        {description}
-                    </p>
-                </div>
-            </div>
-
-            <div className="row photo px-0 justify-content-center m-0">
-                <div className="col-12 text-center w-100 px-0 py-2 ">
-                    <img src={"https://hodobackend.onrender.com/Images/" + image} className="d-block " alt="..." />
-                    {/* <img src="" /alt="uploaded image" /> */}
-                </div>
-            </div>
 
 
-            <div className="row r4 like justify-content-around mt-2 mb-0 pb-1">
-                <div className="col-10 d-flex justify-content-between align-content-start">
-                    <button className={!liked ? "text-decoration-none text-danger px-2 border border-none bg bg-transparent rounded-0 fs-4 d-flex align-items-center" : "d-none"} ><FavoriteBorderIcon className='fs-sm-5 fs-3' onClick={() => handlelikes()} /> {like} </button>
-                    <button className={liked ? "text-decoration-none text-danger px-2 border border-none bg bg-transparent   rounded-0 fs-4 d-flex align-items-center" : "d-none"} onClick={() => handlelikes()}><FavoriteOutlinedIcon className='fs-sm-5 fs-3' /> {like} </button>
-                    <button className="text-decoration-none text-primary px-2 border border-none bg bg-transparent  rounded-0" onClick={() => setcommented(!commented)}><span className='d-md-inline d-none fs-4'>Comment</span> <ChatOutlinedIcon className='fs-sm-5 fs-3' /></button>
-                    <button className="text-decoration-none text-primary px-2 border border-none bg bg-transparent    rounded-0" onClick={() => handleshare(window.location.href)}><span className='d-md-inline d-none fs-4'>Share</span> <ShareOutlinedIcon className='fs-sm-5 fs-3' />    </button>
+                <div className="row r4 like justify-content-around mt-2 mb-0 pb-1">
+                    <div className="col-10 d-flex justify-content-between align-content-start">
+                        <button className={!liked ? "text-decoration-none text-danger px-2 border border-none bg bg-transparent rounded-0 fs-4 d-flex align-items-center" : "d-none"} ><FavoriteBorderIcon className='fs-sm-5 fs-3' onClick={() => handlelikes()} /> {like} </button>
+                        <button className={liked ? "text-decoration-none text-danger px-2 border border-none bg bg-transparent   rounded-0 fs-4 d-flex align-items-center" : "d-none"} onClick={() => handlelikes()}><FavoriteOutlinedIcon className='fs-sm-5 fs-3' /> {like} </button>
+                        <button className="text-decoration-none text-primary px-2 border border-none bg bg-transparent  rounded-0" onClick={() => setcommented(!commented)}><span className='d-md-inline d-none fs-4'>Comment</span> <ChatOutlinedIcon className='fs-sm-5 fs-3' /></button>
+                        <button className="text-decoration-none text-primary px-2 border border-none bg bg-transparent    rounded-0" onClick={() => handleshare(window.location.href)}><span className='d-md-inline d-none fs-4'>Share</span> <ShareOutlinedIcon className='fs-sm-5 fs-3' />    </button>
+                    </div>
+                </div >
+
+                {
+                    cuser.length > 0 ?
+                        <div className={commented ? "row justify-content-center Commentss mt-0 mb-0 m-0 w-100 " : "d-none"}>
+                            <div className="col-12 first rounded-2 p-0">
+                                <div className="container commentsection m-0 w-100 px-2 p-0">
+                                    {cuser.length > 0 ? cuser.map((item, i) => {
+                                        return (
+                                            <div className="row user justify-content-start bg bg-white comment p-1 mb-2 rounded-2 w-100 mx-auto" key={i}>
+                                                <div className="col-12 text-start">
+                                                    <img src={c1} width={30} height={30} className='d-inline rounded-5' alt="" />
+                                                    <button className='d-inline bg bg-transparent font-weight-bold text-primary my-0'>{item}</button>
+                                                    <button className={user === item ? "d-inline w-auto delete bg bg-transparent " : "d-none"} onClick={() => handledelete(comments[i], i)}><DeleteIcon sx={{ color: 'gray' }} /> </button>
+                                                </div>
+                                                <div className="col-12 text-start bg bg-transparent mt-1">
+                                                    {comments[i]}
+                                                </div>
+                                            </div>
+                                        )
+                                    }) : null}
+                                </div>
+                            </div>
+                        </div> : null
+                }
+                <div className={commented ? "row justify-content-center m-0 pt-1 mt-1" : "d-none"}>
+                    <span className="addcmnt mt-0 p-0">
+                        <input className='px-2 py-0 mx-md-3 mx-0 rounded-3 w-75 d-inline bg bg' type="text" name="newcomment" value={newcomment} onChange={(e) => setnewcomment(e.target.value)} placeholder="Add a new comment here" />
+                        <button className="text-primary bg bg-transparent" onClick={() => handlecomment()}><NearMeIcon className='p-0 bg bg-transparent my-auto mb-1' sx={{ fontSize: 25 }} /></button>
+                    </span>
                 </div>
             </div >
 
-            {
-                cuser.length > 0 ?
-                    <div className={commented ? "row justify-content-center Commentss mt-0 mb-0 m-0 w-100 " : "d-none"}>
-                        <div className="col-12 first rounded-2 p-0">
-                            <div className="container commentsection m-0 w-100 px-2 p-0">
-                                {cuser.length > 0 ? cuser.map((item, i) => {
-                                    return (
-                                        <div className="row user justify-content-start bg bg-white comment p-1 mb-2 rounded-2 w-100 mx-auto" key={i}>
-                                            <div className="col-12 text-start">
-                                                <img src={c1} width={30} height={30} className='d-inline rounded-5' alt="" />
-                                                <button className='d-inline bg bg-transparent font-weight-bold text-primary my-0'>{item}</button>
-                                                <button className={user === item ? "d-inline w-auto delete bg bg-transparent " : "d-none"} onClick={() => handledelete(comments[i], i)}><DeleteIcon sx={{ color: 'gray' }} /> </button>
-                                            </div>
-                                            <div className="col-12 text-start bg bg-transparent mt-1">
-                                                {comments[i]}
-                                            </div>
-                                        </div>
-                                    )
-                                }) : null}
-                            </div>
-                        </div>
-                    </div> : null
-            }
-            <div className={commented ? "row justify-content-center m-0 pt-1 mt-1" : "d-none"}>
-                <span className="addcmnt mt-0 p-0">
-                    <input className='px-2 py-0 mx-md-3 mx-0 rounded-3 w-75 d-inline bg bg' type="text" name="newcomment" value={newcomment} onChange={(e) => setnewcomment(e.target.value)} placeholder="Add a new comment here" />
-                    <button className="text-primary bg bg-transparent" onClick={() => handlecomment()}><NearMeIcon className='p-0 bg bg-transparent my-auto mb-1' sx={{ fontSize: 25 }} /></button>
-                </span>
+            <div className={loading ? "row loader w-100 p-0 m-0 opacity-50 d-flex justify-content-center align-items-center text-dark position-absolute top-0" : "d-none"}>
+                <div className="load m-0"></div>
             </div>
-        </div >
-
+        </div>
     )
 }
