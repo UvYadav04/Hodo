@@ -56,7 +56,7 @@ export default function Postform() {
     <>
       <Navbar />
       <div className="container-fluid form mx-auto text-center text-black px-0">
-        <div className="row formrow  justify-content-sm-start justify-content-center align-items-center   p-0 flex-row mx-auto px-2 py-3 my-auto">
+        <div className={!loading ? "row formrow  justify-content-sm-start justify-content-center align-items-center   p-0 flex-row mx-auto px-2 py-3 my-auto" : "d-none"}>
           <div className="col-lg-3 col-md-4 col-sm-5 col-10 px ms-lg-5 ms-md-4 ms-sm-3 ms-0 text-start  py-5 formcol rounded-2">
             <input className='' type="file" onChange={(e) => setfile(e.target.files[0])} />
             <input className='d-block mx-0 mt-4 rounded-2' type="text" name='T1' placeholder='Tag1' value={Tags.T1} onChange={(e) => handletags(e)} />
