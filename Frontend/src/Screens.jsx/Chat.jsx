@@ -192,7 +192,7 @@ function Chat({ socket }) {
                     </section>
                 </div>
                 <div className={"col-lg-9 col-md-8 col-12 chatting d-flex flex-column position-relative justify-content-between p-0"}>
-                    <div className={display ? "header py-1 px-1 d-flex justify-content-start align-items-center position-absolute top-0 w-100" : "d-none"}>
+                    <div className={display ? "header py-1 px-1 d-flex justify-content-start align-items-center position-sticky top-0 w-100" : "d-none"}>
                         <button className="fs-5 bg bg-transparent border-none p-0 mx-2 d-md-none" onClick={() => navigate('/friends')}><ArrowBackIcon sx={{ fontSize: 35 }} /></button>
                         <img src={logo} width={40} height={40} alt="" className=" me-2 rounded-5" />
                         <button onClick={() => navigate('/usersprofile', { state: currentuser })} className="d-inline text-decoration-none text-black fs-5 bg bg-transparent border-none p-0 ">{currentuser}</button>
