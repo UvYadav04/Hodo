@@ -207,6 +207,7 @@ export default function Personal({ username }) {
 
     const handlefollow = async () => {
         if (!following) {
+            setloading(true)
             const response = await fetch("https://hodobackend.onrender.com/follow/new", {
                 method: 'PUT',
                 headers: {
@@ -218,12 +219,13 @@ export default function Personal({ username }) {
             const json = await response.json()
             // console.log(json)
             if (json.success) {
+                setloading(false)
                 setfollowing(true)
-                navigate(0)
             }
         }
 
         if (following) {
+            setloading(true)
             const response = await fetch("https://hodobackend.onrender.com/follow/following", {
                 method: 'PUT',
                 headers: {
@@ -235,14 +237,15 @@ export default function Personal({ username }) {
             const json = await response.json()
             // console.log(json)    
             if (json.success) {
+                setloading(false)
                 setfollowing(false)
-                navigate(0)
             }
         }
     }
 
     const removefollower = async (item) => {
 
+        setloading(true)
         const response = await fetch("https://hodobackend.onrender.com/follow/removefollower", {
             method: 'PUT',
             headers: {
@@ -252,8 +255,8 @@ export default function Personal({ username }) {
             body: JSON.stringify({ item, owner })
         })
         const json = await response.json()
-        // console.log(json)
         if (json.success) {
+            setloading(false)
             setfound(true)
             setuser(json.user)
             setimage(json.user.image)
@@ -484,9 +487,9 @@ export default function Personal({ username }) {
                 {/* col-xl-3 col-lg-3 col-md-5 d-xl-flex d-lg-none d-md-flex flex-row mt-lg-0 mt-3 m-0 border text-primary p-0 */}
 
                 <div className={passwording && !loading ? "row password w-100 justify-content-center align-content-center" : "d-none"}>
-                    <div className=" col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10 d-flex flex-column align-items-center justify-content-center p-lg-5 p-md-3 p-sm-1 p-0 border border-sm-primary border-none border-3">
+                    <div className=" col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10 d-flex flex-column align-items-center justify-content-center p-lg-5 p-md-3 p-sm-1 p-0 border border-primary border-none border-2">
                         <label htmlFor="current" className='m-0 ms-0 w-75 text-start text-primary'>current password</label>
-                        <input type="password" className='d-block mb-2 w-75' value={currentp} onChange={(e) => setcurrentp(e.target.value)} />
+                        <input ty pe="password" className='d-block mb-2 w-75' value={currentp} onChange={(e) => setcurrentp(e.target.value)} />
                         <label htmlFor="new" className='m-0 ms-0 w-75 text-start text-primary' >new    password</label>
                         <input type="password" className='d-block mb-2 w-75' value={newp} onChange={(e) => setnewp(e.target.value)} />
                         <label htmlFor="confirm" className='m-0 ms-0 w-75 text-start text-primary'>confirm password</label>
@@ -495,7 +498,7 @@ export default function Personal({ username }) {
                         <p className={nwrong ? "d-inline m-0 p-0 text-start w-75 text-danger fs-6" : "d-none"}>Password do not match</p>
                         <p className={pwrong ? "d-inline m-0 p-0 text-start w-75 text-danger fs-6" : "d-none"}>Password must be 8 characters long</p>
                         <button className=' mt-2 bg bg-primary text-white fs-6 rounded-3 px-2 border-white' onClick={() => handlepassword()}>Change</button>
-                        <button className=' mt-2 bg bg-primary text-white fs-6 rounded-3 px-2 border-white' onClick={() => navigate(0)}>Go back</button>
+                        <button className=' mt-2 bg bg-primary text-white fs-6 rounded-3 px-2 border-white' onClick={() => setpasswording(false)}>Go back</button>
 
                     </div>
                 </div >
