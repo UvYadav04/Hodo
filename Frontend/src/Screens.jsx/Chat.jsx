@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SendIcon from '@mui/icons-material/Send';
 import Navbar from "../Components/Navbar";
 import Messagebox from "../Components/Messagebox";
 import logo from '../Photos/c6.jpg'
 import usericon from '../Photos/bg1.png'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-
 import { useLocation, useNavigate } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
 function Chat({ socket }) {
@@ -21,6 +20,8 @@ function Chat({ socket }) {
     const [messages, setmessages] = useState([])
     const [actives, setactives] = useState([])
     // console.log(currentuser)
+    const chatref = useRef(null)
+
 
     const owner = localStorage.getItem("username")
     let received = false
@@ -45,9 +46,11 @@ function Chat({ socket }) {
 
             if (!json.nochats) {
                 setmessages(json.data.message)
+
+                chatref.current.scrollTop = chatref.current.scrollHeight;
+
             }
             else {
-                // console.log("No messages before")
                 setmessages([])
             }
         }
@@ -55,7 +58,6 @@ function Chat({ socket }) {
 
     const handlesent = async () => {
         if (currentMessage !== "") {
-
             const response = await fetch("https://hodobackend.onrender.com/chat/newmessage", {
                 method: "POST",
                 headers: {
@@ -190,13 +192,13 @@ function Chat({ socket }) {
                     </section>
                 </div>
                 <div className={"col-lg-9 col-md-8 col-12 chatting d-flex flex-column position-relative justify-content-between p-0"}>
-                    <div className={display ? "header w-auto py-1 px-1 d-flex justify-content-start align-items-center" : "d-none"}>
+                    <div className={display ? "header py-1 px-1 d-flex justify-content-start align-items-center position-absolute top-0 w-100" : "d-none"}>
                         <button className="fs-5 bg bg-transparent border-none p-0 mx-2 d-md-none" onClick={() => navigate('/friends')}><ArrowBackIcon sx={{ fontSize: 35 }} /></button>
                         <img src={logo} width={40} height={40} alt="" className=" me-2 rounded-5" />
                         <button onClick={() => navigate('/usersprofile', { state: currentuser })} className="d-inline text-decoration-none text-black fs-5 bg bg-transparent border-none p-0 ">{currentuser}</button>
                         <button className={display ? "ms-auto fs-5 bg bg-transparent border-none p-0 mx-2 d-md-inline d-none" : "d-inline"} onClick={() => setdisplay(false)}><CloseIcon sx={{ fontSize: 35 }} /></button>
                     </div>
-                    <div className={display ? "messages " : "d-none"}>
+                    <div className={display ? "messages" : "d-none"} ref={chatref}>
                         {
                             messages.map((item, i) => {
                                 return (
@@ -205,7 +207,7 @@ function Chat({ socket }) {
                             })
                         }
                     </div>
-                    <div className={display ? "messenger position-relative text-start m-0 p-0 d-flex align-items-center" : "d-none"} >
+                    <div className={display ? "messenger position-sticky bottom-0 text-start m-0 p-0 d-flex align-items-center w-100" : "d-none"} >
                         <input type="text" placeholder="type message here..." className="w-75 bg bg-white rounded-4 ms-2 px-2 mt-0 mb-0 " value={currentMessage} onChange={(event) => setCurrentMessage(event.target.value)}
                             onKeyDown={(event) => {
                                 if (event.key === "Enter")

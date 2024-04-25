@@ -310,7 +310,7 @@ button {
   max-height: 100vh;
   width: 100vh;
   /* background: linear-gradient(to bottom, rgb(250, 230, 210), white); */
-  background-color: red;
+  /* background-color: red; */
   padding: 0;
 
   .friendsul li {
@@ -322,7 +322,7 @@ button {
 .chatpage .chatrow {
   height: 91.4vh;
   width: 100%;
-  background-color: blue;
+  /* background-color: blue; */
   /* overflow: hidden; */
 
   .friends {
@@ -364,10 +364,8 @@ button {
 }
 
 .chatting .messages {
-  min-height: 79vh;
-  max-height: 79vh;
+  height: 87vh;
   /* background-color: red; */
-  /* max-height: vh; */
   overflow-y: scroll;
   scrollbar-width: none;
 }
@@ -661,12 +659,12 @@ p.updateusername {
   }
 
   .chatting .messages {
-    min-height: 88vh;
-    max-height: 88vh;
+    height: 95vh;
     overflow-y: scroll;
     scrollbar-width: none;
     word-wrap: break-word;
     word-break: normal;
+    scroll-behavior: smooth;
   }
 
 
