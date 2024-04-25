@@ -31,7 +31,7 @@ export default function Postform() {
     // const description = descp, user = username, date = new Date().getTime()
     // console.log(description, user, date)
     setloading(true)
-    const response = await fetch("https://hodobackend.onrender.com/post/new", {
+    const response = await fetch("http://localhost:10000/post/new", {
       method: 'POST',
       headers: {
         // 'Content-Type': 'application/json',
@@ -55,9 +55,9 @@ export default function Postform() {
   return (
     <>
       <Navbar />
-      <div className="container-fluid form mx-auto text-center text-black px-0 bg bg-black">
-        <div className="row formrow justify-content-md-start justify-content-center align-items-center h-100 p-0 flex-row mx-auto">
-          <div className="col-lg-3   col-md-4 col-sm-5 col-10 px ms-lg-5 ms-md-4 ms-sm-3 ms-0 text-start  py-5 formcol rounded-2 ">
+      <div className="container-fluid form mx-auto text-center text-black px-0">
+        <div className="row formrow  justify-content-sm-start justify-content-center align-items-center   p-0 flex-row mx-auto px-2 py-3 my-auto">
+          <div className="col-lg-3 col-md-4 col-sm-5 col-10 px ms-lg-5 ms-md-4 ms-sm-3 ms-0 text-start  py-5 formcol rounded-2">
             <input className='' type="file" onChange={(e) => setfile(e.target.files[0])} />
             <input className='d-block mx-0 mt-4 rounded-2' type="text" name='T1' placeholder='Tag1' value={Tags.T1} onChange={(e) => handletags(e)} />
             <input className='d-block mx-auto rounded-2 my-1' type="text" name='T2' placeholder='Tag2' value={Tags.T2} onChange={(e) => handletags(e)} />

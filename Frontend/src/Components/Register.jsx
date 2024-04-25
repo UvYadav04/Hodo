@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import covers from '../Photos/cover2.jpg'
-import cover from '../Photos/cover2.jpg'
+import care from '../Photos/care2.png'
+import b21 from '../Photos/formside.jpg'
 import logo from '../Photos/logo3.png'
 import { createSearchParams, useNavigate, Link } from "react-router-dom"
 import GoogleIcon from '@mui/icons-material/Google';
@@ -8,7 +9,7 @@ import usericon from '../Photos/bg1.png'
 import { useCookies } from "react-cookie"
 
 import io from 'socket.io-client'
-const socket = io.connect(`https://hodobackend.onrender.com`, {
+const socket = io.connect(`http://localhost:10000`, {
 })
 const ref = React.createRef()
 export default function Login() {
@@ -28,7 +29,7 @@ export default function Login() {
       // console.log(fusername)
       setfusername("")
       setloading(true)
-      const response = await fetch("https://hodobackend.onrender.com/forgetpassword", {
+      const response = await fetch("http://localhost:10000/forgetpassword", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -76,7 +77,7 @@ export default function Login() {
   const handleloginsubmit = async (e) => {
     e.preventDefault();
     setloading(true)
-    const response = await fetch("https://hodobackend.onrender.com/register/login", {
+    const response = await fetch("http://localhost:10000/register/login", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -108,7 +109,7 @@ export default function Login() {
 
     e.preventDefault();
     setloading(true)
-    const response = await fetch("https://hodobackend.onrender.com/register/signup", {
+    const response = await fetch("http://localhost:10000/register/signup", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -133,58 +134,73 @@ export default function Login() {
   }
 
   return (
-    <div className="loginpage container-fluid m-0 text-center"  >
-
-      <div className={!loading ? "row register justify-content-around align-items-center mx-auto bg bg-white p-0" : "d-none"} >
-        <div className="col-xl-4 col-5 d-lg-inline d-none p-0 cover">
-          <img src={covers} className='w-100 m-0 rounded-2 h-100 ' alt="" />
-        </div>
-        <div className={show && !forgot ? "col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10 login d-flex flex-column justify-content-center py-sm-5 py-3 text-center show rounded-2  " : "d-none"}>
-          <img src={logo} width={100} height={80} className='mx-auto bg-transparent' alt="" />
-          <h1 className='fs-sm-1 fs-1'>Welcome back!</h1>
-          <input className='my-md-2 my-sm-2 mt-2 mb-1 fs-sm-5 fs-6 p-2 rounded-2' type="text" name='username' placeholder='username' value={logindata.username} onChange={(e) => handlelogin(e)} />
-          <input className='my-md-2 my-sm-2 mt-1 mb-2 fs-sm-5 fs-6 p-2 rounded-2' type="password" name='password' placeholder='password' value={logindata.password} onChange={(e) => handlelogin(e)} />
-          <div
-            className="d-flex justify-content-between align-items-center mb-lg-4 mb-0 "
-          >
-            <div>
-              <Link href="/" onClick={(e) => handlenewuser(e)} ref={ref} className=" text-decoration-none text-primary fs-6">New user</Link>
+    <div className="logincont w-100 p-0">
+      <div className="loginpage container-fluid mx-auto text-center p-0 " >
+        <div className={!loading ? "row register position-relative justify-content-around align-items-center mx-auto my-auto p-md-4 p-sm-4 p-3 bg bg-transparent " : "d-none"} >
+          <div className={show && !forgot ? "col-xl-4 col-lg-4 col-md-5 col-sm-7 col-12 login d-flex flex-column justify-content-center py-3 text-center show rounded-2 bg bg-white " : "d-none"}>
+            <img src={logo} width={90} height={70} className='mx-auto bg-transparent' alt="" />
+            <h1 className='fs-sm-1 fs-1'>Welcome back!</h1>
+            <input className='my-md-2 my-sm-2 mt-2 mb-1 fs-sm-5 fs-6 p-2 rounded-2' type="text" name='username' placeholder='username' value={logindata.username} onChange={(e) => handlelogin(e)} />
+            <input className='my-md-2 my-sm-2 mt-1 mb-2 fs-sm-5 fs-6 p-2 rounded-2' type="password" name='password' placeholder='password' value={logindata.password} onChange={(e) => handlelogin(e)} />
+            <div
+              className="d-flex justify-content-between align-items-center mb-lg-4 mb-0 "
+            >
+              <div>
+                <Link href="/" onClick={(e) => handlenewuser(e)} ref={ref} className=" text-decoration-none text-primary fs-6">New user</Link>
+              </div>
+              <div>
+                <Link href="/" className=" text-decoration-none text-primary fs-6" onClick={() => setforgot(true)}>Forgot password?</Link>
+              </div>
             </div>
-            <div>
-              <Link href="/" className=" text-decoration-none text-primary fs-6" onClick={() => setforgot(true)}>Forgot password?</Link>
+            <button className='w-50 mx-auto rounded-5 bg bg-primary text-white fs-sm-4 fs-5 mt-0' onClick={(e) => handleloginsubmit(e)}>Login</button>
+            <button className='w-100 mx-auto rounded-1 py-1 fs-sm-5 fs-4 mt-4' ><GoogleIcon className='pb-1' sx={{ fontSize: 35 }} />  Login with Google</button>
+          </div>
+
+          <div className={!show && !forgot ? "col-xl-4 col-lg-5 col-md-6 col-sm-7 col-12 signup d-flex flex-column justify-content-center py-3 text-center show rounded-2 bg bg-white " : "d-none"} >
+            <h3 className='fs-sm-1 fs-3'>Welcome to HODO family</h3>
+            <input className='mt-md-3 mt-2 fs-sm-5 fs-6 p-2 rounded-2' type="text" name='name' placeholder='Full Name' value={userdata.name} onChange={(e) => handlesignup(e)} />
+            <input className='mt-md-3 mt-2 fs-sm-5 fs-6 p-2 rounded-2' type="text " name='username' placeholder='username' value={userdata.username} onChange={(e) => handlesignup(e)} />
+            <input className='mt-md-3 mt-2 fs-sm-5 fs-6 p-2 rounded-2' type="text" name='email' placeholder='email' value={userdata.email} onChange={(e) => handlesignup(e)} />
+            <input className='mt-md-3 mt-2 fs-sm-5 fs-6 p-2 rounded-2' type="password" name='password' placeholder='password' value={userdata.password} onChange={(e) => handlesignup(e)} />
+            <div
+              className="d-flex justify-content-between align-items-center mb-lg-2 mb-1"
+            >
+              <a href="#!" onClick={(e) => handlealreadyuser(e)} ref={ref} className=" text-decoration-none text-primary mb-0  fs-6">already have an account?</a>
             </div>
+            <button className='w-50 mx-auto rounded-5 bg bg-primary text-white fs-sm-4 fs-5 mt-2' onClick={(e) => handlesign(e)}>Sign up</button>
+            <button className='w-100 mx-auto rounded-1 py-1 fs-sm-5 fs-4 mt-4' ><GoogleIcon className='pb-1' sx={{ fontSize: 35 }} />  Login with Google</button>
           </div>
-          <button className='w-50 mx-auto rounded-5 bg bg-primary text-white fs-sm-4 fs-5 mt-0' onClick={(e) => handleloginsubmit(e)}>Login</button>
-          <button className='w-100 mx-auto rounded-1 py-1 fs-sm-5 fs-4 mt-4' ><GoogleIcon className='pb-1' sx={{ fontSize: 35 }} />  Login with Google</button>
-        </div>
 
-        <div className={!show && !forgot ? "col-xl-4 col-lg-5 col-md-6 col-sm-6 col-10 signup d-flex flex-column show text-center justify-content-center  py-md-5 py-4 rounded-2" : "d-none"} >
-          <h3 className='fs-sm-1 fs-3'>Welcome to HODO family</h3>
-          <input className='mt-md-4 mt-sm-3 mt-2 fs-sm-5 fs-6 p-2 rounded-2' type="text" name='name' placeholder='Full Name' value={userdata.name} onChange={(e) => handlesignup(e)} />
-          <input className='mt-md-4 mt-sm-3 mt-2 fs-sm-5 fs-6 p-2 rounded-2' type="text " name='username' placeholder='username' value={userdata.username} onChange={(e) => handlesignup(e)} />
-          <input className='mt-md-4 mt-sm-3 mt-2 fs-sm-5 fs-6 p-2 rounded-2' type="text" name='email' placeholder='email' value={userdata.email} onChange={(e) => handlesignup(e)} />
-          <input className='mt-md-4 mt-sm-3 mt-2 fs-sm-5 fs-6 p-2 rounded-2' type="password" name='password' placeholder='password' value={userdata.password} onChange={(e) => handlesignup(e)} />
-          <div
-            className="d-flex justify-content-between align-items-center mb-lg-2 mb-1"
-          >
-            <a href="#!" onClick={(e) => handlealreadyuser(e)} ref={ref} className=" text-decoration-none text-primary mb-0  fs-6">already have an account?</a>
+          <div className={forgot ? "col-xl-4 col-lg-5 col-md-6 col-sm-7 col-12 signup d-flex flex-column justify-content-center py-3 text-center show rounded-2 bg bg-white mt-5" : "d-none"}>
+            <img src={care} width={120} height={100} className='mx-auto  rounded-5 my-3' alt="" />
+            <input className='rounded-1 px-2 py-1' type="text" placeholder='Enter username' name="fusername" value={fusername} onChange={(e) => setfusername(e.target.value)} />
+            <button className='mt-3 w-25 text-white rounded-2 mx-auto bg bg-primary' onClick={() => handleforgot()} >Forgot</button>
+            <button className=' w-25 text-primary bg bg-transparent' onClick={() => setforgot(false)} >Back</button>
           </div>
-          <button className='w-50 mx-auto rounded-5 bg bg-primary text-white fs-sm-4 fs-5 mt-2' onClick={(e) => handlesign(e)}>Sign up</button>
-          <button className='w-100 mx-auto rounded-1 py-1 fs-sm-5 fs-4 mt-4' ><GoogleIcon className='pb-1' sx={{ fontSize: 35 }} />  Login with Google</button>
-        </div>
 
-        <div className={forgot ? "col-xl-4 col-lg-5 col-md-7 col-sm-7 col-10 signup  d-flex flex-column show text-center justify-content-start h-50 bg bg-white rounded-2" : "d-none"}>
-          <img src={usericon} className='mx-auto w-25 rounded-5 my-3' alt="" />
-          <input type="text" placeholder='Enter username' name="fusername" value={fusername} onChange={(e) => setfusername(e.target.value)} />
-          <button className='mt-3 w-25 text-white rounded-2 mx-auto bg bg-primary' onClick={() => handleforgot()} >Forgot</button>
-          <button className=' w-25 text-primary bg bg-transparent' onClick={() => setforgot(false)} >Back</button>
         </div>
+        <div className={loading ? "row loader w-100 p-0 m-0 opacity-50 d-flex justify-content-center gap-0 align-items-center text-dark" : "d-none"}>
+          <div className="load m-0"></div>
+        </div>
+      </div >
 
+      <div className="svgs position-absolute top-0">
+        <svg width="100vw" height="100vh" viewBox="0 0 ">
+          <path className='d-md-inline d-none' stroke='orange' fill='orange' d="M0,0 C150,500 400,200 600,735 H0 V0"></path>
+          <circle className='circles' cx={1300} cy={150} r={40} fill='orange'></circle>
+          <circle className='circles' cx={320} cy={10} r={40} fill='orange'></circle>
+          <circle className='circles' cx={370} cy={250} r={40} fill='orange'></circle>
+          <circle className='circles' cx={1200} cy={500} r={80} fill='orange' opacity={0.5}></circle>
+          <circle className='circles' cx={900} cy={170} r={60} fill='orange' opacity={0.5}></circle>
+          <circle className='circles' cx={700} cy={650} r={70} fill='orange' opacity={0.8}></circle>
+          {/* <circle className='circles' cx={520} cy={450} r={30} fill='orange' opacity={0.5}></circle> */}
+          <circle className='circles' cx={100} cy={300} r={60} fill='orange' opacity={0.5}></circle>
+          <circle className='circles' cx={300} cy={500} r={70} fill='orange' opacity={0.8}></circle>
+          <circle className='circles' cx={30} cy={670} r={70} fill='orange' opacity={0.4}></circle>
+          <circle className='circles' cx={30} cy={50} r={70} fill='orange' opacity={0.6}></circle>
+        </svg>
       </div>
-      <div className={loading ? "row loader w-100 p-0 m-0 opacity-50 d-flex justify-content-center gap-0 align-items-center text-dark" : "d-none"}>
-        <div className="load m-0"></div>
-      </div>
-    </div >
+    </div>
   )
 
 }
