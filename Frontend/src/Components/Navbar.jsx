@@ -28,7 +28,7 @@ export default function Navbar() {
     if (value !== "") {
       setresult(true)
       // console.log(`value : `, value)
-      const response = await fetch("http://localhost:10000/search/userdata", {
+      const response = await fetch("https://hodobackend.onrender.com/search/userdata", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ export default function Navbar() {
                 return (
                   <div className='d-flex dipdop flex-row justify-content-start bg bg-white text-black mb-1 w-md-auto w-100 rounded-3s' onClick={() => navigate('/usersprofile', { state: item[0].Username })} >
                     <div className="image">
-                      {item[0].image !== "" ? <img src={`http://localhost:10000//Images/` + item[0].image} width={40} height={40} className='d-inline rounded-5 my-1 mx-2' alt="" /> : <img src={usericon} width={40} height={40} className='d-inline rounded-5 my-1 mx-2' alt="" />}
+                      {item[0].image !== "" ? <img src={`https://hodobackend.onrender.com//Images/` + item[0].image} width={40} height={40} className='d-inline rounded-5 my-1 mx-2' alt="" /> : <img src={usericon} width={40} height={40} className='d-inline rounded-5 my-1 mx-2' alt="" />}
                     </div>
                     <div className="info">
                       <h5 className='my-0 fs-md-5 ' >{item[0].Username}</h5>

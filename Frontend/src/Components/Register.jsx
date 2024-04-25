@@ -9,7 +9,7 @@ import usericon from '../Photos/bg1.png'
 import { useCookies } from "react-cookie"
 
 import io from 'socket.io-client'
-const socket = io.connect(`http://localhost:10000`, {
+const socket = io.connect(`https://hodobackend.onrender.com`, {
 })
 const ref = React.createRef()
 export default function Login() {
@@ -29,7 +29,7 @@ export default function Login() {
       // console.log(fusername)
       setfusername("")
       setloading(true)
-      const response = await fetch("http://localhost:10000/forgetpassword", {
+      const response = await fetch("https://hodobackend.onrender.com/forgetpassword", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -77,7 +77,7 @@ export default function Login() {
   const handleloginsubmit = async (e) => {
     e.preventDefault();
     setloading(true)
-    const response = await fetch("http://localhost:10000/register/login", {
+    const response = await fetch("https://hodobackend.onrender.com/register/login", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -109,7 +109,7 @@ export default function Login() {
 
     e.preventDefault();
     setloading(true)
-    const response = await fetch("http://localhost:10000/register/signup", {
+    const response = await fetch("https://hodobackend.onrender.com/register/signup", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -185,7 +185,7 @@ export default function Login() {
       </div >
 
       <div className="svgs position-absolute top-0">
-        <svg width="100vw" height="100vh" viewBox="0 0 ">
+        <svg width="100vw" height="100vh" viewBox="0 0">
           <path className='d-md-inline d-none' stroke='orange' fill='orange' d="M0,0 C150,500 400,200 600,735 H0 V0"></path>
           <circle className='circles' cx={1300} cy={150} r={40} fill='orange'></circle>
           <circle className='circles' cx={320} cy={10} r={40} fill='orange'></circle>

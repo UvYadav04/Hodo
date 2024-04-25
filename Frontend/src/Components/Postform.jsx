@@ -31,7 +31,7 @@ export default function Postform() {
     // const description = descp, user = username, date = new Date().getTime()
     // console.log(description, user, date)
     setloading(true)
-    const response = await fetch("http://localhost:10000/post/new", {
+    const response = await fetch("https://hodobackend.onrender.com/post/new", {
       method: 'POST',
       headers: {
         // 'Content-Type': 'application/json',
