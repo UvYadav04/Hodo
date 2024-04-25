@@ -186,7 +186,7 @@ export default function Login() {
 
       <div className="svgs position-absolute top-0">
         <svg width="100vw" height="100vh" viewBox="0 0">
-          <path className='d-md-inline d-none' stroke='orange' fill='orange' d="M0,0 C150,500 400,200 600,735 H0 V0"></path>
+          {/* <path className='d-md-inline d-none' stroke='orange' fill='orange' d="M0,0 C150,500 400,200 600,735 H0 V0"></path> */}
           <circle className='circles' cx={1300} cy={150} r={40} fill='orange'></circle>
           <circle className='circles' cx={320} cy={10} r={40} fill='orange'></circle>
           <circle className='circles' cx={370} cy={250} r={40} fill='orange'></circle>
