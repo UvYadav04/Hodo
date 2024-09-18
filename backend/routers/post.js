@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const cloudinary = require('cloudinary').v2;
 require('dotenv').config();  // Make sure to load environment variables
 
-const Post = require('../models/post');
+const post = require('../models/post');
 const verify = require('../routers/verification');
 
 // Configure Cloudinary
