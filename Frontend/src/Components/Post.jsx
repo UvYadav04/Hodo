@@ -290,7 +290,7 @@ export default function Post({ image, Tags, likes, description, username, id, Co
 
                 <div className="row photo px-0 justify-content-center m-0">
                     <div className="col-12 text-center w-100 px-0 py-2 ">
-                        <img src={"https://hodobackend.onrender.com/Images/" + image} className="d-block " alt="..." />
+                        <img src={image} className="d-block " alt="..." />
                     </div>
                 </div>
 
