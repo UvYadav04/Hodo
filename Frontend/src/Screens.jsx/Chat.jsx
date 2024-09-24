@@ -164,6 +164,8 @@ function Chat({ socket }) {
             <div className="navbar m-0 p-0 d-md-inline d-none w-100"><Navbar /></div>
             <div className="row justify-content-start chatrow  p-0 m-0">
                 <div className="col-lg-3 col-4 d-md-inline d-none friends pb-0">
+                    <p className="text-danger mb-0 fs-6">*Chat page is having some problems.Please Keep patience.</p>
+
                     <input type="text" name="search" placeholder="search friends" className=" ps-2 w-100  bg bg-white rounded-4 mt-2" />
                     <ul className={!loading && !nofrnds ? "p-1 mt-4 friendsul" : "d-none"}>
                         {
