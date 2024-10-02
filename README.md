@@ -34,3 +34,6 @@ Run the application to start the server.
 1. Sign up and create a profile.
 2. Post photos, browse, and interact with other users.
 3. Chat with friends, search for users, or find nearby people.
+
+4. ## 🌐 Visit Us
+You can check out the live website at [HODO](https://hodoofficial.onrender.com/).
