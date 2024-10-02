@@ -16,20 +16,6 @@
 - **Database**: MongoDB
 - **API Integration**: For external services
 
-## 🚀 Installation
-
-### Clone the Repository
-Clone the HODO repository from GitHub.
-
-### Navigate to the Project Directory
-Change your working directory to the HODO folder.
-
-### Install Dependencies
-Install the required dependencies for the project.
-
-### Start the Development Server
-Run the application to start the server.
-
 ## 📖 Usage
 1. Sign up and create a profile.
 2. Post photos, browse, and interact with other users.
