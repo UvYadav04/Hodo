@@ -35,5 +35,5 @@ Run the application to start the server.
 2. Post photos, browse, and interact with other users.
 3. Chat with friends, search for users, or find nearby people.
 
-4. ## 🌐 Visit Us
+4. ## 🌐 Visit Hodo
 You can check out the live website at [HODO](https://hodoofficial.onrender.com/).
