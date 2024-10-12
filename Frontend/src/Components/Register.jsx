@@ -13,7 +13,7 @@ const socket = io.connect(`https://hodobackend.onrender.com`, {
 })
 const ref = React.createRef()
 export default function Login() {
-  const [logindata, setlogindata] = useState({ username: "user01", password: "12345" })
+  const [logindata, setlogindata] = useState({ username: "dummyuser", password: "12345" })
   const [userdata, setuserdata] = useState({ username: "", password: "", name: "", email: "" })
   const navigate = useNavigate()
   const [show, setshow] = useState(true)
