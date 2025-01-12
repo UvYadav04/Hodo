@@ -10,24 +10,24 @@ import {
   Routes,
   Route
 } from "react-router-dom"
-import Homepage from './Screens.jsx/Homepage';
+import Homepage from './Screens/Homepage';
 // import '../node_modules/boostrap/'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../node_modules/bootstrap/dist/js/bootstrap.js'
 import '../node_modules/bootstrap/dist/js/bootstrap.min.js'
 import Privacy from './Components/Privacydocs.jsx';
-import Auth from './Screens.jsx/Auth.jsx';
-import Profile from './Screens.jsx/Profile.jsx';
-import Home from './Screens.jsx/Home.jsx'
-import SWR from './Screens.jsx/SWR.jsx';
-import Usersprofile from './Screens.jsx/Usersprofile.jsx';
-import Search from './Screens.jsx/Search.jsx'
-import Chat from './Screens.jsx//Chat.jsx'
+import Auth from './Screens/Auth.jsx';
+import Profile from './Screens/Profile.jsx';
+import Home from './Screens/Home.jsx'
+import SWR from './Screens/SWR.jsx';
+import Usersprofile from './Screens/Usersprofile.jsx';
+import Search from './Screens/Search.jsx'
+import Chat from './Screens//Chat.jsx'
 import io from 'socket.io-client'
 import React, { useEffect, useState } from 'react';
-import Nearbys from './Screens.jsx/Nearbys.jsx';
-import Chatlist from './Screens.jsx/Chatlist.jsx';
+import Nearbys from './Screens/Nearbys.jsx';
+import Chatlist from './Screens/Chatlist.jsx';
 const socket = io.connect("https://hodobackend.onrender.com")
 
 export const Locationcontext = React.createContext()
